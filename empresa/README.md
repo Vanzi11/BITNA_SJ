@@ -5,4 +5,5 @@ LEITURA OBRIGATÓRIA para qualquer IA que trabalhe neste projeto:
 2. `GUIA_DE_VOZ.md` — identidade verbal: slogan, frases da casa, vocabulário permitido/proibido, regras invioláveis. TODO texto produzido deriva daqui.
 3. `DECISOES.md` — registro numerado de decisões (D1–D13). Nada aqui se reverte sem registrar.
 4. `PESQUISA_MERCADO.md` — personas (4 perfis), funil validado (Cenário C).
-5. `PROMPT_GEMINI_DESIGN.md` — prompt usado para a direção de arte (referência histórica).
+5. `PROMPT_GEMINI_DESIGN.md` — prompt usado para a direção de arte do PDF Premium (Camada Produto — referência histórica).
+6. `marca/` — identidade institucional (Camada Institucional: logo, site, redes, publicidade). Ver `marca/README.md` para a distinção entre Camada Institucional e Camada Produto (D24).

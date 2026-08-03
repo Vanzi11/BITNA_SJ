@@ -5,3 +5,6 @@ dist/
 .claude/
 *.pyc
 __pycache__/
+
+# DOCX originais dos brandbooks (grandes, só referência local — o PDF aprovado e os MDs já cobrem o conteúdo)
+empresa/marca/fontes-originais/
