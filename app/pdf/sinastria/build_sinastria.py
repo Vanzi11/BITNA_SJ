@@ -34,6 +34,27 @@ W, H = A4
 HERE = os.path.dirname(os.path.abspath(__file__))
 FONT_DIR = os.path.join(HERE, '..', 'premium_v5', 'fonts')
 LOGO_PATH = os.path.join(HERE, '..', '..', '..', 'empresa', 'marca', 'logo', 'logo_hero_branco.png')
+DOC_VERSION = 'V3'
+ANO_DOC = date.today().year
+
+# Nome de arquivo Tipo_DuplaIniciais_Versao_Ano (D35) — ex.: Amorosa_IvãMRS&HelenaRC_V3_2026.
+# Slug de cada pessoa = primeiro nome + iniciais de cada nome seguinte (mantém acento do 1º nome).
+def _slug_pessoa(nome):
+    ign = {'de', 'da', 'do', 'das', 'dos', 'e'}
+    parts = [p for p in (nome or '').split() if p and p.lower() not in ign]
+    if not parts:
+        return 'XX'
+    return parts[0] + ''.join(p[0].upper() for p in parts[1:])
+
+def nome_arquivo(dados):
+    tipo = {'amorosa': 'Amorosa', 'societaria': 'Profissional'}.get(dados.get('tipoRelacao'), 'Sinastria')
+    s1 = _slug_pessoa(dados.get('pessoa1', {}).get('nome', ''))
+    s2 = _slug_pessoa(dados.get('pessoa2', {}).get('nome', ''))
+    return f"{tipo}_{s1}&{s2}_{DOC_VERSION}_{ANO_DOC}"
+
+def _iniciais_curtas(nome):
+    ign = {'de', 'da', 'do', 'das', 'dos', 'e'}
+    return ''.join(p[0].upper() for p in (nome or '').split() if p and p.lower() not in ign) or 'XX'
 
 # ---------- paleta base (Livraria de Seul) ----------
 IVORY    = HexColor('#f7f3ea')

@@ -39,6 +39,25 @@ Você é a IA que assume a construção da **Bitna Saju** — empresa de relató
 
 Feita a auditoria oferta vs. entrega (`empresa/AUDITORIA_COERENCIA_PRODUTOS.md`). Portfólio travado com nomes/preços/páginas: 🌿 **Leitura Essencial** R$47 · ⭐ **Leitura Completa** R$97 (renomeada de "Premium"; id técnico segue `premium`) · 💞 **Sinastria Amorosa** R$97 · 🤝 **Sinastria Profissional** R$97 · 🌸 **Jornadas Bitna** R$249 (bundle novo). Ver EMPRESA.md v1.2 e D27. Três achados que viraram trabalho pendente (abaixo): Essencial sobredimensionado, Sinastria sem PDF, páginas anunciadas ajustadas à realidade.
 
+## [D35 — EM ANDAMENTO] Correções da Sinastria (revisão do Ivã, 04/08/2026)
+
+Ivã revisou as amostras v2 e pediu um lote grande de ajustes. **Só o começo foi feito** (helpers de nome de arquivo `Tipo_Dupla_V3_Ano` tipo `Amorosa_IvãMRS&HelenaRC_V3_2026`, e `DOC_VERSION`/`ANO_DOC` em `build_sinastria.py`). As amostras v2 (10 páginas) seguem válidas. **Falta implementar (checklist):**
+1. **Capa no padrão do Essencial:** eyebrow "EDIÇÃO SINASTRIA · V3 · 2026"; a PERGUNTA vira o título gigante ("Como funciona a relação/parceria de vocês?"), o nome do produto ("Sinastria Amorosa/Profissional") pequeno; abandonar "Saju de Casal"/"Sociedade e Parcerias". Hoje a capa repete "Sinastria Amorosa" 2×.
+2. **Nome completo** do cliente sempre; nos cartões da p. "quem é cada um", incluir nascimento com **cidade-UF** ("Salvador - BA"). (JSON de sinastria precisa de `nascimento.uf` por pessoa — server já preenche via `montarLeitura`; nas amostras injetar BA/SP/DF/PR.)
+3. **Fonte do corpo +1** (hoje 12,5 → 13,5).
+4. **Rodapé com fundo preto**: logo bem pequena OU o site + as **iniciais dos clientes** (ex.: "BITNASAJU.COM.BR · IMRS & HRC").
+5. **Página "Antes de ler"** (como no Essencial) — falta nas sinastrias; para o casal, usar a moldura "toda relação cria uma terceira identidade — nem você, nem a outra pessoa, mas o que nasce quando os dois caminham juntos" + o que é o gunghap.
+6. **Ideograma do gunghap** na p. do corpo: "gunghap (宮合)" — hoje o parêntese sai vazio (hangul 궁합 é removido no Linux). Corrigir nos relatórios E no prompt `sinastria.md`.
+7. **Termômetro em FAIXAS, não número** (crítica forte — "brasileiro ama nota, vira passei/reprovei"): 🟢 Harmonia Natural · 🟡 Harmonia Consciente · 🔵 Relação de Crescimento · 🟠 Complementaridade Desafiadora. Mapear por score, destacar a faixa atual, remover/minimizar o "51/100".
+8. **Frase na p. "quem é cada um":** "Antes de entender a relação, precisamos conhecer quem cada um é."
+9. **Página de OFERTA como última página** (padrão upsell do Essencial): oferecer a Jornada Bitna (Amorosa/Profissional) + demais leituras.
+10. **Emoção nos textos:** reescrever trechos "X ama pela firmeza" em prosa mais viva ("Ivã não diz 'eu te amo' com facilidade. Ele prefere demonstrar ficando. Resolvendo. Voltando..."). Fixar no prompt.
+11. **Resumo de bolso + "Primeiros três acordos"** (profissional: quem decide o quê, como discordar, como revisar; amorosa: análogo).
+12. **Abandonar linguagem de "compatibilidade" → "compreensão"** no PDF e na oferta (posicionamento: a Bitna vende compreensão/decisões práticas, não veredito de compatibilidade). Ajustar wording e registrar em EMPRESA.
+13. **[propor] Páginas type-specific que o Ivã elogiou muito** (avaliar/rediscutir): profissional → página "Quando essa parceria dá o seu melhor" (fluxo visual criar→estruturar→validar→executar→revisar) + gráfico emocional de barras (Visão/Execução/Comunicação/Risco). São type-specific, precisam de definição de eixos/valores — confirmar com o Ivã antes.
+
+Insight estratégico do Ivã a preservar: **"o diferencial da Bitna não é o Saju — é transformar uma tradição coreana em decisões práticas / traduzir padrões em conversas."** A Profissional "parece ferramenta de gestão" — potencial de vender para empresas/B2B.
+
 ## Demais pendências (ordem sugerida)
 
 1. ~~**[D28] Construir o gerador de PDF de Sinastria**~~ — ✅ **CONCLUÍDO (04/08/2026, D34).** `app/pdf/sinastria/build_sinastria.py`: 1 gerador, 2 produtos por tema (`tipoRelacao`) — Seal Red amorosa / Matte Bronze profissional. 10 páginas com 2 diagramas (ciclo dos 5 elementos + "o que um traz ao outro") e orientação individual a cada pessoa (D33). Testado com 2 pares reais → amostras `relatorios/exemplos/sinastria_*_AMOSTRA_v2.pdf`. Pendências menores: rota `/pdf-sinastria` no `server.mjs`, paletas formais, apagar amostras v1. **Destrava as Jornadas Bitna (D29), agora construíveis.**
