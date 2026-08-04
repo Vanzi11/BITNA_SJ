@@ -19,6 +19,13 @@ O campo `sexo` de CADA pessoa define a concordância dos trechos sobre ela. Conf
 
 > Nota (D22/D27): "amorosa" e "societaria" são hoje comercializadas como 2 produtos distintos (Sinastria Amorosa / Sinastria Profissional — renomeada de "Societária & Parcerias" em D27, R$ 97 cada) — mesmo motor e mesmo prompt, só o valor de `tipoRelacao` muda. Os 4 tópicos de cada um acima são os diferenciais anunciados na venda; a estrutura de 9 seções abaixo é onde eles entram (principalmente seções 3–7).
 
+## COBERTURA OBRIGATÓRIA dos pontos anunciados (D33)
+
+O relatório precisa responder a **TODOS** os pontos que a oferta promete para aquele tipo — pode acrescentar mais se for relevante e coerente com o mapa, nunca menos. Não precisa usar os rótulos como títulos, mas cada ponto tem que estar respondido em algum lugar do texto:
+
+- **amorosa:** (1) pontos de conexão; (2) fontes de conflito; (3) como cada um demonstra carinho, expressa afeto e segurança; (4) o que fortalece a relação; (5) o que merece atenção; (6) estratégias para uma relação mais harmoniosa.
+- **societaria (Profissional):** (1) compatibilidade entre os perfis; (2) complementaridade entre talentos; (3) como cada pessoa toma decisões; (4) comunicação; (5) pontos fortes da parceria; (6) possíveis fontes de conflito; (7) estratégias para fortalecer a parceria.
+
 ## Regras de fidelidade
 
 1. Tudo deriva do JSON dos dois mapas + score do motor. A riqueza está no CRUZAMENTO: relação entre os dois Mestres do Dia (ciclo de geração: Madeira→Fogo→Terra→Metal→Água→Madeira; ciclo de controle: Madeira⊣Terra⊣Água⊣Fogo⊣Metal⊣Madeira), o que um supre no mapa do outro (elementos ausentes × dominantes, yongsin recíproco), animais dos ramos do dia.
@@ -33,10 +40,16 @@ O campo `sexo` de CADA pessoa define a concordância dos trechos sobre ela. Conf
 3. **A química de vocês** — o cruzamento elemental explicado em linguagem humana.
 4. **O que flui bem** — afinidades concretas dos dados, com cenas.
 5. **Onde a corda esfrega** — atritos prováveis, cada um com acolhimento + prática concreta de convivência (ou cláusula de acordo, no caso societário).
-6. **O termômetro** — o score contextualizado.
-7. **Três combinados para vocês** — orientações práticas para cultivarem o melhor da combinação.
-8. **Resumo de bolso** — "✦ Vocês dois em 4 linhas" (compartilhável).
-9. **Nota final** — *"Este relatório é uma ferramenta de autoconhecimento a dois baseada na tradição coreana do gunghap. Nenhum mapa determina uma relação: ela é construída pelas escolhas, pelo diálogo e pelo cuidado de ambos."*
+6. **Como cada um demonstra afeto e busca segurança** (amorosa) / **Como cada um decide e se comunica** (societaria) — um parágrafo por pessoa, cobrindo os pontos anunciados do tipo.
+7. **O termômetro** — o score contextualizado.
+8. **Para cada um de vocês** — seção OBRIGATÓRIA de orientação **individual e direta**, endereçando cada pessoa pelo nome, com conselhos concretos e específicos do mapa dela dentro dessa relação. Formato: *"[Nome1], neste ponto você deve... / na hora de X, cuide de..."* e depois *"[Nome2], neste ponto você deve... / quando Y, lembre de..."*. Cada pessoa recebe 3–4 orientações práticas, ancoradas no que o mapa DELA pede (elemento em excesso/ausente, força do Mestre). É a seção que faz cada leitor sentir que o relatório falou com ele, não só sobre o casal/dupla.
+9. **Combinados a dois** — orientações práticas conjuntas para cultivarem o melhor da combinação (no societário: cláusulas a acordar antes de assinar).
+10. **Resumo de bolso** — "✦ Vocês dois em 4 linhas" (compartilhável).
+11. **Nota final** — *"Este relatório é uma ferramenta de autoconhecimento a dois baseada na tradição coreana do gunghap. Nenhum mapa determina uma relação: ela é construída pelas escolhas, pelo diálogo e pelo cuidado de ambos."*
+
+## Extensão
+
+1600–1900 palavras — o relatório precisa ser encorpado e cobrir todos os pontos anunciados com profundidade. Os diagramas (ciclo dos elementos e complementaridade) são desenhados pelo PDF a partir do JSON — o texto não precisa descrevê-los, mas pode referenciá-los.
 
 ## Formato
 

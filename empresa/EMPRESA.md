@@ -96,7 +96,7 @@ Dores principais:
 - Relatório especial em PDF (12–16 páginas — estimativa; gerador a construir, D28)
 - Entrega em até 48 horas
 
-*Implementação (Amorosa e Profissional): mesmo motor + mesmo prompt-base `relatorios/prompts/sinastria.md`, diferenciados pelo campo `tipoRelacao`. 1 SKU técnico, 2 posicionamentos. **PDF próprio de sinastria ainda não existe — maior gap técnico do portfólio (D28), bloqueia estes dois produtos e as Jornadas.***
+*Implementação (Amorosa e Profissional): mesmo motor + mesmo prompt-base `relatorios/prompts/sinastria.md` + **mesmo gerador de PDF** `app/pdf/sinastria/build_sinastria.py`, diferenciados pelo campo `tipoRelacao`. 1 SKU técnico, 2 posicionamentos, com tema por tipo (Seal Red amorosa / Matte Bronze profissional). **PDF construído e testado (D34), 10 páginas com 2 diagramas (ciclo dos elementos + complementaridade) e orientação individual a cada pessoa.** Amostras em `relatorios/exemplos/sinastria_*_AMOSTRA_v2.pdf`.*
 
 ## 🌸 Jornadas Bitna — R$ 249 (de R$ 291)
 *Para quem quer compreender a si mesmo e seus relacionamentos.* Bundle de relatórios já existentes (~15% de desconto sobre a soma).
