@@ -5,10 +5,12 @@ Bitna Saju — Gerador de PDF · Direção de arte v2 "Livraria de Seul"
 Paleta: marfim, lavanda suave, roxo profundo, dourado, cinza quente + selo vermelho.
 Uso: python3 gerar_pdf.py entrada.json saida.pdf
 """
-import sys, json, io, re, os
+import sys, json, io, re, os, unicodedata
+from datetime import date
 from reportlab.lib.pagesizes import A4
 from reportlab.pdfgen import canvas as rl_canvas
 from reportlab.lib.colors import HexColor
+from reportlab.lib.utils import ImageReader
 from reportlab.platypus import BaseDocTemplate, PageTemplate, Frame, Paragraph, HRFlowable
 from reportlab.lib.styles import ParagraphStyle
 from reportlab.lib.enums import TA_JUSTIFY, TA_CENTER
@@ -17,6 +19,30 @@ from reportlab.pdfbase.ttfonts import TTFont
 from pypdf import PdfReader, PdfWriter
 
 W, H = A4
+
+# --- Fonte +1 SÓ no texto corrido das páginas 2,4,5,6 (D31, regra 2) --------
+# O aumento é feito direto nos estilos de parágrafo do corpo (páginas 4,5,6) e
+# do caderno "antes de ler" (página 2), preservando os TÍTULOS e todas as outras
+# páginas. Não há patch global de setFont — SW() é só um alias de medição.
+BODY_BUMP = 1.0
+_SW = pdfmetrics.stringWidth
+def SW(text, fontName, fontSize, *a, **k):
+    return _SW(text, fontName, fontSize, *a, **k)
+
+# --- Versão do modelo de documento (D30) -----------------------------------
+# Sobe a cada mudança significativa de PADRÃO do documento (não do conteúdo).
+# Ex.: cliente que refizer a leitura meses depois recebe V4 e sabe que é um
+# modelo diferente do que recebeu na V3, mesmo no mesmo ano.
+DOC_VERSION = 'V3'
+ANO_DOC = date.today().year
+
+# --- Logo aprovada Bitna Saju (D23/D30): capa e última página --------------
+LOGO_PATH = None
+for _cand in [os.path.join(os.path.dirname(os.path.abspath(__file__)),
+                           '..', '..', 'empresa', 'marca', 'logo', 'logo_hero_branco.png')]:
+    if os.path.exists(_cand):
+        LOGO_PATH = _cand
+        break
 MARFIM   = HexColor('#f7f3ea')   # cream do Premium (não usado aqui — Essencial é fundo branco)
 MARFIM2  = HexColor('#f2ede1')
 BRANCO   = HexColor('#fdfcf9')   # fundo da Edição Essencial — diferencia do cream ornamentado do Premium
@@ -71,7 +97,7 @@ def draw_misto(c, x, y, texto, fonte, tam, align='l'):
     texto = hangul_para_hanja(texto)
     if CJK_FONT is None: texto = limpar_cjk(texto)
     runs = _runs(texto)
-    def wd(e, t): return pdfmetrics.stringWidth(t, CJK_FONT if (e and CJK_FONT) else fonte, tam)
+    def wd(e, t): return SW(t, CJK_FONT if (e and CJK_FONT) else fonte, tam)
     total = sum(wd(e, t) for e, t in runs)
     if align == 'c': x -= total/2
     elif align == 'r': x -= total
@@ -99,7 +125,7 @@ def quebrar_linhas(texto, fonte, tam, max_w, max_linhas=None):
     linhas, atual = [], ''
     for p in palavras:
         teste = (atual + ' ' + p).strip()
-        if pdfmetrics.stringWidth(teste, fonte, tam) <= max_w or not atual:
+        if SW(teste, fonte, tam) <= max_w or not atual:
             atual = teste
         else:
             linhas.append(atual); atual = p
@@ -110,9 +136,44 @@ def marca_hanja(c, x, y, texto='四柱', tam=15, cor=None, align='l'):
     """Marca discreta em hanja — substitui o carimbo vermelho na capa/encerramento da Essencial."""
     if not CJK_FONT: return
     c.setFillColor(cor or DOURADO); c.setFont(CJK_FONT, tam)
-    w = pdfmetrics.stringWidth(texto, CJK_FONT, tam)
+    w = SW(texto, CJK_FONT, tam)
     xx = x - w if align == 'r' else (x - w/2 if align == 'c' else x)
     c.drawString(xx, y, texto)
+
+def desenhar_logo(c, cx, cy, larg=210):
+    """Logo aprovada Bitna Saju centralizada em (cx, cy). Fundo branco da imagem é
+    mascarado para assentar no marfim/branco da página sem retângulo visível.
+    Degrada para a marca em hanja se o arquivo não estiver disponível."""
+    if not LOGO_PATH:
+        marca_hanja(c, cx, cy, tam=20, align='c'); return
+    try:
+        ir = ImageReader(LOGO_PATH)
+        iw, ih = ir.getSize(); h = larg * ih / iw
+        c.drawImage(ir, cx - larg/2, cy - h/2, larg, h,
+                    mask=[245, 255, 245, 255, 245, 255], preserveAspectRatio=True)
+    except Exception:
+        marca_hanja(c, cx, cy, tam=20, align='c')
+
+def slug_nome(nome):
+    """Primeiro nome completo + iniciais dos nomes do meio + último nome completo,
+    sem espaços nem acentos (D31, regra 1).
+    Ex.: 'Ivã Márcio Rego Santos' -> 'IvaMRSantos'."""
+    if not nome: return 'XX'
+    ign = {'de', 'da', 'do', 'das', 'dos', 'e'}
+    parts = [p for p in nome.split() if p and p.lower() not in ign]
+    if not parts: return 'XX'
+    if len(parts) == 1:
+        base = parts[0]
+    else:
+        base = parts[0] + ''.join(p[0] for p in parts[1:-1]) + parts[-1]
+    base = ''.join(ch for ch in unicodedata.normalize('NFKD', base) if not unicodedata.combining(ch))
+    return base or 'XX'
+
+def nome_arquivo(nome, produto, versao=DOC_VERSION, ano=ANO_DOC):
+    """Padrão de nome de arquivo Tipo_Nome_Versao_Ano (D31).
+    Ex.: nome_arquivo('Ivã Márcio Rego Santos', 'essencial') -> 'Essencial_IvaMRSantos_V3_2026'."""
+    tipo = {'premium': 'Completa', 'essencial': 'Essencial'}.get(produto, 'Essencial')
+    return f"{tipo}_{slug_nome(nome)}_{versao}_{ano}"
 
 def selo(c, cx, cy, lado=38, texto='四柱'):
     """Carimbo vermelho tradicional (dojang)."""
@@ -215,7 +276,7 @@ def cabecalho(c, eyebrow, headline):
     """Estilo editorial da Essencial: rótulo pequeno (categoria) acima, título grande
     em itálico serifado abaixo — inverte o peso visual do Premium (que usa título bold reto)."""
     c.setFillColor(CINZA); c.setFont('Helvetica', 8.5)
-    c.drawCentredString(W/2, H-64, 'S A J U   B R A S I L')
+    c.drawCentredString(W/2, H-64, 'B I T N A   S A J U')
     c.setFillColor(DOURADO); c.setFont('Helvetica-Bold', 8.2)
     c.drawCentredString(W/2, H-90, rastreado(eyebrow.upper()))
     linhas = quebrar_linhas(headline, 'Times-Italic', 22, W-220, max_linhas=2)
@@ -279,40 +340,46 @@ def mestre_chave(l):
     m = (l.get('mestreDoDia') or '').split(' ')[0]
     return m if m in HANJA_MESTRE else None
 
+def _cidade_uf(n):
+    """Cidade seguida da sigla do estado, quando disponível: 'Salvador - BA' (D30)."""
+    cidade = n.get('cidade', '')
+    uf = n.get('uf') or n.get('estado')
+    return f"{cidade} - {uf}" if uf else cidade
+
 def pagina_capa(c, dados):
     fundo(c); moldura(c)
     l = dados['leitura']; nome = dados.get('nome') or ''
     premium = dados.get('produto') == 'premium'
-    c.setFillColor(CINZA); c.setFont('Helvetica', 9.5)
-    c.drawCentredString(W/2, H-90, 'S A J U   B R A S I L')
-    if not premium:
-        marca_hanja(c, W-70, H-95, tam=15, align='r')
-    linha_dourada(c, H-104, 60)
     if premium:
+        # Ramo Premium é código morto em produção (o Premium roda em premium_v5/build_pdf.py);
+        # mantido só por segurança de teste manual.
+        c.setFillColor(CINZA); c.setFont('Helvetica', 9.5)
+        c.drawCentredString(W/2, H-90, 'B I T N A   S A J U')
+        linha_dourada(c, H-104, 60)
         mk = mestre_chave(l)
         if mk and CJK_FONT:
-            c.setFillColor(HexColor('#e7e0d0'))
-            c.setFont(CJK_FONT, 300)
+            c.setFillColor(HexColor('#e7e0d0')); c.setFont(CJK_FONT, 300)
             c.drawCentredString(W/2, H/2-70, HANJA_MESTRE[mk])
+        c.setFillColor(ROXO); c.setFont('Times-Bold', 30)
+        c.drawCentredString(W/2, H-260, 'Leitura Completa')
     else:
+        # Logo aprovada Bitna Saju no topo, bem maior (D30 regra 6 + D31 regra 5)
+        desenhar_logo(c, W/2, H-150, larg=320)
+        linha_dourada(c, H-250, 60)
+        # Eyebrow com versão do modelo e ano (D30, regra 7)
         c.setFillColor(DOURADO); c.setFont('Helvetica-Bold', 9)
-        c.drawCentredString(W/2, H-172, rastreado('EDIÇÃO ESSENCIAL'))
-    c.setFillColor(ROXO)
-    if premium:
-        c.setFont('Times-Bold', 30)
-        c.drawCentredString(W/2, H-260, 'Leitura Personalizada Premium')
-    else:
-        c.setFont('Times-Italic', 30)
-        c.drawCentredString(W/2, H-224, 'Leitura Personalizada')
-        c.drawCentredString(W/2, H-258, 'Essencial')
+        c.drawCentredString(W/2, H-274, rastreado(f'EDIÇÃO ESSENCIAL · {DOC_VERSION} · {ANO_DOC}'))
+        c.setFillColor(ROXO); c.setFont('Times-Italic', 30)
+        c.drawCentredString(W/2, H-320, 'Leitura Personalizada Essencial')
     c.setFillColor(CINZA); c.setFont('Times-Italic', 12)
-    c.drawCentredString(W/2, H-284, 'um retrato dos seus padrões, pela tradição coreana dos Quatro Pilares')
+    c.drawCentredString(W/2, H-346, 'um retrato dos seus padrões, pela tradição coreana dos Quatro Pilares')
     if nome:
+        # Nome SEMPRE completo nas peças de identificação (D30, regra 1)
         c.setFillColor(TXT); c.setFont('Times-Bold', 21)
         c.drawCentredString(W/2, 250, nome)
     n = l['nascimento']
     c.setFillColor(CINZA); c.setFont('Helvetica', 10)
-    c.drawCentredString(W/2, 228, f"{'/'.join(reversed(n['data'].split('-')))} às {n['hora']} · {n['cidade']}")
+    c.drawCentredString(W/2, 228, f"{'/'.join(reversed(n['data'].split('-')))} às {n['hora']} · {_cidade_uf(n)}")
     c.setFillColor(ROXO_MED)
     draw_misto(c, W/2, 200, f"Mestre do Dia · {l.get('mestreDoDia','')}", 'Times-Roman', 12, align='c')
     if premium:
@@ -373,7 +440,7 @@ def pagina_pilares(c, dados):
     cabecalho(c, 'Os Quatro Pilares', 'as energias do momento exato do seu nascimento')
     papeis = [('ano','ANO','raízes · origem'), ('mes','MÊS','carreira · vida pública'),
               ('dia','DIA','eu íntimo · vínculos'), ('hora','HORA','projetos · maturidade')]
-    wc, hc, gap = 112, 235, 16
+    wc, hc, gap = 124, 235, 11   # cartões mais largos p/ o texto não colar nas bordas (D31, regra 4)
     x0 = (W - 4*wc - 3*gap)/2; y0 = H/2 - 90
     for i, (chave, rot, sub) in enumerate(papeis):
         carta_pilar(c, x0 + i*(wc+gap), y0, wc, hc, rot, sub, l['pilares'].get(chave))
@@ -434,7 +501,7 @@ def pagina_arquetipos(c, dados):
         c.setFillColor(DOURADO); c.setFont('Helvetica', 7.5)
         c.drawString(x0+2, y+3, rotulo)
         c.setStrokeColor(DOURADO2); c.setLineWidth(0.4)
-        c.line(x0 + 2 + pdfmetrics.stringWidth(rotulo, 'Helvetica', 7.5) + 8, y+6, x0 + 2*cw + gapx, y+6)
+        c.line(x0 + 2 + SW(rotulo, 'Helvetica', 7.5) + 8, y+6, x0 + 2*cw + gapx, y+6)
         for j, (nomeA, hanja, desc_a, desc_x) in enumerate(par):
             v = dist.get(nomeA, 0)
             x = x0 + j*(cw+gapx); yc = y - ch
@@ -457,7 +524,7 @@ def pagina_arquetipos(c, dados):
     larguras = []
     for nv, rot in itens:
         wdots = (4*4.4+4) if nv >= 2 else 2*4.4
-        larguras.append(wdots + 9 + pdfmetrics.stringWidth(rot, 'Helvetica', 11))
+        larguras.append(wdots + 9 + SW(rot, 'Helvetica', 11))
     sep = 30
     x = W/2 - (sum(larguras) + sep*2)/2
     for (nv, rot), lg in zip(itens, larguras):
@@ -537,7 +604,7 @@ def pagina_card_final(c, dados):
         c.setFillColor(CINZA); c.setFont('Times-Italic', 10)
         c.drawCentredString(W/2, H/2-118, nome)
     c.setFillColor(DOURADO); c.setFont('Helvetica', 8)
-    c.drawCentredString(W/2, H/2-136, 'S A J U B R A S I L . C O M . B R')
+    c.drawCentredString(W/2, H/2-136, 'B I T N A S A J U . C O M . B R')
     c.setFillColor(CINZA); c.setFont('Helvetica', 7.5)
     c.drawCentredString(W/2, 62, 'Este relatório é uma ferramenta de autoconhecimento baseada na tradição coreana do Saju.')
     c.drawCentredString(W/2, 51, 'Ele não substitui acompanhamento médico ou psicológico, e nenhum mapa decide por você: o caminho é sempre seu.')
@@ -563,7 +630,7 @@ def paginas_caderno(c, itens=None):
         fundo(c); moldura(c)
         cabecalho(c, subt, titulo)
         y = H - 190
-        estilo = ParagraphStyle('cad', fontName='Times-Roman', fontSize=11.5, leading=19,
+        estilo = ParagraphStyle('cad', fontName='Times-Roman', fontSize=11.5 + BODY_BUMP, leading=19 + BODY_BUMP,
                                 textColor=TXT, alignment=TA_JUSTIFY)
         for ptxt in pars:
             if CJK_FONT: ptxt = CJK_RE.sub(lambda m: f'<font name="CJK">{m.group(0)}</font>', ptxt)
@@ -577,12 +644,14 @@ def paginas_caderno(c, itens=None):
 
 def md_para_flowables(md_texto):
     estilos = {
+        # keepWithNext: um título nunca fecha a página sozinho — se for órfão no rodapé,
+        # é empurrado para o topo da página seguinte, junto do parágrafo que ele abre (D32, regra 1).
         'h2': ParagraphStyle('h2', fontName='Times-Bold', fontSize=16.5, leading=21, textColor=ROXO,
-                             spaceBefore=22, spaceAfter=8, alignment=TA_CENTER),
+                             spaceBefore=22, spaceAfter=8, alignment=TA_CENTER, keepWithNext=1),
         'h3': ParagraphStyle('h3', fontName='Times-Bold', fontSize=13, leading=17, textColor=ROXO_MED,
-                             spaceBefore=14, spaceAfter=5),
-        'p': ParagraphStyle('p', fontName='Times-Roman', fontSize=11.3, leading=18.5, textColor=TXT,
-                            alignment=TA_JUSTIFY, spaceAfter=9),
+                             spaceBefore=14, spaceAfter=5, keepWithNext=1),
+        'p': ParagraphStyle('p', fontName='Times-Roman', fontSize=11.3 + BODY_BUMP, leading=18.5 + BODY_BUMP,
+                            textColor=TXT, alignment=TA_JUSTIFY, spaceAfter=9),
     }
     def inline(t):
         t = t.replace('&', '&amp;').replace('<', '&lt;').replace('>', '&gt;')
@@ -662,7 +731,7 @@ def pdf_texto(md_texto, nome):
         canv.saveState()
         fundo(canv); moldura(canv)
         canv.setFillColor(CINZA); canv.setFont('Helvetica', 7.5)
-        canv.drawCentredString(W/2, 50, ('S A J U   B R A S I L' + ('   ·   ' + nome if nome else '')))
+        canv.drawCentredString(W/2, 50, ('B I T N A   S A J U' + ('   ·   ' + nome if nome else '')))
         canv.setFillColor(CINZA); canv.setFont('Times-Roman', 9)
         canv.drawCentredString(W/2, 36, f"— {PAG['n'] + doc.page} —")
         canv.restoreState()
@@ -699,7 +768,7 @@ def pagina_sintese(c, dados, texto, resumo_pares):
     fundo(c); moldura(c)
     nome = dados.get('nome') or ''
     c.setFillColor(CINZA); c.setFont('Helvetica', 8.5)
-    c.drawCentredString(W/2, H-64, 'S A J U   B R A S I L')
+    c.drawCentredString(W/2, H-64, 'B I T N A   S A J U')
     c.setFillColor(DOURADO); c.setFont('Helvetica-Bold', 8.2)
     c.drawCentredString(W/2, H-90, rastreado('SÍNTESE'))
     c.setFillColor(ROXO); c.setFont('Times-Italic', 22)
@@ -746,34 +815,43 @@ def pagina_nota(c, dados, texto):
     numero(c)
     c.showPage()
 
+# Diferenciais da Leitura Completa — título curto (grande) + descrição do que o
+# cliente PASSA A TER se subir de versão (D30 regra 4 + D31 regra 3: fonte dobrada).
 UPSELL_ITENS = [
-    'o bloqueio central do seu mapa — o padrão que mais te trava hoje, nomeado com precisão e cuidado',
-    'os dez arquétipos completos do seu mapa, nome técnico e tradução em comportamento',
-    'seus animais e suas estrelas (sinsais), cada um com instrução de uso',
-    'a jornada inteira pelos ciclos de década — o que passou, o presente em detalhe e o que vem a seguir',
+    ('Os Quatro Pilares', 'Ano, Mês, Dia e Hora analisados um a um — não só o seu Mestre do Dia.'),
+    ('Os Cinco Elementos', 'Onde você tem excesso, onde falta, e como isso aparece no dia a dia.'),
+    ('O bloqueio central', 'O padrão que mais te trava hoje, nomeado com precisão e um caminho de saída.'),
+    ('Os dez arquétipos', 'A leitura completa de como cada energia se relaciona com o seu centro.'),
+    ('Animais e estrelas', 'A camada simbólica do temperamento, cada uma com instrução de uso.'),
+    ('Seus Ciclos de Vida', 'Década a década: o que passou, o presente em detalhe e o que preparar.'),
+    ('Prosperidade e estratégias', 'Como o dinheiro flui para você e os ajustes de cor, hábito e ambiente.'),
 ]
 
 def pagina_upsell(c, dados):
-    """Fecho com ar de 'quero saber mais': deixa claro que esta é a Essencial e existe
-    uma versão mais completa — pedido geral do Ivã, sem tom de venda pesada."""
+    """Fecho com ar de 'quero saber mais': deixa claro que esta é a Essencial e mostra
+    tudo o que a Leitura Completa acrescenta — sem venda pesada, mas fazendo o cliente
+    perceber o tamanho do que ainda pode receber (D30 regra 4 + D31 regra 3)."""
     fundo(c); moldura(c)
-    marca_hanja(c, W/2, H/2+206, tam=20, align='c')
-    c.setFillColor(ROXO); c.setFont('Times-Italic', 19)
-    c.drawCentredString(W/2, H/2+150, 'Isto foi a Edição Essencial')
-    c.drawCentredString(W/2, H/2+122, 'do seu mapa.')
-    linha_dourada(c, H/2+100, 60)
-    c.setFillColor(TXT); c.setFont('Times-Roman', 10.8)
-    c.drawCentredString(W/2, H/2+72, 'A Edição Premium aprofunda cada camada. Ela inclui, entre outras coisas:')
-    y = H/2 + 42
-    estilo = ParagraphStyle('ups', fontName='Times-Roman', fontSize=10, leading=15, textColor=TXT)
-    for item in UPSELL_ITENS:
-        p = Paragraph(item, estilo)
-        wp, hp = p.wrap(W-300, 60)
-        c.setFillColor(DOURADO); c.circle(126, y-4, 1.6, stroke=0, fill=1)
-        p.drawOn(c, 140, y-hp)
-        y -= hp + 13
-    c.setFillColor(ROXO_MED); c.setFont('Times-Italic', 10.5)
-    c.drawCentredString(W/2, y-14, 'saiba mais em bitnasaju.com.br')
+    desenhar_logo(c, W/2, H-90, larg=150)   # logo no encerramento (D30, regra 6)
+    c.setFillColor(ROXO); c.setFont('Times-Italic', 18)
+    c.drawCentredString(W/2, H-156, 'Isto foi a Edição Essencial do seu mapa.')
+    linha_dourada(c, H-172, 60)
+    c.setFillColor(TXT); c.setFont('Times-Roman', 11.5)
+    c.drawCentredString(W/2, H-196, 'A Leitura Completa aprofunda cada camada. Veja tudo o que ela acrescenta:')
+    y = H - 232
+    # tópicos num tamanho harmonioso (D32, regra 2): reduzidos em relação ao D31 (era 21/12),
+    # e descrições com largura maior para não quebrarem de forma feia.
+    est_t = ParagraphStyle('upt', fontName='Times-Bold', fontSize=15, leading=18, textColor=ROXO)
+    est_d = ParagraphStyle('upd', fontName='Times-Roman', fontSize=10.5, leading=14, textColor=CINZA)
+    for titulo, desc in UPSELL_ITENS:
+        c.setFillColor(DOURADO); c.circle(120, y-7, 2.3, stroke=0, fill=1)
+        pt = Paragraph(titulo, est_t); wt, ht = pt.wrap(W-270, 40); pt.drawOn(c, 138, y-ht)
+        y -= ht + 2
+        pd = Paragraph(desc, est_d); wd, hd = pd.wrap(W-270, 40); pd.drawOn(c, 138, y-hd)
+        y -= hd + 15
+    # "Saiba mais" em destaque, com www. (D31, regra 3)
+    c.setFillColor(ROXO); c.setFont('Times-Bold', 20)
+    c.drawCentredString(W/2, max(y-16, 60), 'Saiba mais em www.bitnasaju.com.br')
     numero(c)
     c.showPage()
 
@@ -793,8 +871,10 @@ def gerar(entrada, saida):
         # "Antes de ler o seu mapa" acompanha toda leitura Essencial, sempre como página 2 (item 2)
         paginas_caderno(c, CADERNO[:1])
     pagina_pilares(c, dados)
-    pagina_elementos(c, dados)
     if premium:
+        # A página "Os Cinco Elementos" é exclusiva da Leitura Completa (D26): o mapa dos
+        # elementos com excessos/ausências deixou de ser escopo da Essencial ("Quem sou eu?").
+        pagina_elementos(c, dados)
         pagina_arquetipos(c, dados)
         pagina_ciclos(c, dados)
     c.save(); fixo.seek(0)

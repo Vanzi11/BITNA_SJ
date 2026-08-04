@@ -53,12 +53,31 @@ function traduzirDaeUn(periods) {
   }));
 }
 
+// Nome de arquivo padronizado Tipo_Nome_Versao_Ano (D31, regra 1)
+// Nome = primeiro nome completo + iniciais do meio + último nome completo, sem acento.
+// Ex.: 'Ivã Márcio Rego Santos' -> 'IvaMRSantos'.
+const DOC_VERSION = 'V3';
+const IGNORAR_NOME = new Set(['de', 'da', 'do', 'das', 'dos', 'e']);
+const slugNome = (nome) => {
+  const parts = (nome || '').split(/\s+/).filter((p) => p && !IGNORAR_NOME.has(p.toLowerCase()));
+  if (!parts.length) return 'XX';
+  const base = parts.length === 1
+    ? parts[0]
+    : parts[0] + parts.slice(1, -1).map((p) => p[0]).join('') + parts[parts.length - 1];
+  return base.normalize('NFD').replace(/[̀-ͯ]/g, '') || 'XX';
+};
+const nomeArquivo = (nome, premium) =>
+  `${premium ? 'Completa' : 'Essencial'}_${slugNome(nome)}_${DOC_VERSION}_${new Date().getFullYear()}`;
+
 function montarLeitura({ data, hora, cidade, sexo }) {
   const horaDesconhecida = !hora;
   const horaEfetiva = hora || '12:00';
   const saju = calculateSaju(data, horaEfetiva, 'solar', false, sexo, cidade);
   const leitura = traduzirSaju(saju);
   leitura.ciclosDeDecada = traduzirDaeUn(calculateDaeUn(saju));
+  // Sigla do estado de nascimento, para a capa exibir "Cidade - UF" (D30, regra 1)
+  const infoCidade = BRAZIL_CITIES.find((cc) => normalizeBrazilCityName(cc.name) === normalizeBrazilCityName(cidade));
+  if (infoCidade?.state) leitura.nascimento.uf = infoCidade.state;
   if (horaDesconhecida) {
     // 3 pilares: sem hora confiável, o pilar da hora é omitido
     delete leitura.pilares.hora;
@@ -192,7 +211,7 @@ const server = createServer(async (req, res) => {
       });
       const pdf = lerArquivo(saida);
       try { unlinkSync(entrada); unlinkSync(saida); } catch {}
-      res.writeHead(200, { 'content-type': 'application/pdf', 'content-disposition': 'attachment; filename="leitura-saju.pdf"' });
+      res.writeHead(200, { 'content-type': 'application/pdf', 'content-disposition': `attachment; filename="${nomeArquivo(b.nome, premium)}.pdf"` });
       return res.end(pdf);
     }
 

@@ -18,7 +18,7 @@ Você é a IA que assume a construção da **Bitna Saju** — empresa de relató
 
 **Prompts dos relatórios** (`relatorios/prompts/`): voz aprovada (mulher madura, vivida e acolhedora; honestidade acolhedora; estrutura V3 com frases fixas da casa). O relatório-padrão de qualidade é `relatorios/exemplos/relatorio_iva_premium_demonstracao.md`.
 
-**Dois produtos prontos DE PONTA A PONTA**: Edição Essencial (R$ 47, `app/pdf/gerar_pdf.py`, identidade própria — D21) e Leitura Premium (R$ 197, `app/pdf/premium_v5/build_pdf.py`, visual "livro de Seul" parametrizado — D14–D19). Ambos: cálculo + texto + PDF testados com dados reais.
+**Dois produtos prontos DE PONTA A PONTA**: Leitura Essencial (R$ 47, `app/pdf/gerar_pdf.py`, identidade própria — D21; escopo a enxugar, D26) e Leitura Completa (R$ 97 — nome comercial, renomeada de "Premium", id técnico segue `premium`; `app/pdf/premium_v5/build_pdf.py`, visual "livro de Seul" parametrizado — D14–D19). Ambos: cálculo + texto + PDF testados com dados reais. As duas Sinastrias e as Jornadas Bitna estão vendidas na oferta mas **ainda sem PDF entregável** (D28).
 
 ## REGRAS INVIOLÁVEIS (a identidade da empresa)
 
@@ -35,14 +35,19 @@ Você é a IA que assume a construção da **Bitna Saju** — empresa de relató
 
 **Limite conhecido, não bloqueante**: se o LLM escrever termos coreanos em **hangul** solto na prosa (ex.: 십성), a fonte precisa ter cobertura de hangul, não só hanja — `malgun.ttf` no Windows cobre os dois; no Linux de teste deste sandbox só havia hanja disponível (Noto Serif/Sans CJK aqui são CFF, que o reportlab não lê — caiu pro Droid, hanja-only). Como D12 já pede hanja nos visuais e não hangul, isso não deveria aparecer na prática, mas fica registrado.
 
+## Auditoria de coerência de produtos (03/08/2026 — D25–D29)
+
+Feita a auditoria oferta vs. entrega (`empresa/AUDITORIA_COERENCIA_PRODUTOS.md`). Portfólio travado com nomes/preços/páginas: 🌿 **Leitura Essencial** R$47 · ⭐ **Leitura Completa** R$97 (renomeada de "Premium"; id técnico segue `premium`) · 💞 **Sinastria Amorosa** R$97 · 🤝 **Sinastria Profissional** R$97 · 🌸 **Jornadas Bitna** R$249 (bundle novo). Ver EMPRESA.md v1.2 e D27. Três achados que viraram trabalho pendente (abaixo): Essencial sobredimensionado, Sinastria sem PDF, páginas anunciadas ajustadas à realidade.
+
 ## Demais pendências (ordem sugerida)
 
-1. ~~PDF do produto Essencial~~ — ✅ CONCLUÍDO (D21): redesenhado como "Edição Essencial" com identidade própria (fundo branco, navy, sem moldura, página de upsell), amostra `leitura_essencial_fagundes_1987_AMOSTRA_v2.pdf`.
-2. Sinastria: prompt pronto; falta PDF próprio (decisão D11: acentos VERMELHOS amorosa / DOURADOS societária).
-3. DIRECAO_DE_ARTE.md — escrever após Ivã aprovar o v5 parametrizado página a página (D13). Com a parametrização pronta, dá pra gerar PDFs de mapas variados pra essa revisão.
-4. Pré-lançamento: política de reembolso, LGPD/consentimento no formulário, transparência de IA, meta de validação (ver Pendências em DECISOES.md).
-5. EMPRESA.md v1.1 (portfólio atualizado: entrada R$47, sinastria R$49,90, Mapa Completo do Parceiro R$99,90 como bump, Premium R$197, Clube R$27,90 depois).
-6. Expandir cidades para base IBGE completa; sorte diária como conteúdo de Instagram.
+1. **[D28] Construir o gerador de PDF de Sinastria — PRIORIDADE Nº 1.** Não existe hoje (só o prompt `sinastria.md` + exemplos .md). Bloqueia 3 produtos: as 2 Sinastrias e as Jornadas Bitna. Base: `app/pdf/premium_v5/build_pdf.py`; paleta D11 (selo vermelho amorosa / dourado profissional). A oferta anuncia 12–16 páginas como estimativa — validar após construir e testar com 2 mapas reais.
+2. ~~**[D26] Enxugar a Leitura Essencial**~~ + ~~**[D30] 9 correções de padrão do PDF**~~ — ✅ **CONCLUÍDOS (03/08/2026).** D26: prompt 12→8 seções, foco "Quem sou eu?", página de elementos premium-only, → 9 páginas (era 11). D30: nome completo + "Cidade - UF" na capa, logo aprovada na capa/fecho, fonte +1, eyebrow com versão (V3), página final com diferenciais da Completa, "Saju Brasil"→"Bitna Saju", ideograma 四柱 na abertura, adendos elementais no Faça mais/Evite, nome de arquivo `Tipo_Iniciais_V_Ano`. Tocou `gerar_pdf.py`, `server.mjs` (uf + nome de arquivo) e `leitura_individual.md`. Refinado em **D31** (nome de arquivo primeiro+último nome completo → `Essencial_IvaMRSantos_V3_2026`, fonte +1 só no texto corrido preservando títulos, logo maior na capa, cards da p.3 alargados, "www." no site, tópicos da p.9 dobrados). Refinado ainda em **D32** (título nunca fecha página via `keepWithNext`; tópicos da p.9 reequilibrados; rótulo "Mestre do Dia do seu nascimento" na p.7). Amostra canônica: `relatorios/exemplos/Essencial_IvaMRSantos_V3_2026.pdf`. Ver D26, D30, D31 e D32.
+3. **[D29] Empacotar as Jornadas Bitna** — formulário multi-pessoa (2–3 pessoas numa compra) + entrega dos 3 PDFs juntos. Depende de D28.
+4. **[D27] Propagar "Leitura Completa"** nos materiais de cliente (site/checkout/e-mail). Id técnico `premium` no código permanece.
+5. Sinastria — paleta própria e DIRECAO_DE_ARTE (parte do D28).
+6. Pré-lançamento: política de reembolso, LGPD/consentimento no formulário, transparência de IA, meta de validação (ver Pendências em DECISOES.md).
+7. Expandir cidades para base IBGE completa; sorte diária como conteúdo de Instagram.
 
 ## Como gerar um relatório hoje (fluxo completo)
 

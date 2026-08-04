@@ -1,6 +1,6 @@
 # BITNA SAJU
 > Documento de Contexto da Empresa
-> Versão 1.0
+> Versão 1.2 (03/08/2026)
 ---
 # Visão Geral
 A Bitna Saju é uma empresa digital AI First dedicada à divulgação e comercialização de produtos baseados no Saju (Quatro Pilares do Destino), adaptados para o público brasileiro.
@@ -48,47 +48,63 @@ Dores principais:
 - compatibilidade amorosa
 ---
 # Produtos
-> v1.1 (21/07/2026) — 4 tipos de produto travados (nome + diferenciais). **Preços não fechados** — valores de D4 (DECISOES.md) seguem como referência de funil até nova decisão. Ver D22 para o registro desta atualização.
+> v1.2 (03/08/2026) — nomes, preços e páginas travados após a **auditoria de coerência** (`AUDITORIA_COERENCIA_PRODUTOS.md`, decisões D25–D29). Cada produto responde a uma pergunta da jornada do cliente. Páginas anunciadas refletem o que o gerador realmente produz (D25). Ver D27 para nomes/preços.
 
-## 🌿 Plano Essencial
-Para quem quer começar a jornada de autoconhecimento coreano.
-- Relatório Personalizado em PDF
-- Análise do Elemento Mestre & Dinâmica Yin-Yang
-- Visão Geral de Carreira e Talentos Naturais
-- Resumo de Compatibilidade & Amor
+**A jornada do cliente (posicionamento):**
+- 🌿 Leitura Essencial → *Quem sou eu?*
+- ⭐ Leitura Completa → *Como minha vida funciona?*
+- 💞 Sinastria Amorosa → *Como funciona nossa relação?*
+- 🤝 Sinastria Profissional → *Como funciona nossa parceria?*
 
-*Implementação: `app/pdf/gerar_pdf.py` + `relatorios/prompts/leitura_individual.md` (produto "essencial" no backend).*
+## 🌿 Leitura Essencial — R$ 47
+*Descubra quem você é.* Para quem está iniciando a jornada de autoconhecimento pela tradição coreana do Saju. Apresenta os principais padrões do mapa natal — personalidade e forma natural de agir no mundo.
+- Seu Elemento Mestre
+- Seus principais talentos naturais
+- Sua forma de pensar, agir e tomar decisões
+- Relatório personalizado em PDF (9 páginas)
+- Entrega em até 48 horas
 
-## ⭐ Plano Premium
-A imersão completa no seu mapa de vida e destino.
-- Relatório Completo e Aprofundado em PDF
-  - Visão Aprofundada de Carreira e Talentos Naturais
-  - Visão Aprofundada de Compatibilidade & Amor
-- Tudo do Plano Essencial +
-- Análise detalhada dos 4 Pilares (Ano, Mês, Dia, Hora)
-- Mapa dos Cinco Elementos: seu equilíbrio e excessos energéticos
-- Guia de Ciclos de Vida: como navegar pelos seus momentos de sorte e desafios
-- Conselhos Práticos: cores, elementos e hábitos para harmonizar sua energia
+> **Escopo reduzido (D26) + 9 correções de padrão (D30) — ✅ implementados:** foco em "Quem sou eu?" (ciclos, cinco elementos e sinsal saíram para a Completa; núcleo do Mestre do Dia aprofundado). Padrão do PDF atualizado (D30): nome completo + "Cidade - UF" na capa, logo aprovada na capa e no fecho, fonte +1, eyebrow "EDIÇÃO ESSENCIAL · V3 · Ano", página final com os diferenciais da Completa, nome de arquivo `Tipo_Iniciais_Versão_Ano`. Refinado em D31 (nome de arquivo primeiro+último nome completo, fonte +1 só no texto corrido preservando títulos, logo maior na capa, cards da p.3 alargados, "www." no site, tópicos da p.9 maiores). Amostra canônica: `relatorios/exemplos/Essencial_IvaMRSantos_V3_2026.pdf` (9 páginas, testada com dado real). *Implementação: `app/pdf/gerar_pdf.py` + `app/server.mjs` + `relatorios/prompts/leitura_individual.md` (id técnico `essencial`).*
 
-*Implementação: `app/pdf/premium_v5/build_pdf.py` + `relatorios/prompts/leitura_premium.md` (produto "premium" no backend).*
+## ⭐ Leitura Completa — R$ 97 (de R$ 120)
+*Descubra como sua vida funciona.* Amplia a Leitura Essencial com uma visão aprofundada dos ciclos, potenciais e padrões do mapa. Inclui tudo da Essencial +
+- Os Quatro Pilares completos (Ano, Mês, Dia e Hora)
+- Mapa dos Cinco Elementos: equilíbrios e excessos naturais
+- Ciclos da Vida e tendências de prosperidade e desafios
+- Períodos de aprendizado
+- Estratégias para harmonizar seus padrões
+- Relatório completo e aprofundado em PDF (cerca de 26 páginas; varia com o mapa)
+- Prioridade de entrega
 
-## 💞 Sinastria Amorosa (Saju de Casal)
-Para casais, encontros recentes ou para entender a química com o crush.
-- Relatório Especial de Compatibilidade em PDF
-- Cruzamento de Elementos: como o Elemento Mestre de cada um reage ao outro (complemento, atrito ou paixão)
-- Dinâmica da Relativização: onde a relação flui naturalmente e onde podem surgir faíscas/desentendimentos
-- Linguagens da Conexão: como cada um expressa afeto e segurança segundo o Saju
-- Conselhos do Saju: dicas práticas para harmonizar as energias do casal e cultivar um relacionamento duradouro
+*Nome comercial "Leitura Completa" (renomeado de "Premium" — D27); id técnico interno segue `premium`. Implementação: `app/pdf/premium_v5/build_pdf.py` + `relatorios/prompts/leitura_premium.md`.*
 
-## 🤝 Sinastria Societária & Parcerias
-Para sócios, parceiros de negócios, projetos em equipe ou amigos próximos.
-- Relatório Estratégico de Parceria em PDF
-- Mapeamento de Talentos Complementares: quem é melhor na visão/estratégia e quem brilha na execução/operação
-- Pontos de Tensão nos Negócios: mapeamento de possíveis divergências em momentos de estresse ou tomada de decisão
-- Prosperidade Combinada: como a junção dos elementos dos dois atrai ou bloqueia oportunidades financeiras
-- Guia de Comunicação Eficiente: como alinhar expectativas e potencializar a tomada de decisão em conjunto
+## 💞 Sinastria Amorosa (Saju de Casal) — R$ 97
+*Como funciona nossa relação?* Para casais, pessoas se conhecendo ou quem quer compreender uma relação afetiva. Não descreve indivíduos — descreve o relacionamento.
+- Pontos de conexão e fontes de conflito
+- Como cada um demonstra carinho, expressa afeto e segurança
+- O que fortalece a relação e o que merece atenção
+- Estratégias para uma relação mais harmoniosa
+- Relatório especial em PDF (12–16 páginas — estimativa; gerador a construir, D28)
+- Entrega em até 48 horas
 
-*Implementação (Amorosa e Societária): mesmo motor + mesmo prompt-base `relatorios/prompts/sinastria.md`, diferenciados pelo campo `tipoRelacao`. É 1 SKU técnico com 2 posicionamentos de produto distintos — não duplicar engine/prompt (ver D4, D22). PDF próprio de sinastria ainda pendente (ver CONTINUIDADE.md).*
+## 🤝 Sinastria Profissional — R$ 97
+*Como funciona nossa parceria?* Para sócios, parceiros de negócios, colegas de trabalho ou amizades importantes. Como duas pessoas funcionam juntas em ambientes profissionais.
+- Compatibilidade e complementaridade entre os perfis e talentos
+- Como cada pessoa toma decisões e se comunica
+- Pontos fortes da parceria e possíveis fontes de conflito
+- Estratégias para fortalecer a parceria
+- Relatório especial em PDF (12–16 páginas — estimativa; gerador a construir, D28)
+- Entrega em até 48 horas
+
+*Implementação (Amorosa e Profissional): mesmo motor + mesmo prompt-base `relatorios/prompts/sinastria.md`, diferenciados pelo campo `tipoRelacao`. 1 SKU técnico, 2 posicionamentos. **PDF próprio de sinastria ainda não existe — maior gap técnico do portfólio (D28), bloqueia estes dois produtos e as Jornadas.***
+
+## 🌸 Jornadas Bitna — R$ 249 (de R$ 291)
+*Para quem quer compreender a si mesmo e seus relacionamentos.* Bundle de relatórios já existentes (~15% de desconto sobre a soma).
+- **Jornada Amorosa** — 2 Leituras Completas (uma para cada pessoa) + 1 Sinastria Amorosa
+- **Jornada Profissional** — 2 Leituras Completas (uma para cada pessoa) + 1 Sinastria Profissional
+- 3 relatórios personalizados, com prioridade de entrega (até 48 horas)
+
+*Produto novo (D29) — empacotamento, sem motor/prompt novo. Depende do PDF de Sinastria (D28), de formulário multi-pessoa e do fluxo de entrega dos 3 PDFs juntos. Substitui na prática o "Mapa Completo do Parceiro" (D4), agora fora do line-up.*
 
 ## Clube Saju — R$ 27,90/mês (fase 2)
 Horóscopo coreano mensal, conteúdos exclusivos, comunidade, descontos, novas leituras, sinastrias promocionais. Inicialmente conceito — não construir agora.

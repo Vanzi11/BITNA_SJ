@@ -2,7 +2,7 @@
 
 > **🤖 Para IAs continuando este trabalho: leia `CONTINUIDADE.md` PRIMEIRO.** Ele contém o estado do projeto, as regras invioláveis da marca, a tarefa pendente prioritária e a ordem de leitura dos documentos. Cada pasta tem seu próprio README.
 
-Empresa digital de relatórios de autoconhecimento baseados no Saju (사주, Quatro Pilares do Destino) e sinastria (궁합, gunghap), adaptados para o público brasileiro. Dois produtos prontos: Leitura Individual (R$ 47) e Leitura Premium (R$ 197).
+Empresa digital de relatórios de autoconhecimento baseados no Saju (사주, Quatro Pilares do Destino) e sinastria (궁합, gunghap), adaptados para o público brasileiro. Portfólio (v1.2, D27): Leitura Essencial R$ 47 · Leitura Completa R$ 97 · Sinastria Amorosa / Profissional R$ 97 · Jornadas Bitna R$ 249. Ver `empresa/EMPRESA.md` e a auditoria de coerência em `empresa/AUDITORIA_COERENCIA_PRODUTOS.md`.
 
 ## O que há neste repositório
 
