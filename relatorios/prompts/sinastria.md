@@ -41,7 +41,7 @@ O relatório precisa responder a **TODOS** os pontos que a oferta promete para a
 4. **O que flui bem** — afinidades concretas dos dados, com cenas.
 5. **Onde a corda esfrega** — atritos prováveis, cada um com acolhimento + prática concreta de convivência (ou cláusula de acordo, no caso societário).
 6. **Como cada um demonstra afeto e busca segurança** (amorosa) / **Como cada um decide e se comunica** (societaria) — um parágrafo por pessoa, cobrindo os pontos anunciados do tipo.
-7. **O termômetro** — o score contextualizado.
+7. **A harmonia de vocês** — o score aparece no PDF como **FAIXA qualitativa** (Harmonia Natural / Consciente / Relação de Crescimento / Complementaridade Desafiadora), **nunca como número** (brasileiro lê nota como "passei/reprovei"). No texto, contextualize a faixa como ponto de partida que se move com consciência — jamais como veredito de "compatibilidade".
 8. **Para cada um de vocês** — seção OBRIGATÓRIA de orientação **individual e direta**, endereçando cada pessoa pelo nome, com conselhos concretos e específicos do mapa dela dentro dessa relação. Formato: *"[Nome1], neste ponto você deve... / na hora de X, cuide de..."* e depois *"[Nome2], neste ponto você deve... / quando Y, lembre de..."*. Cada pessoa recebe 3–4 orientações práticas, ancoradas no que o mapa DELA pede (elemento em excesso/ausente, força do Mestre). É a seção que faz cada leitor sentir que o relatório falou com ele, não só sobre o casal/dupla.
 9. **Combinados a dois** — orientações práticas conjuntas para cultivarem o melhor da combinação (no societário: cláusulas a acordar antes de assinar).
 10. **Resumo de bolso** — "✦ Vocês dois em 4 linhas" (compartilhável).
@@ -53,4 +53,15 @@ O relatório precisa responder a **TODOS** os pontos que a oferta promete para a
 
 ## Formato
 
-Markdown, títulos curtos, parágrafos de 2-4 linhas, sem tabelas. Termos coreanos com parcimônia.
+Markdown, títulos curtos, parágrafos de 2-4 linhas, sem tabelas. Termos coreanos com parcimônia. Ao citar **gunghap** pela primeira vez, escreva o ideograma em **hanja: "gunghap (宮合)"** — nunca o hangul (궁합), que não renderiza em todas as fontes do PDF.
+
+## Traduzir para quem nunca ouviu falar de Saju (D36 — princípio de TODA a casa)
+
+O cliente compra a **tradução**, não o Saju — quanto menos ele precisar entender o "motor", melhor. Seja sensível e explique mais, sem complexificar:
+- **Explique cada termo técnico na PRIMEIRA vez que aparece, em uma frase curta.** Ex.: "Mu, a Terra Yang — no Saju, o arquétipo central da personalidade dele"; "Madeira (crescimento, visão, ideias novas)". Nunca largue "Mestre do Dia", "elemento dominante", "Yin/Yang", "Eul/Gyeong" cru, sem tradução, na primeira aparição.
+- **Ao usar uma dinâmica entre elementos, diga logo se é boa/ruim/neutra e o que representa** — o leigo não sabe. Ex.: "no Saju, a Madeira rompe a Terra para crescer — isso não é bom nem ruim, é uma dinâmica de movimento e renovação". Dar a pista do que **não é** (não é veredito, não é reprovação, não é defeito) é informação tão valiosa quanto o que é.
+- A página "Como ler este relatório" e as legendas dos diagramas já fazem parte disso no PDF; o texto deve seguir o mesmo espírito. Regra registrada para propagar a todos os relatórios da empresa (ver D36).
+
+## Posicionamento (D35): compreensão, não compatibilidade
+
+A Bitna **não vende compatibilidade** — vende **compreensão** e decisões práticas. Evite "compatibilidade", "combinam", "vão dar certo", veredito sobre o futuro. Prefira "como vocês funcionam juntos", "onde flui e onde pede cuidado". **Emocione**: prefira a cena viva à afirmação seca — em vez de "Ele ama pela firmeza", escreva "Ele não diz 'eu te amo' com facilidade; prefere demonstrar ficando, resolvendo, voltando — sendo o chão que continua ali quando o resto muda". A parte mais forte do relatório é a orientação prática (seções 8 e 9): é ali que a leitura vira ferramenta de decisão.

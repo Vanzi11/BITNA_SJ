@@ -48,8 +48,8 @@ def _slug_pessoa(nome):
 
 def nome_arquivo(dados):
     tipo = {'amorosa': 'Amorosa', 'societaria': 'Profissional'}.get(dados.get('tipoRelacao'), 'Sinastria')
-    s1 = _slug_pessoa(dados.get('pessoa1', {}).get('nome', ''))
-    s2 = _slug_pessoa(dados.get('pessoa2', {}).get('nome', ''))
+    s1 = _iniciais_curtas(dados.get('pessoa1', {}).get('nome', ''))
+    s2 = _iniciais_curtas(dados.get('pessoa2', {}).get('nome', ''))
     return f"{tipo}_{s1}&{s2}_{DOC_VERSION}_{ANO_DOC}"
 
 def _iniciais_curtas(nome):
@@ -73,22 +73,34 @@ THEME = {
     'amorosa': {
         'accent': HexColor('#B22222'),      # Seal Red
         'accent_soft': HexColor('#e7c6c1'),
-        'eyebrow': 'SINASTRIA AMOROSA',
-        'titulo': 'Sinastria Amorosa',
-        'subtitulo': 'Saju de Casal',
-        'pergunta': 'Como funciona a relação de vocês?',
+        'eyebrow': 'EDIÇÃO SINASTRIA',
+        'titulo': 'Sinastria Amorosa',      # nome do produto (pequeno na capa)
+        'pergunta': 'Como funciona a relação de vocês?',  # herói da capa
         'selo': '宮合',           # gunghap
-        'resumo_titulo': '✦ Vocês dois em 4 linhas',
+        'resumo_titulo': 'Vocês dois em 4 linhas',
+        # Cross-sell (D36): quem comprou a Amorosa é convidado à Jornada PROFISSIONAL
+        'oferta_jornada': 'Jornada Profissional',
+        'oferta_gancho': 'Vocês entenderam a relação. Existe também a leitura de como vocês funcionam num projeto ou sociedade:',
+        'oferta_desc': 'A Jornada Profissional reúne as Leituras Completas de cada um + a Sinastria Profissional da dupla.',
+        'antes_frase': ('Toda relação cria uma terceira identidade. Não é você, não é a outra '
+                        'pessoa — é aquilo que nasce quando os dois caminham juntos. É esse '
+                        'terceiro que este mapa procura entender.'),
     },
     'societaria': {
         'accent': HexColor('#A68B67'),      # Matte Bronze
         'accent_soft': HexColor('#e2d6c4'),
-        'eyebrow': 'SINASTRIA PROFISSIONAL',
+        'eyebrow': 'EDIÇÃO SINASTRIA',
         'titulo': 'Sinastria Profissional',
-        'subtitulo': 'Sociedade e Parcerias',
         'pergunta': 'Como funciona a parceria de vocês?',
         'selo': '宮合',
-        'resumo_titulo': '✦ Vocês dois em 4 linhas',
+        'resumo_titulo': 'Vocês dois em 4 linhas',
+        # Cross-sell (D36): quem comprou a Profissional é convidado à Jornada AMOROSA
+        'oferta_jornada': 'Jornada Amorosa',
+        'oferta_gancho': 'Vocês entenderam a parceria. Existe também a leitura de como vocês funcionam no afeto e na convivência:',
+        'oferta_desc': 'A Jornada Amorosa reúne as Leituras Completas de cada um + a Sinastria Amorosa da dupla.',
+        'antes_frase': ('Uma parceria cria uma terceira identidade — não é você, não é o seu '
+                        'sócio, é a sociedade que nasce entre os dois. É esse terceiro, com força '
+                        'e riscos próprios, que este mapa procura entender.'),
     },
 }
 def tema(dados):
@@ -216,34 +228,71 @@ def desenhar_logo(c, cx, cy, larg):
         pass
 
 PAG = {'n': 0}
+RODAPE = {'iniciais': ''}   # "IMRS & HRC" — preenchido em gerar()
+
+def rodape_barra(c):
+    """Barra preta no rodapé com o site e as iniciais dos clientes (D35)."""
+    c.setFillColor(HexColor('#1b1a17')); c.rect(0, 0, W, 22, stroke=0, fill=1)
+    c.setFillColor(HexColor('#e9e3d5')); c.setFont(SANS, 6.6)
+    txt = 'BITNASAJU.COM.BR' + ('        ' + RODAPE['iniciais'] if RODAPE['iniciais'] else '')
+    c.drawCentredString(W/2, 8, txt)
+
 def numero(c, th, mostrar=True):
     PAG['n'] += 1
+    rodape_barra(c)
     if mostrar and PAG['n'] > 1:
         c.setFillColor(MUTED); c.setFont(SANS, 8)
-        c.drawCentredString(W/2, 40, f"— {PAG['n']} —")
+        c.drawCentredString(W/2, 31, f"— {PAG['n']} —")
+
+def _cidade_uf(p):
+    n = p.get('nascimento') or {}
+    cidade = n.get('cidade', ''); uf = n.get('uf') or n.get('estado')
+    return f"{cidade} - {uf}" if uf else cidade
+
+def _data_br(p):
+    d = ((p.get('nascimento') or {}).get('data') or '')
+    return '/'.join(reversed(d.split('-'))) if d else ''
+
+def _nasc_linha(p):
+    n = p.get('nascimento') or {}
+    h = n.get('hora')
+    hora = f" às {h}" if h and h != 'desconhecida' else ''
+    return f"{_data_br(p)}{hora} · {_cidade_uf(p)}"
+
+def faixa_relacao(score):
+    """Faixa qualitativa em vez do número cru (D35): brasileiro lê nota como passa/reprova."""
+    if score >= 78:  return ('Harmonia Natural', HexColor('#4a6b46'))       # verde
+    if score >= 62:  return ('Harmonia Consciente', HexColor('#b58b3a'))    # dourado
+    if score >= 46:  return ('Relação de Crescimento', HexColor('#3b5a7a')) # azul
+    return ('Complementaridade Desafiadora', HexColor('#a85a2d'))           # laranja
 
 # ---------- páginas ----------
 def pagina_capa(c, dados, th):
     fundo(c)
     p1, p2 = dados['pessoa1'], dados['pessoa2']
-    desenhar_logo(c, W/2, H-140, 250)
-    hairline(c, H-232, 66, cor=th['accent'])
+    desenhar_logo(c, W/2, H-150, 320)
+    hairline(c, H-252, 66, cor=th['accent'])
+    # eyebrow no padrão do Essencial: EDIÇÃO SINASTRIA · V3 · 2026 (D35)
     c.setFillColor(th['accent']); c.setFont(SANS, 9)
-    c.drawCentredString(W/2, H-256, rastreado(th['eyebrow']))
-    c.setFillColor(INK); c.setFont(DISPLAY_IT, 34)
-    c.drawCentredString(W/2, H-300, th['titulo'])
-    c.setFillColor(MUTED); c.setFont(BODY_I, 13)
-    c.drawCentredString(W/2, H-324, th['subtitulo'])
-    # nomes das duas pessoas
+    c.drawCentredString(W/2, H-276, rastreado(f"{th['eyebrow']} · {DOC_VERSION} · {ANO_DOC}"))
+    # HERÓI da capa = a PERGUNTA (o que o cliente realmente procura); nome do produto pequeno
+    c.setFillColor(INK); c.setFont(DISPLAY_IT, 31)
+    for i, ln in enumerate(quebrar(th['pergunta'], DISPLAY_IT, 31, W-150)):
+        c.drawCentredString(W/2, H-320 - i*34, ln)
+    c.setFillColor(MUTED); c.setFont(SANS, 9.5)
+    c.drawCentredString(W/2, H-398, rastreado(th['titulo'].upper()))
+    # nomes das duas pessoas (completos) + dados de nascimento, como na capa do Essencial (D36)
     c.setFillColor(BODY_C); c.setFont(DISPLAY, 20)
-    c.drawCentredString(W/2, 322, p1.get('nome', 'Pessoa 1'))
+    c.drawCentredString(W/2, 344, p1.get('nome', 'Pessoa 1'))
+    c.setFillColor(MUTED); c.setFont(SANS, 8.5)
+    c.drawCentredString(W/2, 328, _nasc_linha(p1))
     c.setFillColor(th['accent']); c.setFont(BODY_I, 15)
-    c.drawCentredString(W/2, 296, 'e')
+    c.drawCentredString(W/2, 302, 'e')
     c.setFillColor(BODY_C); c.setFont(DISPLAY, 20)
-    c.drawCentredString(W/2, 268, p2.get('nome', 'Pessoa 2'))
-    selo(c, W/2, 196, 40, th['accent'], th['selo'])
-    c.setFillColor(MUTED); c.setFont(BODY_I, 11)
-    c.drawCentredString(W/2, 150, th['pergunta'])
+    c.drawCentredString(W/2, 278, p2.get('nome', 'Pessoa 2'))
+    c.setFillColor(MUTED); c.setFont(SANS, 8.5)
+    c.drawCentredString(W/2, 262, _nasc_linha(p2))
+    selo(c, W/2, 192, 40, th['accent'], th['selo'])
     c.setFillColor(MUTED); c.setFont(BODY_I, 10)
     c.drawCentredString(W/2, 92, '"Não é sobre prever o futuro de vocês — é sobre entender como vocês funcionam juntos."')
     numero(c, th, mostrar=False); c.showPage()
@@ -257,6 +306,8 @@ def card_pessoa(c, x, w, p, th):
     c.setFillColor(BODY_C); c.setFont(DISPLAY, 15)
     for i, ln in enumerate(quebrar(p.get('nome', ''), DISPLAY, 15, w-24)[:2]):
         c.drawCentredString(cx, y_top-26 - i*17, ln)
+    c.setFillColor(MUTED); c.setFont(SANS, 7.3)
+    c.drawCentredString(cx, y_top-58, f"{_data_br(p)}  ·  {_cidade_uf(p)}")
     hj = hanja_de(p.get('mestreDoDia', ''))
     elem = elem_mestre(p.get('mestreDoDia', ''))
     if CJK and hj:
@@ -282,11 +333,25 @@ def pagina_quem(c, dados, th):
     c.setFillColor(INK); c.setFont(DISPLAY_IT, 23)
     c.drawCentredString(W/2, H-128, 'os dois mapas, lado a lado')
     hairline(c, H-146, 60, cor=GOLD)
+    c.setFillColor(BODY_C); c.setFont(BODY_I, 12)
+    c.drawCentredString(W/2, H-174, 'Antes de entender a relação, precisamos conhecer quem cada um é.')
     gap = 24; w = (W - 2*92 - gap)/2
     card_pessoa(c, 92, w, dados['pessoa1'], th)
     card_pessoa(c, 92+w+gap, w, dados['pessoa2'], th)
+    # o que cada categoria significa — uma frase, para quem não conhece Saju (D36)
+    exps = [('Mestre do Dia', 'o arquétipo central da personalidade de cada um'),
+            ('Força', 'quanto esse traço aparece naturalmente'),
+            ('Elemento dominante', 'o estilo predominante de agir'),
+            ('Animal do dia', 'um símbolo complementar do temperamento')]
+    yy = 202
+    for rot, desc in exps:
+        wl = SW(rot + ':  ', SANS, 8)
+        wd = SW(desc, BODY_I, 10.5); x = W/2 - (wl + wd)/2
+        c.setFillColor(th['accent']); c.setFont(SANS, 8); c.drawString(x, yy, rot + ':')
+        c.setFillColor(BODY_C); c.setFont(BODY_I, 10.5); c.drawString(x + wl, yy, desc)
+        yy -= 15
     c.setFillColor(MUTED); c.setFont(BODY_I, 10.5)
-    c.drawCentredString(W/2, 96, 'Cada mapa é um retrato de temperamento — a leitura a dois nasce do encontro dos dois.')
+    c.drawCentredString(W/2, 122, 'Cada mapa é um retrato de temperamento — a leitura a dois nasce do encontro dos dois.')
     numero(c, th); c.showPage()
 
 def _cab(c, th, eyebrow, titulo):
@@ -330,7 +395,9 @@ def pagina_ciclo(c, dados, th):
     p1, p2 = dados['pessoa1'], dados['pessoa2']
     e1, e2 = elem_mestre(p1.get('mestreDoDia', '')), elem_mestre(p2.get('mestreDoDia', ''))
     _cab(c, th, 'O CICLO DOS ELEMENTOS', 'como as energias de vocês se relacionam')
-    cx, cy, R = W/2, H/2+34, 132
+    c.setFillColor(BODY_C); c.setFont(BODY_I, 11)
+    c.drawCentredString(W/2, H-172, 'Os cinco elementos são cinco formas de agir no mundo — veja como se alimentam e se equilibram.')
+    cx, cy, R = W/2, H/2+28, 128
     pos = {}
     for i, e in enumerate(ELEM_ORDER):
         a = math.radians(90 - i*72); pos[e] = (cx+R*math.cos(a), cy+R*math.sin(a))
@@ -398,21 +465,35 @@ def pagina_complementaridade(c, dados, th):
     c.setFillColor(BODY_C); c.setFont(BODY_I, 12)
     for i, ln in enumerate(quebrar(cap, BODY_I, 12, W-190)):
         c.drawCentredString(W/2, yN-120 - i*18, ln)
-    # termômetro no rodapé
+    # A harmonia em FAIXA, não número (D35): evita a leitura "passei/reprovei".
     score = int((dados.get('analiseMotor') or {}).get('score') or 0)
-    bx, bw, by = W/2-160, 320, 168
+    nome_faixa, cor_faixa = faixa_relacao(score)
     c.setFillColor(th['accent']); c.setFont(SANS, 8)
-    c.drawCentredString(W/2, by+44, rastreado('O TERMÔMETRO DA RELAÇÃO'))
-    c.setStrokeColor(HAIRLINE); c.setFillColor(HexColor('#efe9db')); c.setLineWidth(0.8)
-    c.roundRect(bx, by, bw, 15, 7.5, stroke=1, fill=1)
-    c.setFillColor(th['accent']); c.roundRect(bx, by, max(15, bw*score/100), 15, 7.5, stroke=0, fill=1)
-    c.setFillColor(INK); c.setFont(DISPLAY, 27); c.drawCentredString(W/2, by-40, f'{score}')
-    c.setFillColor(MUTED); c.setFont(SANS, 8); c.drawCentredString(W/2, by-53, rastreado('DE 100'))
-    c.setFillColor(BODY_C); c.setFont(BODY_I, 11)
-    msg = ('Faixa média não é incompatibilidade — é uma relação que cresce com consciência.'
-           if score < 70 else 'Uma base forte, que ainda assim floresce com atenção e diálogo.')
-    for i, ln in enumerate(quebrar(msg, BODY_I, 11, 380)):
-        c.drawCentredString(W/2, by-80 - i*16, ln)
+    c.drawCentredString(W/2, 232, rastreado('A HARMONIA DE VOCÊS'))
+    bands = [('Complementaridade Desafiadora', 'Desafiadora', HexColor('#a85a2d')),
+             ('Relação de Crescimento', 'Crescimento', HexColor('#3b5a7a')),
+             ('Harmonia Consciente', 'Consciente', HexColor('#b58b3a')),
+             ('Harmonia Natural', 'Natural', HexColor('#4a6b46'))]
+    seg, gp = 86, 6; total = 4*seg + 3*gp; x0 = W/2 - total/2; by = 200
+    for i, (nm, curto, cor) in enumerate(bands):
+        ativo = (nm == nome_faixa); x = x0 + i*(seg+gp)
+        c.setFillAlpha(1.0 if ativo else 0.30); c.setFillColor(cor)   # todas coloridas; inativas esmaecidas
+        c.roundRect(x, by, seg, 14, 4, stroke=0, fill=1); c.setFillAlpha(1.0)
+        if ativo:
+            c.setStrokeColor(INK); c.setLineWidth(1.1)
+            c.roundRect(x-1.7, by-1.7, seg+3.4, 17.4, 4, stroke=1, fill=0)
+            c.setFillColor(cor); p = c.beginPath()  # marcador triangular acima
+            p.moveTo(x+seg/2, by+23); p.lineTo(x+seg/2-5, by+31); p.lineTo(x+seg/2+5, by+31); p.close()
+            c.drawPath(p, stroke=0, fill=1)
+        c.setFillColor(cor if ativo else MUTED); c.setFont(SANS, 6.8 if ativo else 6.3)
+        c.drawCentredString(x+seg/2, by-13, curto)
+    c.setFillColor(cor_faixa); c.setFont(DISPLAY, 21)
+    c.drawCentredString(W/2, by-44, nome_faixa)
+    c.setFillColor(BODY_C); c.setFont(BODY_I, 10.5)
+    msg = ('As quatro faixas vão da mais desafiadora à mais natural — a de vocês está destacada. '
+           'Nenhuma é reprovação: cada uma pede um tipo diferente de cuidado.')
+    for i, ln in enumerate(quebrar(msg, BODY_I, 10.5, 415)):
+        c.drawCentredString(W/2, by-66 - i*15, ln)
     numero(c, th); c.showPage()
 
 # ---------- corpo narrativo ----------
@@ -440,7 +521,7 @@ def md_flowables(md, th):
                              spaceBefore=20, spaceAfter=7, keepWithNext=1),
         'h3': ParagraphStyle('h3', fontName=DISPLAY, fontSize=13.5, leading=17, textColor=INK,
                              spaceBefore=13, spaceAfter=4, keepWithNext=1),
-        'p': ParagraphStyle('p', fontName=BODY_F, fontSize=12.5, leading=19.5, textColor=BODY_C,
+        'p': ParagraphStyle('p', fontName=BODY_F, fontSize=13.5, leading=20.5, textColor=BODY_C,
                             alignment=TA_JUSTIFY, spaceAfter=9),
     }
     def inline(t):
@@ -464,12 +545,11 @@ def pdf_corpo(md, th, nome_rodape):
     buf = io.BytesIO()
     def fundo_pg(canv, doc):
         canv.saveState(); fundo(canv)
-        canv.setFillColor(MUTED); canv.setFont(SANS, 7.5)
-        canv.drawCentredString(W/2, 52, rastreado('BITNA SAJU') + ('   ·   ' + nome_rodape if nome_rodape else ''))
+        rodape_barra(canv)
         canv.setFillColor(MUTED); canv.setFont(SANS, 8)
-        canv.drawCentredString(W/2, 38, f"— {PAG['n'] + doc.page} —")
+        canv.drawCentredString(W/2, 31, f"— {PAG['n'] + doc.page} —")
         canv.restoreState()
-    doc = BaseDocTemplate(buf, pagesize=A4, leftMargin=92, rightMargin=92, topMargin=84, bottomMargin=76)
+    doc = BaseDocTemplate(buf, pagesize=A4, leftMargin=92, rightMargin=92, topMargin=84, bottomMargin=82)
     doc.addPageTemplates([PageTemplate(id='corpo', frames=[Frame(92, 76, W-184, H-160, id='f')], onPage=fundo_pg)])
     doc.build(md_flowables(md, th))
     buf.seek(0)
@@ -492,8 +572,8 @@ def pagina_resumo(c, dados, th, resumo_pares):
     c.setFillColor(INK); c.setFont(DISPLAY_IT, 24)
     c.drawCentredString(W/2, H-152, th['resumo_titulo'])
     hairline(c, H-168, 60, cor=GOLD)
-    y = H-214
-    for label, valor in resumo_pares[:5]:
+    y = H-206
+    for label, valor in resumo_pares[:8]:
         y = linha_editorial(c, 110, y, W-220, label, valor, th)
     numero(c, th); c.showPage()
 
@@ -512,17 +592,96 @@ def pagina_nota(c, dados, th, nota):
     selo(c, W/2, H-286-hp-46, 34, th['accent'], th['selo'])
     numero(c, th); c.showPage()
 
+def pagina_antes(c, dados, th):
+    """Página 2 'Antes de ler' — moldura emocional (a terceira identidade) + o que é o gunghap (D35)."""
+    fundo(c)
+    c.setFillColor(th['accent']); c.setFont(SANS, 8.5)
+    c.drawCentredString(W/2, H-110, rastreado('ANTES DE LER'))
+    c.setFillColor(INK); c.setFont(DISPLAY_IT, 24)
+    c.drawCentredString(W/2, H-142, 'A terceira identidade')
+    hairline(c, H-160, 60, cor=GOLD)
+    est = ParagraphStyle('af', fontName=DISPLAY_IT, fontSize=18, leading=27, textColor=INK, alignment=TA_CENTER)
+    p = Paragraph(th['antes_frase'], est); wp, hp = p.wrap(W-190, 300); p.drawOn(c, 95, H-214-hp)
+    y = H-214-hp-44
+    txt = ('Na Coreia, antes de um casamento ou de uma sociedade, consulta-se o gunghap (宮合) — '
+           'a leitura de compreensão a dois dentro do Saju. Ela não diz se vocês "combinam": '
+           'ilumina como as energias dos dois mapas se encontram, onde fluem e onde pedem '
+           'cuidado, para que vocês decidam melhor, juntos.')
+    txt = CJK_RE.sub(lambda m: f'<font name="CJK">{m.group(0)}</font>', txt) if CJK else limpar_cjk(txt)
+    est2 = ParagraphStyle('af2', fontName=BODY_F, fontSize=12.5, leading=19, textColor=BODY_C, alignment=TA_CENTER)
+    p2 = Paragraph(txt, est2); wp2, hp2 = p2.wrap(W-200, 300); p2.drawOn(c, 100, y-hp2)
+    selo(c, W/2, 120, 34, th['accent'], th['selo'])
+    numero(c, th); c.showPage()
+
+def pagina_como_ler(c, dados, th):
+    """Ponte para quem nunca ouviu falar de Saju (D36): o cliente compra a TRADUÇÃO, não o motor."""
+    fundo(c)
+    c.setFillColor(th['accent']); c.setFont(SANS, 8.5)
+    c.drawCentredString(W/2, H-110, rastreado('COMO LER ESTE RELATÓRIO'))
+    c.setFillColor(INK); c.setFont(DISPLAY_IT, 24)
+    c.drawCentredString(W/2, H-142, 'você não precisa conhecer Saju')
+    hairline(c, H-160, 60, cor=GOLD)
+    est = ParagraphStyle('cl', fontName=BODY_F, fontSize=12.5, leading=19, textColor=BODY_C, alignment=TA_CENTER)
+    intro = ('Ao longo das páginas você verá palavras como Madeira, Fogo, Terra, Metal e Água. '
+             'Elas não representam os elementos físicos: são arquétipos usados há séculos na tradição '
+             'coreana para descrever formas diferentes de pensar, decidir, comunicar e agir.')
+    p = Paragraph(intro, est); wp, hp = p.wrap(W-200, 200); p.drawOn(c, 100, H-200-hp)
+    y = H-200-hp-42
+    trad = [('Madeira', 'crescimento, visão, ideias novas'), ('Fogo', 'expressão, entusiasmo, energia'),
+            ('Terra', 'estabilidade, cuidado, base sólida'), ('Metal', 'estrutura, decisão, foco'),
+            ('Água', 'reflexão, adaptação, estratégia')]
+    for el, desc in trad:
+        c.setFillColor(COR_ELEM[el]); c.circle(158, y-4, 7, stroke=0, fill=1)
+        if CJK:
+            c.setFillColor(IVORY); c.setFont(CJK, 8); c.drawCentredString(158, y-6.8, ELEM_CH[el])
+        c.setFillColor(INK); c.setFont(DISPLAY, 14); c.drawString(176, y-6, el)
+        c.setFillColor(MUTED); c.setFont(BODY_I, 12); c.drawString(250, y-6, '— ' + desc)
+        y -= 27
+    est2 = ParagraphStyle('cl2', fontName=BODY_I, fontSize=12.5, leading=18, textColor=INK, alignment=TA_CENTER)
+    fim = 'Nas próximas páginas, traduzimos esses símbolos para situações reais do dia a dia. É só ler com calma.'
+    p2 = Paragraph(fim, est2); wp2, hp2 = p2.wrap(W-230, 80); p2.drawOn(c, 115, y-16-hp2)
+    numero(c, th); c.showPage()
+
+def pagina_oferta(c, dados, th):
+    """Última página — oferta da próxima etapa (Jornada Bitna), no espírito do upsell do Essencial (D35)."""
+    fundo(c)
+    desenhar_logo(c, W/2, H-98, 150)
+    c.setFillColor(INK); c.setFont(DISPLAY_IT, 22)
+    c.drawCentredString(W/2, H-172, f"Isto foi a {th['titulo']}.")
+    hairline(c, H-190, 60, cor=th['accent'])
+    est_g = ParagraphStyle('og', fontName=BODY_F, fontSize=12.5, leading=18, textColor=BODY_C, alignment=TA_CENTER)
+    pg = Paragraph(th['oferta_gancho'], est_g); wg, hg = pg.wrap(W-200, 60); pg.drawOn(c, 100, H-212-hg)
+    yj = H-212-hg-30
+    c.setFillColor(th['accent']); c.setFont(DISPLAY, 27)
+    c.drawCentredString(W/2, yj, th['oferta_jornada'])
+    est = ParagraphStyle('of', fontName=BODY_I, fontSize=13, leading=19, textColor=INK, alignment=TA_CENTER)
+    p = Paragraph(th['oferta_desc'], est); wp, hp = p.wrap(W-200, 80); p.drawOn(c, 100, yj-24-hp)
+    y = yj-24-hp-34
+    itens = [('As duas Leituras Completas', 'O mapa individual e aprofundado de cada um de vocês (Quem sou eu? · Como minha vida funciona?).'),
+             ('A outra Sinastria da dupla', 'A leitura da relação de vocês na dimensão que ainda não exploraram.')]
+    et = ParagraphStyle('it', fontName=DISPLAY, fontSize=14, leading=17, textColor=th['accent'])
+    ed = ParagraphStyle('id', fontName=BODY_F, fontSize=10.8, leading=14.5, textColor=MUTED)
+    for titulo, desc in itens:
+        c.setFillColor(th['accent']); c.circle(122, y-3, 2.3, stroke=0, fill=1)
+        pt = Paragraph(titulo, et); wt, ht = pt.wrap(W-300, 30); pt.drawOn(c, 138, y-ht); y -= ht+2
+        pd = Paragraph(desc, ed); wd, hd = pd.wrap(W-280, 40); pd.drawOn(c, 138, y-hd); y -= hd+16
+    c.setFillColor(th['accent']); c.setFont(DISPLAY, 22)
+    c.drawCentredString(W/2, max(y-14, 70), 'Saiba mais em www.bitnasaju.com.br')
+    numero(c, th); c.showPage()
+
 # ---------- montagem ----------
 def gerar(entrada, saida):
     PAG['n'] = 0
     dados = json.load(open(entrada, encoding='utf-8'))
     th = tema(dados)
-    nome_rodape = (dados['pessoa1'].get('nome', '').split()[0] + ' & ' +
-                   dados['pessoa2'].get('nome', '').split()[0]) if dados.get('pessoa1') else ''
+    RODAPE['iniciais'] = (_iniciais_curtas(dados['pessoa1'].get('nome', '')) + ' & ' +
+                          _iniciais_curtas(dados['pessoa2'].get('nome', ''))) if dados.get('pessoa1') else ''
     fixo = io.BytesIO()
     c = rl_canvas.Canvas(fixo, pagesize=A4)
     c.setTitle(f"{th['titulo']} — Bitna Saju")
     pagina_capa(c, dados, th)
+    pagina_antes(c, dados, th)
+    pagina_como_ler(c, dados, th)
     pagina_quem(c, dados, th)
     pagina_ciclo(c, dados, th)
     pagina_complementaridade(c, dados, th)
@@ -533,7 +692,7 @@ def gerar(entrada, saida):
     resumo_pares, nota = [], ''
     if relatorio:
         corpo_md, resumo_pares, nota = extrair_resumo_nota(relatorio)
-        parte = PdfReader(pdf_corpo(corpo_md, th, nome_rodape))
+        parte = PdfReader(pdf_corpo(corpo_md, th, RODAPE['iniciais']))
         partes.append(parte); PAG['n'] += len(parte.pages)
 
     cauda = io.BytesIO()
@@ -541,6 +700,7 @@ def gerar(entrada, saida):
     if resumo_pares:
         pagina_resumo(c2, dados, th, resumo_pares)
     pagina_nota(c2, dados, th, nota)
+    pagina_oferta(c2, dados, th)   # oferta como última página (D35)
     c2.save(); cauda.seek(0)
     partes.append(PdfReader(cauda))
 

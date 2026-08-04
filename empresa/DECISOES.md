@@ -206,3 +206,32 @@ A amostra `Essencial_IMRS_V3_2026.pdf` (D30) fica superada por esta; ambas as am
 - **Páginas vs. oferta:** com os relatórios de amostra (~1.280 palavras) deu 10 páginas; com o texto de produção que o prompt agora pede (1600–1900 palavras) tende a ~12, encostando na faixa 12–16 anunciada. Confirmar quando houver relatório de produção.
 - **Pendências desta entrega:** (1) wire de uma rota `/pdf-sinastria` no `server.mjs` (hoje só há `/pdf` para leitura individual/completa) — o gerador roda standalone; (2) paletas formais das duas sinastrias além da cor de acento; (3) amostras v1 (8 páginas, pré-enriquecimento) podem ser apagadas.
 - **Destrava:** as duas Sinastrias viram entregáveis, e as **Jornadas Bitna** (D29) passam a ser construíveis.
+
+**D35. Lote de correções da Sinastria (revisão do Ivã) — implementado e testado** — amostras `relatorios/exemplos/sinastria_*_AMOSTRA_v3.pdf` (13 páginas cada, dentro da faixa 12–16), conferidas por render. Mudanças em `build_sinastria.py` e nos relatórios/prompt:
+1. **Capa no padrão do Essencial:** eyebrow "EDIÇÃO SINASTRIA · V3 · 2026"; a **pergunta** vira o título gigante ("Como funciona a relação/parceria de vocês?"), o nome do produto ("Sinastria Amorosa/Profissional") fica pequeno; abandonadas "Saju de Casal" e "Sociedade e Parcerias". Fim da repetição do nome.
+2. **Nome completo** sempre; **cidade-UF** no cartão de cada pessoa ("Salvador - BA") a partir de `nascimento.uf`.
+3. **Nome de arquivo** `Tipo_Dupla_Versão_Ano` → `Amorosa_IvãMRS&HelenaRC_V3_2026` (slug = 1º nome + iniciais dos demais, por pessoa, unidos por "&").
+4. **Fonte do corpo +1** (13,5pt).
+5. **Rodapé com barra preta**: site + iniciais dos clientes ("BITNASAJU.COM.BR    IMRS & HRC").
+6. **Página 2 "Antes de ler — a terceira identidade"** (moldura emocional + o que é o gunghap), agora padrão das sinastrias.
+7. **Ideograma do gunghap:** "gunghap (宮合)" (hanja, não hangul) — fixado no prompt.
+8. **Termômetro vira FAIXA, não número** (crítica central do Ivã): 🟢 Harmonia Natural · 🟡 Harmonia Consciente · 🔵 Relação de Crescimento · 🟠 Complementaridade Desafiadora, com a faixa atual destacada numa barra de 4 segmentos e o número removido. Reduz a leitura "passei/reprovei".
+9. **Frase na página dos dois mapas:** "Antes de entender a relação, precisamos conhecer quem cada um é."
+10. **Página de OFERTA como última página:** apresenta a Jornada Bitna (Amorosa/Profissional) — 2 Leituras Completas + esta Sinastria — no espírito do upsell do Essencial.
+11. **Mais emoção nos textos** (cena viva em vez de afirmação seca) + **"primeiros três acordos/passos"** no resumo de bolso (profissional: quem decide/como discordar/como revisar; amoroso: análogo). Regras fixadas no prompt.
+12. **Posicionamento (fixado no prompt):** a Bitna vende **compreensão**, não "compatibilidade"/veredito. Insight estratégico do Ivã a preservar: *"o diferencial da Bitna não é o Saju — é traduzir a tradição coreana em decisões práticas"*; a Profissional tem cara de **ferramenta de gestão**, com potencial B2B.
+- **Proposto, ainda NÃO feito (a alinhar com o Ivã):** páginas type-specific que ele elogiou — profissional: "Quando essa parceria dá o seu melhor" (fluxo visual criar→estruturar→validar→executar→revisar) + gráfico emocional de barras (Visão/Execução/Comunicação/Risco). Precisam de definição de eixos/valores.
+
+**D36. 2ª revisão da Sinastria + princípio de tradução para leigos (casa)** — o Ivã leu como se nunca tivesse ouvido falar de Saju e apontou que entende ~85–90%, com atrito nos termos técnicos antes da p.6. Insight central dele: *"vocês não vendem Saju, vendem tradução — quanto menos o cliente perceber o motor, melhor."* Implementado e testado (amostras do par **Ivã + Fagundes** para os dois tipos: `relatorios/exemplos/Amorosa_IMRS_FNP_V3_2026_AMOSTRA.pdf` e `Profissional_IMRS_FNP_V3_2026_AMOSTRA.pdf`, 13 páginas cada, conferidas por render):
+1. **Capa:** dados de nascimento (data · hora · Cidade-UF) ao lado do nome de cada pessoa, como no Essencial.
+2. **Nome de arquivo:** `Tipo_INICIAIS&INICIAIS_V3_Ano` (ex.: `Amorosa_IMRS&FNP_V3_2026`) — iniciais, não mais o nome longo.
+3. **Removido o "✦"** do título do resumo (renderizava como quadrado/tofu na fonte).
+4. **Cross-sell invertido:** a Amorosa convida para a **Jornada Profissional** e a Profissional para a **Jornada Amorosa** — quem comprou uma sinastria não precisa do combo que a repete.
+5. **Página 2:** título "A terceira identidade" (maiúscula).
+6. **Escala de harmonia:** as 4 faixas agora **todas coloridas** (inativas esmaecidas), a de vocês destacada com marcador + rótulos curtos + explicação "nenhuma é reprovação; cada uma pede um cuidado diferente" — dá a pista do que **não é**.
+7. **Nova página "Como ler este relatório"** (logo após a capa/abertura): explica que Madeira/Fogo/Terra/Metal/Água são arquétipos, não elementos físicos, com uma tradução de uma palavra para cada, e "você não precisa conhecer Saju".
+8. **Página "quem é cada um":** cada categoria (Mestre do Dia, Força, Elemento dominante, Animal) ganhou uma frase explicando o que é.
+9. **Diagrama do ciclo:** legenda "os cinco elementos são cinco formas de agir no mundo — veja como se alimentam e se equilibram".
+10. **Textos:** termos explicados na 1ª aparição; dinâmicas de controle ("Madeira rompe a Terra") agora vêm com "não é bom nem ruim, é movimento/renovação".
+- **[D36 — princípio de TODA a casa, registrado no prompt de sinastria]:** traduzir o Saju para leigos, explicar cada termo técnico na primeira aparição em uma frase, dar a pista do que **não é**, ser sensível sem complexificar. **Propagar a `leitura_premium.md`** (que usa jargão dos dez deuses) e conferir `leitura_individual.md`. *Ver "Pendências abertas".*
+- **Amostras de referência agora usam o MESMO par (Ivã + Fagundes)** nos dois tipos, a pedido do Ivã.

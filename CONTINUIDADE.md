@@ -39,24 +39,17 @@ Você é a IA que assume a construção da **Bitna Saju** — empresa de relató
 
 Feita a auditoria oferta vs. entrega (`empresa/AUDITORIA_COERENCIA_PRODUTOS.md`). Portfólio travado com nomes/preços/páginas: 🌿 **Leitura Essencial** R$47 · ⭐ **Leitura Completa** R$97 (renomeada de "Premium"; id técnico segue `premium`) · 💞 **Sinastria Amorosa** R$97 · 🤝 **Sinastria Profissional** R$97 · 🌸 **Jornadas Bitna** R$249 (bundle novo). Ver EMPRESA.md v1.2 e D27. Três achados que viraram trabalho pendente (abaixo): Essencial sobredimensionado, Sinastria sem PDF, páginas anunciadas ajustadas à realidade.
 
-## [D35 — EM ANDAMENTO] Correções da Sinastria (revisão do Ivã, 04/08/2026)
+## [D35 — ✅ CONCLUÍDO 04/08/2026] Correções da Sinastria (revisão do Ivã)
 
-Ivã revisou as amostras v2 e pediu um lote grande de ajustes. **Só o começo foi feito** (helpers de nome de arquivo `Tipo_Dupla_V3_Ano` tipo `Amorosa_IvãMRS&HelenaRC_V3_2026`, e `DOC_VERSION`/`ANO_DOC` em `build_sinastria.py`). As amostras v2 (10 páginas) seguem válidas. **Falta implementar (checklist):**
-1. **Capa no padrão do Essencial:** eyebrow "EDIÇÃO SINASTRIA · V3 · 2026"; a PERGUNTA vira o título gigante ("Como funciona a relação/parceria de vocês?"), o nome do produto ("Sinastria Amorosa/Profissional") pequeno; abandonar "Saju de Casal"/"Sociedade e Parcerias". Hoje a capa repete "Sinastria Amorosa" 2×.
-2. **Nome completo** do cliente sempre; nos cartões da p. "quem é cada um", incluir nascimento com **cidade-UF** ("Salvador - BA"). (JSON de sinastria precisa de `nascimento.uf` por pessoa — server já preenche via `montarLeitura`; nas amostras injetar BA/SP/DF/PR.)
-3. **Fonte do corpo +1** (hoje 12,5 → 13,5).
-4. **Rodapé com fundo preto**: logo bem pequena OU o site + as **iniciais dos clientes** (ex.: "BITNASAJU.COM.BR · IMRS & HRC").
-5. **Página "Antes de ler"** (como no Essencial) — falta nas sinastrias; para o casal, usar a moldura "toda relação cria uma terceira identidade — nem você, nem a outra pessoa, mas o que nasce quando os dois caminham juntos" + o que é o gunghap.
-6. **Ideograma do gunghap** na p. do corpo: "gunghap (宮合)" — hoje o parêntese sai vazio (hangul 궁합 é removido no Linux). Corrigir nos relatórios E no prompt `sinastria.md`.
-7. **Termômetro em FAIXAS, não número** (crítica forte — "brasileiro ama nota, vira passei/reprovei"): 🟢 Harmonia Natural · 🟡 Harmonia Consciente · 🔵 Relação de Crescimento · 🟠 Complementaridade Desafiadora. Mapear por score, destacar a faixa atual, remover/minimizar o "51/100".
-8. **Frase na p. "quem é cada um":** "Antes de entender a relação, precisamos conhecer quem cada um é."
-9. **Página de OFERTA como última página** (padrão upsell do Essencial): oferecer a Jornada Bitna (Amorosa/Profissional) + demais leituras.
-10. **Emoção nos textos:** reescrever trechos "X ama pela firmeza" em prosa mais viva ("Ivã não diz 'eu te amo' com facilidade. Ele prefere demonstrar ficando. Resolvendo. Voltando..."). Fixar no prompt.
-11. **Resumo de bolso + "Primeiros três acordos"** (profissional: quem decide o quê, como discordar, como revisar; amorosa: análogo).
-12. **Abandonar linguagem de "compatibilidade" → "compreensão"** no PDF e na oferta (posicionamento: a Bitna vende compreensão/decisões práticas, não veredito de compatibilidade). Ajustar wording e registrar em EMPRESA.
-13. **[propor] Páginas type-specific que o Ivã elogiou muito** (avaliar/rediscutir): profissional → página "Quando essa parceria dá o seu melhor" (fluxo visual criar→estruturar→validar→executar→revisar) + gráfico emocional de barras (Visão/Execução/Comunicação/Risco). São type-specific, precisam de definição de eixos/valores — confirmar com o Ivã antes.
+Lote grande implementado e testado — amostras `relatorios/exemplos/sinastria_*_AMOSTRA_v3.pdf` (13 páginas cada). Feito: capa no padrão do Essencial (pergunta como herói, "EDIÇÃO SINASTRIA · V3 · Ano", sem "Saju de Casal"/repetição); nome completo + cidade-UF nos cartões; nome de arquivo de dupla (`Amorosa_IvãMRS&HelenaRC_V3_2026`); fonte +1; rodapé preto com site+iniciais; página "Antes de ler — a terceira identidade"; gunghap (宮合); **termômetro em faixas, não número**; frase na p. dos dois mapas; **página de oferta final** (Jornada Bitna); mais emoção; "primeiros três acordos/passos" no resumo; posicionamento "compreensão, não compatibilidade". Ver **D35** no DECISOES.md.
 
-Insight estratégico do Ivã a preservar: **"o diferencial da Bitna não é o Saju — é transformar uma tradição coreana em decisões práticas / traduzir padrões em conversas."** A Profissional "parece ferramenta de gestão" — potencial de vender para empresas/B2B.
+**D36 (2ª revisão) — ✅ CONCLUÍDO 04/08/2026:** capa com dados de nascimento; nome de arquivo por iniciais (`Amorosa_IMRS&FNP_V3_2026`); ✦ removido; cross-sell invertido (Amorosa→Jornada Profissional e vice-versa); p.2 título maiúsculo; **escala de harmonia com todas as faixas coloridas + explicação**; **nova página "Como ler este relatório"** (ponte para leigos); explicações de termos na p. "quem é cada um" e legenda no ciclo; termos explicados na 1ª aparição nos textos. Amostras do par **Ivã + Fagundes** (os dois tipos): `relatorios/exemplos/Amorosa_IMRS_FNP_V3_2026_AMOSTRA.pdf` e `Profissional_IMRS_FNP_V3_2026_AMOSTRA.pdf` (13 páginas). Ver **D36**.
+
+**Pendências abertas desta rodada:**
+- **[D36] Propagar o princípio "traduzir para leigos"** (explicar cada termo técnico na 1ª aparição, dar a pista do que NÃO é, sem complexificar) para `leitura_premium.md` (usa jargão dos dez deuses) e conferir `leitura_individual.md`. Já fixado em `sinastria.md`. **Vale para TODOS os relatórios da casa** — candidato a entrar no `GUIA_DE_VOZ.md` (discutir com o Ivã antes de editar esse ativo).
+- **[proposto, a alinhar]** páginas type-specific da Profissional: "Quando essa parceria dá o seu melhor" (fluxo visual) + gráfico emocional de barras (Visão/Execução/Comunicação/Risco).
+
+**Insight estratégico do Ivã a preservar:** *"a Bitna não vende Saju, vende tradução — quanto menos o cliente perceber o motor, melhor / o diferencial é transformar a tradição coreana em decisões práticas."* A Sinastria Profissional tem cara de **ferramenta de gestão** → potencial B2B.
 
 ## Demais pendências (ordem sugerida)
 
