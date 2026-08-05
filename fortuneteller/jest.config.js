@@ -1,3 +1,11 @@
+// Precisa ser setado aqui (não só em setupFiles): o V8 cacheia o fuso horário
+// resolvido na primeira chamada a Date/Intl do processo, e setupFiles roda
+// DENTRO do worker do Jest, que pode já ter tocado Date/Intl no próprio
+// bootstrap antes do setupFiles executar. Setar aqui, no jest.config.js,
+// roda no processo principal do Jest ANTES de criar os workers — os workers
+// herdam a env var já correta desde o nascimento do processo.
+process.env.TZ = 'Asia/Seoul';
+
 /** @type {import('ts-jest').JestConfigWithTsJest} */
 export default {
   preset: 'ts-jest/presets/default-esm',
@@ -15,7 +23,6 @@ export default {
     ],
   },
   testMatch: ['**/tests/**/*.test.ts'],
-  setupFiles: ['<rootDir>/tests/jest.setup.ts'],
   collectCoverageFrom: [
     'src/**/*.ts',
     '!src/index.ts',
