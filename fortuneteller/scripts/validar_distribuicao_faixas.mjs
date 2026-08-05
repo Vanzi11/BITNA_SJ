@@ -104,8 +104,8 @@ function simular(nome, limiares) {
   console.log(`  ${nome.padEnd(28)} [${lc}, ${lco}, ${ln}]  →  ${linha}`);
 }
 
-console.log('\npropostas de recalibração (simuladas, nada aplicado):');
-simular('atual (build_sinastria.py)', [46, 62, 78]);
+console.log('\ncomparação de esquemas:');
+simular('original, pré-D38 (46/62/78)', [46, 62, 78]);
 simular('quartis exatos (25/25/25/25)', [51, 56, 61]);
-simular('meio-termo (~15/35/35/15)', [48, 56, 64]);
+simular('atual — meio-termo (D38)', [48, 56, 64]);
 

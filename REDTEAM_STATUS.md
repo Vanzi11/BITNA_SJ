@@ -52,11 +52,11 @@ Testado contra a coluna do oráculo do Fagundes que eu não conseguia verificar 
 
 **Decisão tomada (D37, `empresa/DECISOES.md`)**: hora solar verdadeira continua como padrão único da casa — é exatamente o comportamento que já rodava antes desta rodada, agora formalizado. `relogio` e `diaMudaAs23h` ficam implementados e testados, mas não expostos como opção — reserva técnica.
 
-## Item 6 — Sistema de faixas honesto — 🟡 DIAGNOSTICADO, proposta pronta, falta decisão
+## Item 6 — Sistema de faixas honesto — ✅ FECHADO (D38)
 
-**Confirmado o que o red team suspeitava.** Script de validação criado (`fortuneteller/scripts/validar_distribuicao_faixas.mjs`, rodar com `node scripts/validar_distribuicao_faixas.mjs` depois de `npm run build`) — testou ~15 mil pares de mapas reais diversos contra os limiares atuais (`app/pdf/sinastria/build_sinastria.py`: 46/62/78):
+**Confirmado o que o red team suspeitava.** Script de validação criado (`fortuneteller/scripts/validar_distribuicao_faixas.mjs`, rodar com `node scripts/validar_distribuicao_faixas.mjs` depois de `npm run build`) — testou ~15 mil pares de mapas reais diversos contra os limiares originais (`app/pdf/sinastria/build_sinastria.py`: 46/62/78):
 
-| Faixa | Hoje (46/62/78) |
+| Faixa | Antes (46/62/78) |
 |---|---|
 | Desafiadora | 4,9% |
 | Crescimento | **74,7%** |
@@ -72,7 +72,9 @@ Três quartos de todos os pares caem em "Crescimento", e "Natural" praticamente 
 | Quartis exatos | 51 / 56 / 61 | 20% | 27% | 27% | 25% |
 | Meio-termo | 48 / 56 / 64 | 10% | 38% | 38% | 14% |
 
-A correção mais simples é só recalibrar os limiares (baixo risco — não toca na fórmula de score, só em 2 números no `build_sinastria.py`). Uma correção mais funda seria redesenhar a própria fórmula pra distribuir melhor por conta própria (maior risco — mexe no significado do score em qualquer outro lugar que o leia).
+A correção mais simples é só recalibrar os limiares (baixo risco — não toca na fórmula de score, só em 2 números no `build_sinastria.py`). Uma correção mais funda seria redesenhar a própria fórmula pra distribuir melhor por conta própria (maior risco — mexe no significado do score em qualquer outro lugar que o leia) — não feita nesta rodada, fica registrada como possibilidade futura.
+
+**Decisão (D38, `empresa/DECISOES.md`)**: mantidas as 4 faixas (o Ivã cogitou mais categorias, mas decidiu adiar essa ideia) e aplicado o esquema meio-termo — **novos limiares 48/56/64** em `faixa_relacao()`. Distribuição agora: Desafiadora ~10% · Crescimento ~38% · Consciente ~38% · Natural ~14%.
 
 **Decisão que falta**: qual dos dois esquemas (ou um customizado) vira o padrão — e se vale a pena investir na correção mais funda da fórmula depois, ou se recalibrar os limiares já resolve o suficiente pra fase de validação atual.
 

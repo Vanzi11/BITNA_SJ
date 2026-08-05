@@ -260,10 +260,14 @@ def _nasc_linha(p):
     return f"{_data_br(p)}{hora} · {_cidade_uf(p)}"
 
 def faixa_relacao(score):
-    """Faixa qualitativa em vez do número cru (D35): brasileiro lê nota como passa/reprova."""
-    if score >= 78:  return ('Harmonia Natural', HexColor('#4a6b46'))       # verde
-    if score >= 62:  return ('Harmonia Consciente', HexColor('#b58b3a'))    # dourado
-    if score >= 46:  return ('Relação de Crescimento', HexColor('#3b5a7a')) # azul
+    """Faixa qualitativa em vez do número cru (D35): brasileiro lê nota como passa/reprova.
+    Limiares recalibrados em D38 (item 6 do red team) contra a distribuição real do score
+    (fortuneteller/scripts/validar_distribuicao_faixas.mjs) — os antigos (46/62/78) jogavam
+    74,7% de todos os pares em "Crescimento" e quase nunca alcançavam "Natural" (0,3%).
+    Esquema "meio-termo": Desafiadora ~10% · Crescimento ~38% · Consciente ~38% · Natural ~14%."""
+    if score >= 64:  return ('Harmonia Natural', HexColor('#4a6b46'))       # verde
+    if score >= 56:  return ('Harmonia Consciente', HexColor('#b58b3a'))    # dourado
+    if score >= 48:  return ('Relação de Crescimento', HexColor('#3b5a7a')) # azul
     return ('Complementaridade Desafiadora', HexColor('#a85a2d'))           # laranja
 
 # ---------- páginas ----------
