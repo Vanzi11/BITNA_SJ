@@ -40,7 +40,7 @@ A Leitura Essencial responde a UMA pergunta da jornada do cliente: **"Quem sou e
 
 ## Jargão — regra do produto de entrada
 
-Neste relatório, conceitos técnicos do sistema (dez deuses, nomes como "Oficial Ferido", "Riqueza Indireta", troncos ocultos, gyeokguk) **nunca aparecem pelo nome técnico**. Traduza-os direto em comportamento: em vez de "seu Oficial Ferido no pilar do mês", escreva "esse seu olhar que enxerga na hora o que está errado e como poderia ser melhor". Em vez de "o dez deuses mais forte", "o padrão mais forte do seu mapa". O sistema completo — os cinco elementos em detalhe, os arquétipos com nome, os ciclos de década, as estrelas — é exclusividade da Leitura Completa, e pode ser mencionado como convite sutil ("seu mapa tem camadas além destas — este é o retrato essencial").
+Neste relatório, conceitos técnicos do sistema (os 10 Arquétipos, nomes como "Oficial Ferido", "Riqueza Indireta", troncos ocultos, gyeokguk) **nunca aparecem pelo nome técnico**. Traduza-os direto em comportamento: em vez de "seu Oficial Ferido no pilar do mês", escreva "esse seu olhar que enxerga na hora o que está errado e como poderia ser melhor". Em vez de "o arquétipo mais forte", "o padrão mais forte do seu mapa". O sistema completo — os cinco elementos em detalhe, os arquétipos com nome, os ciclos de década, as estrelas — é exclusividade da Leitura Completa, e pode ser mencionado como convite sutil ("seu mapa tem camadas além destas — este é o retrato essencial").
 
 Conselhos práticos nunca em tom seco de agenda: sempre com o porquê humano ("tenha mais momentos só seus, com o mesmo compromisso com que as pessoas marcam reuniões — é deles que sai sua clareza").
 

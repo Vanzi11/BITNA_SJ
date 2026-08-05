@@ -25,9 +25,13 @@ Clara · respeitosa · acolhedora · racional · curiosa · profunda · detalhis
 
 **Honestidade acolhedora**: nomeamos o bloqueio e a sombra — com o carinho de quem quer ver a pessoa crescer, nunca com o tapa do "sem filtro". Acolher primeiro, orientar depois, sempre aterrissar no concreto.
 
+## Nomenclatura oficial: 10 Arquétipos, nunca "dez deuses"
+
+O termo técnico coreano é 十神 (romanizado shí shén / 십성), tradicionalmente traduzido como "dez deuses". **Na Bitna Saju, a categoria é sempre "os 10 Arquétipos"** em qualquer texto voltado ao cliente (relatórios, prompts, site, marketing) — "deuses" soa místico e contraria a regra de anti-misticismo da casa (ver "Vocabulário" abaixo). Os nomes individuais de cada um dos dez continuam exatamente como são (Deus do Alimento, Riqueza Direta, Oficial Ferido etc.) — a mudança é só no nome da **categoria**, não de cada entrada. Decisão registrada em `DECISOES.md` D39 (05/08/2026, feedback do Ivã na revisão da Sinastria Profissional).
+
 ## Espírito Poético Explicativo do Saju
 
-Todo termo técnico (arquétipo, dez-deus, sinsal, dinâmica entre elementos) precisa de tradução — isso já era regra (ver "Como falamos" acima e D36 no `DECISOES.md`). O que este princípio acrescenta é **como** traduzir bem: a diferença entre uma tradução que só soa bonita e uma que o leitor guarda.
+Todo termo técnico (um dos 10 Arquétipos, sinsal, dinâmica entre elementos) precisa de tradução — isso já era regra (ver "Como falamos" acima e D36 no `DECISOES.md`). O que este princípio acrescenta é **como** traduzir bem: a diferença entre uma tradução que só soa bonita e uma que o leitor guarda. **Sempre que um Arquétipo for mencionado, a explicação que vem logo depois segue este espírito — nunca só o nome solto.**
 
 **O teste**: depois de escrever a explicação, pergunte — *isso ajudaria alguém que nunca ouviu falar de Saju a entender de verdade, e ainda ficar curioso pra saber mais? Ou só soa elegante sem dizer nada que se possa visualizar?* Se for só um adjetivo bonito colado no termo, reescreva. Se o leitor consegue **ver a cena** ou **reconhecer o comportamento** em alguém que conhece, está certo.
 
@@ -40,6 +44,7 @@ Todo termo técnico (arquétipo, dez-deus, sinsal, dinâmica entre elementos) pr
 A diferença não é o tamanho do texto — é que a segunda versão dá ao leitor uma **imagem que ele já viu em alguém**, não uma lista de substantivos abstratos (criação, produção, valor). Regras práticas:
 - Prefira um **comportamento observável** ("termina um projeto e já está esboçando o próximo") a um **substantivo abstrato** ("produção serena").
 - Se o termo **reaparecer páginas depois**, não presuma retenção — um lembrete curto entre parênteses resolve ("o mesmo arquétipo que já vimos — quem cria por prazer, não por comando").
+- **Quando a explicação já nasce com cena concreta** (ex.: "Terra Yang é a montanha: firme, confiável, difícil de derrubar por pressão externa"), não é preciso reescrever — mas vale **acrescentar** uma frase curta de tradução prática logo depois, começando com "Na prática, isso quer dizer:", conectando a imagem a um comportamento de decisão real. Ex.: *"Na prática, isso quer dizer: Ivã não muda de posição no calor da reunião — ele escuta, pondera, e quando finalmente decide, é difícil convencê-lo do contrário no dia seguinte."*
 - Vale para **todos os produtos da casa** (Essencial, Completa, as duas Sinastrias), não só onde foi identificado pela primeira vez (relatório de Sinastria Profissional, 05/08/2026 — feedback do Ivã).
 
 ## Vocabulário
