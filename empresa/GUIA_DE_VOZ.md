@@ -35,6 +35,8 @@ Todo termo técnico (um dos 10 Arquétipos, sinsal, dinâmica entre elementos) p
 
 **O teste**: depois de escrever a explicação, pergunte — *isso ajudaria alguém que nunca ouviu falar de Saju a entender de verdade, e ainda ficar curioso pra saber mais? Ou só soa elegante sem dizer nada que se possa visualizar?* Se for só um adjetivo bonito colado no termo, reescreva. Se o leitor consegue **ver a cena** ou **reconhecer o comportamento** em alguém que conhece, está certo.
 
+**Vale mesmo sem termo técnico nenhum** (confirmado na revisão da Leitura Essencial, 05/08/2026 — produto que por regra própria nunca nomeia o termo técnico, ver `relatorios/prompts/leitura_individual.md`). A regra não é "explique o termo com cena" — é, mais fundo, **nunca descrever personalidade com adjetivo solto, sempre com algo visualizável**. Errado mesmo sem jargão: *"sua força é equilibrada — nem rígida demais, nem passiva demais"* (podia descrever qualquer pessoa). Certo: *"numa reunião difícil, você não é quem grita mais alto nem quem se cala primeiro: você lê a sala e ajusta o próprio tom até achar o jeito que resolve sem machucar ninguém"* — mesma ideia, agora com uma cena que só essa pessoa protagoniza.
+
 **Errado (rótulo poético, não ancora em nada concreto):**
 > "Deus do Alimento (食神 — no Saju, o arquétipo ligado à criação serena, produção sem pressa, gerar valor pelo que se faz, não pelo que se persegue)."
 
