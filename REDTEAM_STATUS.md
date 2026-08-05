@@ -30,11 +30,13 @@ As duas sinastrias já tinham uma página "NOTA" (`pagina_nota`) com um texto fi
 
 **Igual ao item 2**: revisão de advogado antes de publicar, mesma ressalva já registrada em `empresa/textos/LANCAMENTO_MANUAL_TEXTOS.md` pra política de reembolso.
 
-## Item 8 — Logo/assets — ⏸️ BLOQUEADO, falta arquivo-fonte
+## Item 8 — Logo/assets — ✅ FEITO
 
-Confirmado: não existe nenhum arquivo vetorial do logo (SVG, AI, EPS) em lugar nenhum do repositório — só PNGs já renderizados em `empresa/marca/logo/`. Não dá pra "vetorizar" o glifo 빛나 sem o arquivo de origem (provavelmente Figma, de onde saiu o Brandbook V2). A fragilidade real existe: `Site/bitna-saju-index.html` tem um SVG com `<text>빛나</text>` como texto vivo (fonte do sistema), que quebra em dispositivo sem fonte coreana instalada — mas os PDFs de produto usam os PNGs já prontos, não têm esse problema.
+Confirmado: não existia nenhum arquivo vetorial do logo no repositório, só PNGs já renderizados. O Ivã enviou `gemini-svg.svg` (05/08/2026) com a estrutura/cores/grid do BrandBook — mas apesar do nome, o texto ainda estava vivo (`<text font-family="Didot, Bodoni MT...">`), dependente de fonte instalada, não vetorizado de verdade.
 
-**Ação necessária, não é código**: Ivã precisa enviar o arquivo de origem do logo (com curvas/paths reais) pra alguém converter texto→path.
+Convertido para curvas reais: baixadas as fontes de origem (Playfair Display 500 para BITNA, Inter 300 para SAJU, Noto Serif KR 700 para o selo 빛나 — via Google Fonts, decompactadas de WOFF2 para TTF com `fonttools`) e usado `opentype.js` pra extrair o contorno de cada glifo e montar `<path>` no lugar de `<text>`. Resultado: `empresa/marca/logo/logo_vetorizado.svg`, conferido visualmente (renderizado para PNG e inspecionado) — bateu certo com a estrutura do arquivo original, zero dependência de fonte no dispositivo que renderiza.
+
+Bug pego no caminho: um `grep -B3` pegou a URL da fonte errada (subconjunto "latin-ext" em vez de "latin") na primeira tentativa, fazendo S/J/U de "SAJU" renderizarem como glifo `.notdef` — pego na conferência visual, corrigido antes de salvar o arquivo final.
 
 **SSL/www**: confirmado que não existe `.htaccess` nem qualquer config de servidor versionada no repositório — é 100% fora do escopo de código, fica pendente direto com o Ivã (cPanel).
 
