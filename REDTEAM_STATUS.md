@@ -38,7 +38,7 @@ Confirmado: não existe nenhum arquivo vetorial do logo (SVG, AI, EPS) em lugar 
 
 **SSL/www**: confirmado que não existe `.htaccess` nem qualquer config de servidor versionada no repositório — é 100% fora do escopo de código, fica pendente direto com o Ivã (cPanel).
 
-## Item 5 — Convenção de hora + "hora desconhecida" — 🟡 ESTRUTURA PRONTA, falta decisão de padrão
+## Item 5 — Convenção de hora + "hora desconhecida" — ✅ FECHADO (D37)
 
 **"Hora desconhecida" já estava implementado** (não sabia disso quando escrevi a primeira versão desta seção) — `app/server.mjs`, função `montarLeitura` (usada tanto por `/leitura` quanto por `/sinastria`, para qualquer uma das duas pessoas): usa meio-dia só como placeholder técnico pro cálculo, mas deleta o pilar da Hora do resultado (`delete leitura.pilares.hora`) e marca `horaDesconhecida: true` + `nascimento.hora = 'desconhecida'`. Nunca inventa hora nem finge precisão que não tem.
 
@@ -48,7 +48,7 @@ Confirmado: não existe nenhum arquivo vetorial do logo (SVG, AI, EPS) em lugar 
 
 Testado contra a coluna do oráculo do Fagundes que eu não conseguia verificar antes (hora do relógio = 戊寅) — bateu certo depois de corrigir um bug no primeiro rascunho (detalhes no commit `c4ab77c`). 137/137 testes passam, nenhuma mudança no comportamento padrão.
 
-**Decisão que falta**: qual convenção vira o padrão de fato (`solar`, `relogio`, ou `diaMudaAs23h` ligado) — ou se cada uma fica disponível como opção no formulário, sem um "padrão da casa". Ver missão original, item 5.
+**Decisão tomada (D37, `empresa/DECISOES.md`)**: hora solar verdadeira continua como padrão único da casa — é exatamente o comportamento que já rodava antes desta rodada, agora formalizado. `relogio` e `diaMudaAs23h` ficam implementados e testados, mas não expostos como opção — reserva técnica.
 
 ## Item 4 — Diferenciar a Sinastria Profissional — não iniciado
 

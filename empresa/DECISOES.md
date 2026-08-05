@@ -235,3 +235,7 @@ A amostra `Essencial_IMRS_V3_2026.pdf` (D30) fica superada por esta; ambas as am
 10. **Textos:** termos explicados na 1ª aparição; dinâmicas de controle ("Madeira rompe a Terra") agora vêm com "não é bom nem ruim, é movimento/renovação".
 - **[D36 — princípio de TODA a casa, registrado no prompt de sinastria]:** traduzir o Saju para leigos, explicar cada termo técnico na primeira aparição em uma frase, dar a pista do que **não é**, ser sensível sem complexificar. **Propagar a `leitura_premium.md`** (que usa jargão dos dez deuses) e conferir `leitura_individual.md`. *Ver "Pendências abertas".*
 - **Amostras de referência agora usam o MESMO par (Ivã + Fagundes)** nos dois tipos, a pedido do Ivã.
+
+## 04/08/2026 — Correções do red team
+
+**D37. Convenção de hora travada em "hora solar verdadeira"** — durante o loop de correções do red team (item 5, ver `REDTEAM_STATUS.md`), o motor ganhou suporte estrutural pra 3 convenções de hora (`solar` / `relogio` / `diaMudaAs23h`, `fortuneteller/src/lib/saju.ts` + `utils/date.ts`, commit `c4ab77c`), sem fixar qual seria o padrão. O Ivã confirmou: **hora solar verdadeira (correção de longitude) continua sendo o padrão único da casa** — é o comportamento que já rodava antes desta rodada, agora só formalizado como decisão de metodologia em vez de implícito no código. As outras duas convenções ficam implementadas e testadas (oráculo do Fagundes verificado nos dois caminhos), mas não expostas como opção ao cliente — reserva técnica caso surja necessidade de revisão futura.
