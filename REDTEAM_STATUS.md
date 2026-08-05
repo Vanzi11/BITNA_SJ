@@ -74,4 +74,10 @@ A correção mais simples é só recalibrar os limiares (baixo risco — não to
 
 **Decisão que falta**: qual dos dois esquemas (ou um customizado) vira o padrão — e se vale a pena investir na correção mais funda da fórmula depois, ou se recalibrar os limiares já resolve o suficiente pra fase de validação atual.
 
-## Item 4 — Diferenciar a Sinastria Profissional — 🚧 em andamento
+## Item 4 — Diferenciar a Sinastria Profissional — ✅ FEITO (pendente amostra/revisão)
+
+Amorosa e Profissional tinham a mesma estrutura de 11 seções, só trocando tom/rótulos — o red team apontou ~60-70% de sobreposição real. Os dados pra diferenciar de verdade **já existiam no motor**, sem precisar de nenhuma mudança de código: `pessoa1/pessoa2.dezDeuses.distribuicao` já traz as contagens de Riqueza Direta/Indireta (財) e Oficial Direto/Indireto (官) de cada mapa — só faltava o prompt (`relatorios/prompts/sinastria.md`) instruir o uso disso.
+
+Adicionado: parágrafo explícito no "Foco por tipo de relação" comparando riqueza/autoridade entre as duas pessoas; 2 pontos novos na cobertura obrigatória (dinheiro/risco, autoridade/decisão), exclusivos da societaria; a seção 6 da estrutura virou "Dinheiro, risco e autoridade" na societaria (era conteúdo genérico) — a seção que a amorosa explicitamente não tem.
+
+**Não gerei amostra nova pra conferir visualmente** — fica pro Ivã rodar o motor real e revisar como já faz com os outros PDFs (o texto é gerado pelo LLM a partir do prompt, não dá pra prever com certeza como vai sair sem rodar de verdade).
