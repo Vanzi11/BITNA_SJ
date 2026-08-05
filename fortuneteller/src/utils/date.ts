@@ -15,6 +15,16 @@ import { formatInTimeZone } from 'date-fns-tz';
 export const KOREA_TIMEZONE = 'Asia/Seoul';
 
 /**
+ * Convenção de hora para o cálculo do pilar da Hora (Bitna Saju — item 5 do
+ * checklist de red team, estrutura pronta, padrão ainda não decidido):
+ * - 'solar': hora solar verdadeira (correção de longitude) — comportamento
+ *   atual, mantido como padrão até decisão de metodologia.
+ * - 'relogio': hora civil registrada (com horário de verão histórico já
+ *   aplicado), sem a correção de longitude adicional.
+ */
+export type HoraConvencao = 'solar' | 'relogio';
+
+/**
  * 출생일시를 대한민국 벽시계 시각으로 해석하여 UTC 시각으로 변환합니다.
  * IANA `Asia/Seoul` 규칙을 사용하므로 1948~1960·1987~1988 일광절약시간(썸머타임) 구간이 반영됩니다.
  * 입력은 당시 기록된 시계 시각(표준시+1h로 앞당겨졌던 시기)을 그대로 넣는 것을 가정합니다.
@@ -38,13 +48,17 @@ export const TRUE_SOLAR_TIME_ADJUSTMENT = -30;
 export function getAdjustedBirthInstantForSaju(
   solarDate: string,
   birthTime: string,
-  birthCity?: string
+  birthCity?: string,
+  horaConvencao: HoraConvencao = 'solar'
 ): Date {
   // Bitna Saju: cidades brasileiras seguem fluxo próprio (timezone IANA + longitude)
   if (isBrazilBirthCity(birthCity)) {
-    return getAdjustedBirthInstantBrazilForSaju(solarDate, birthTime, birthCity!);
+    return getAdjustedBirthInstantBrazilForSaju(solarDate, birthTime, birthCity!, horaConvencao);
   }
   const wall = parseBirthDateTimeKorea(solarDate, birthTime);
+  if (horaConvencao === 'relogio') {
+    return wall;
+  }
   const offsetMin = getLongitudeOffsetMinutesForSaju(birthCity);
   return addMinutes(wall, offsetMin);
 }
@@ -62,12 +76,20 @@ export function getAdjustedBirthInstantForSaju(
  *
  * Limitação conhecida: se os dígitos re-ancorados caírem exatamente numa
  * lacuna de DST coreano (1948–60, 1987–88), há deslocamento de 1h.
- * Janela raríssima; documentada em docs/ROADMAP.md.
+ * Janela raríssima; documentada em docs/ROADMAP.md. (Investigado a fundo no
+ * item 1 do red team em 2026-08 — não é isso que causava as diferenças
+ * observadas ali; aquelas eram artefato do ambiente de teste, não deste
+ * limite. Este limite específico segue teoricamente possível, mas nunca
+ * reproduzido nos oráculos verificados.)
+ *
+ * horaConvencao='relogio' pula o passo 2 (sem correção de longitude) —
+ * usa a hora civil (com horário de verão histórico já aplicado) direto.
  */
 export function getAdjustedBirthInstantBrazilForSaju(
   solarDate: string,
   birthTime: string,
-  birthCity: string
+  birthCity: string,
+  horaConvencao: HoraConvencao = 'solar'
 ): Date {
   const info = getBrazilCityInfo(birthCity);
   if (!info) {
@@ -76,6 +98,12 @@ export function getAdjustedBirthInstantBrazilForSaju(
   const utcInstant = toDate(`${solarDate}T${birthTime}:00`, { timeZone: info.timezone });
   if (isNaN(utcInstant.getTime())) {
     throw new Error(`Data/hora de nascimento inválida: ${solarDate} ${birthTime}`);
+  }
+  if (horaConvencao === 'relogio') {
+    // Sem correção nenhuma: os dígitos a re-ancorar são a própria hora civil
+    // digitada, tal qual — não os de utcInstant (que já estariam deslocados
+    // pelo fuso de origem e reintroduziriam o erro que este caminho evita).
+    return toDate(`${solarDate}T${birthTime}:00`, { timeZone: KOREA_TIMEZONE });
   }
   const solarInstant = addMinutes(utcInstant, Math.round(info.longitude * 4));
   const digits = formatInTimeZone(solarInstant, 'UTC', "yyyy-MM-dd'T'HH:mm:ss");

@@ -61,12 +61,19 @@ describe('Oráculo — Fagundes (1987-06-15 03:06, Brasília-DF)', () => {
     expect(hanjaPilar(saju.day)).toBe('乙未');
   });
 
-  test('pilar da Hora usa hora SOLAR (~02:54) e dá 丁丑 — não 戊寅 (hora do relógio)', () => {
-    // Este é o caso crítico do item 5: a correção de longitude muda o pilar
-    // porque cruza a fronteira de ramo (寅 03-05h → 丑 01-03h). O código hoje
-    // só implementa este caminho (hora solar) para cidades brasileiras — não
-    // existe ainda um caminho "hora do relógio" para comparar (ver item 5-estrutura).
+  test('pilar da Hora usa hora SOLAR (~02:54) por padrão e dá 丁丑', () => {
+    // Caso crítico do item 5: a correção de longitude muda o pilar porque
+    // cruza a fronteira de ramo (寅 03-05h → 丑 01-03h).
     expect(hanjaPilar(saju.hour)).toBe('丁丑');
+  });
+
+  test('item 5-estrutura: horaConvencao="relogio" dá 戊寅 — a outra coluna do oráculo', () => {
+    const sajuRelogio = calculateSaju('1987-06-15', '03:06', 'solar', false, 'male', 'Brasília', {
+      horaConvencao: 'relogio',
+    });
+    expect(hanjaPilar(sajuRelogio.hour)).toBe('戊寅');
+    // Ano/Mês/Dia não dependem da convenção de hora — continuam iguais.
+    expect(hanjaPilar(sajuRelogio.day)).toBe('乙未');
   });
 
   test('Mestre do Dia = 乙 (Eul, Madeira Yin)', () => {
@@ -103,5 +110,47 @@ describe('Regressão de horário de verão (item 1) — janeiro/1990, São Paulo
     const saju = calculateSaju('1990-01-15', '12:00', 'solar', false, 'male', 'São Paulo');
     expect(saju.hour.stem).toBeTruthy();
     expect(saju.hour.branch).toBeTruthy();
+  });
+});
+
+describe('Item 5-estrutura: diaMudaAs23h (convenção "zi cedo", 早子時)', () => {
+  // Sem oráculo externo pra este caso (não fazia parte da tabela original) —
+  // verificação estrutural: com a flag ligada, um nascimento às 23h+ deve
+  // usar o MESMO pilar do Dia que alguém nascido no dia seguinte às 00h,
+  // não o pilar do próprio dia civil.
+  test('padrão (false): 23h30 usa o pilar do próprio dia civil', () => {
+    const saju = calculateSaju('1987-06-15', '23:30', 'solar', false, 'male', 'Brasília', {
+      horaConvencao: 'relogio',
+    });
+    const sajuMesmoDiaMeioDia = calculateSaju('1987-06-15', '12:00', 'solar', false, 'male', 'Brasília', {
+      horaConvencao: 'relogio',
+    });
+    expect(saju.day.stem).toBe(sajuMesmoDiaMeioDia.day.stem);
+    expect(saju.day.branch).toBe(sajuMesmoDiaMeioDia.day.branch);
+  });
+
+  test('diaMudaAs23h=true: 23h30 usa o pilar do dia SEGUINTE', () => {
+    const saju = calculateSaju('1987-06-15', '23:30', 'solar', false, 'male', 'Brasília', {
+      horaConvencao: 'relogio',
+      diaMudaAs23h: true,
+    });
+    const sajuDiaSeguinte = calculateSaju('1987-06-16', '12:00', 'solar', false, 'male', 'Brasília', {
+      horaConvencao: 'relogio',
+    });
+    expect(saju.day.stem).toBe(sajuDiaSeguinte.day.stem);
+    expect(saju.day.branch).toBe(sajuDiaSeguinte.day.branch);
+    // continua marcando hora zi (子) — isso já era correto antes, não muda
+    expect(saju.hour.branch).toBe('자');
+  });
+
+  test('diaMudaAs23h=true não afeta horários antes das 23h', () => {
+    const comFlag = calculateSaju('1987-06-15', '22:59', 'solar', false, 'male', 'Brasília', {
+      horaConvencao: 'relogio', diaMudaAs23h: true,
+    });
+    const semFlag = calculateSaju('1987-06-15', '22:59', 'solar', false, 'male', 'Brasília', {
+      horaConvencao: 'relogio',
+    });
+    expect(comFlag.day.stem).toBe(semFlag.day.stem);
+    expect(comFlag.day.branch).toBe(semFlag.day.branch);
   });
 });

@@ -2,7 +2,7 @@
  * 사주팔자 계산 핵심 로직
  */
 
-import { differenceInCalendarDays } from 'date-fns';
+import { differenceInCalendarDays, addDays } from 'date-fns';
 import { formatInTimeZone, toDate } from 'date-fns-tz';
 import type { SajuData, Pillar, Gender, CalendarType, WuXing } from '../types/index.js';
 import { getHeavenlyStemByIndex } from '../data/heavenly_stems.js';
@@ -10,7 +10,7 @@ import { getEarthlyBranchByIndex, analyzeBranchRelations, checkWolRyeong, calcul
 import { getCurrentSolarTerm, getSolarTermMonthIndex } from '../data/solar_terms.js';
 import { WUXING_DATA } from '../data/wuxing.js';
 import { convertCalendar } from './calendar.js';
-import { getAdjustedBirthInstantForSaju } from '../utils/date.js';
+import { getAdjustedBirthInstantForSaju, type HoraConvencao } from '../utils/date.js';
 import { resolveBirthCityForSaju } from '../data/longitude_table.js';
 import { calculateTenGodsDistribution, generateTenGodsList } from './ten_gods.js';
 import { findSinSals } from './sin_sal.js';
@@ -22,6 +22,23 @@ import { sajuCache, generateSajuCacheKey } from './performance_cache.js';
 const SEOUL_TZ = 'Asia/Seoul';
 
 /**
+ * Opções de metodologia para o cálculo (Bitna Saju — item 5 do checklist de
+ * red team). Nenhuma tem padrão diferente do comportamento histórico do
+ * motor: passar `opcoes` só muda o resultado se você explicitar um valor
+ * não-padrão.
+ */
+export interface OpcoesCalculoSaju {
+  /** 'solar' (padrão, comportamento histórico) ou 'relogio'. Ver HoraConvencao em utils/date.ts. */
+  horaConvencao?: HoraConvencao;
+  /**
+   * Se true, nascimentos às 23h ou depois usam o pilar do Dia do dia
+   * SEGUINTE (convenção "zi cedo"/早子時 — a hora zi já pertence ao próximo
+   * dia). Padrão false: dia segue a data civil, como sempre foi.
+   */
+  diaMudaAs23h?: boolean;
+}
+
+/**
  * 생년월일시로부터 사주팔자 계산 (캐싱 적용)
  */
 export function calculateSaju(
@@ -30,22 +47,24 @@ export function calculateSaju(
   calendar: CalendarType,
   isLeapMonth: boolean,
   gender: Gender,
-  birthCity?: string
+  birthCity?: string,
+  opcoes?: OpcoesCalculoSaju
 ): SajuData {
   const resolvedBirthCity = resolveBirthCityForSaju(birthCity);
+  const horaConvencao: HoraConvencao = opcoes?.horaConvencao ?? 'solar';
+  const diaMudaAs23h = opcoes?.diaMudaAs23h ?? false;
+  const usaPadrao = horaConvencao === 'solar' && !diaMudaAs23h;
 
-  // 캐시 체크
-  const cacheKey = generateSajuCacheKey(
-    birthDate,
-    birthTime,
-    calendar,
-    isLeapMonth,
-    gender,
-    resolvedBirthCity
-  );
-  const cached = sajuCache.get(cacheKey);
-  if (cached) {
-    return cached as SajuData;
+  // Cache só é usado no caminho padrão — evita qualquer risco de colisão de
+  // chave com os resultados já verificados pelos oráculos (ver item 1).
+  const cacheKey = usaPadrao
+    ? generateSajuCacheKey(birthDate, birthTime, calendar, isLeapMonth, gender, resolvedBirthCity)
+    : null;
+  if (cacheKey) {
+    const cached = sajuCache.get(cacheKey);
+    if (cached) {
+      return cached as SajuData;
+    }
   }
 
   // 음력을 양력으로 변환
@@ -55,8 +74,9 @@ export function calculateSaju(
     solarDate = conversion.convertedDate;
   }
 
-  // 출생 벽시계(썸머타임) + 출생지 경도 보정(동경 135° 대비)
-  const adjustedDate = getAdjustedBirthInstantForSaju(solarDate, birthTime, resolvedBirthCity);
+  // 출생 벽시계(썸머타임) + 출생지 경도 보정(동경 135° 대비) — ou hora do
+  // relógio pura, conforme horaConvencao.
+  const adjustedDate = getAdjustedBirthInstantForSaju(solarDate, birthTime, resolvedBirthCity, horaConvencao);
 
   // 연주 계산
   const yearPillar = calculateYearPillar(adjustedDate);
@@ -65,7 +85,7 @@ export function calculateSaju(
   const monthPillar = calculateMonthPillar(adjustedDate, yearPillar);
 
   // 일주 계산
-  const dayPillar = calculateDayPillar(adjustedDate);
+  const dayPillar = calculateDayPillar(adjustedDate, diaMudaAs23h);
 
   // 시주 계산
   const hourPillar = calculateHourPillar(adjustedDate, dayPillar);
@@ -159,8 +179,10 @@ export function calculateSaju(
     reasoning: yongSinAnalysis.reasoning,
   };
 
-  // 캐시에 저장
-  sajuCache.set(cacheKey, sajuData);
+  // 캐시에 저장 (só no caminho padrão, ver nota acima)
+  if (cacheKey) {
+    sajuCache.set(cacheKey, sajuData);
+  }
 
   return sajuData;
 }
@@ -256,8 +278,19 @@ function calculateMonthPillar(date: Date, yearPillar: Pillar): Pillar {
  * 정확한 기준일: 1900년 1월 1일 = 갑술일(甲戌日) (만세력 원전 대조 완료)
  * 출생 순간을 대한민국 달력 일(Asia/Seoul)로 두고 기준일과의 일수 차를 쓴다(UTC 일수 나눗셈·서버 타임존 의존 방지).
  */
-function calculateDayPillar(date: Date): Pillar {
-  const birthKoreaDateStr = formatInTimeZone(date, SEOUL_TZ, 'yyyy-MM-dd');
+function calculateDayPillar(date: Date, diaMudaAs23h = false): Pillar {
+  let birthKoreaDateStr = formatInTimeZone(date, SEOUL_TZ, 'yyyy-MM-dd');
+  if (diaMudaAs23h) {
+    // Convenção "zi cedo" (早子時): 23h-24h já pertence ao dia seguinte para
+    // fins do pilar do Dia (a hora zi, 23h-01h, já usa o ramo do próximo dia
+    // em calculateHourPillar — aqui alinhamos o pilar do Dia à mesma lógica).
+    const hourNow = parseInt(formatInTimeZone(date, SEOUL_TZ, 'H'), 10);
+    if (hourNow >= 23) {
+      const meioDiaDoDia = toDate(`${birthKoreaDateStr}T12:00:00`, { timeZone: SEOUL_TZ });
+      const proximoDia = addDays(meioDiaDoDia, 1);
+      birthKoreaDateStr = formatInTimeZone(proximoDia, SEOUL_TZ, 'yyyy-MM-dd');
+    }
+  }
   const base = toDate('1900-01-01T12:00:00', { timeZone: SEOUL_TZ });
   const birth = toDate(`${birthKoreaDateStr}T12:00:00`, { timeZone: SEOUL_TZ });
   const diffDays = differenceInCalendarDays(birth, base);
