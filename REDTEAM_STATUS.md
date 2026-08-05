@@ -50,8 +50,28 @@ Testado contra a coluna do oráculo do Fagundes que eu não conseguia verificar 
 
 **Decisão tomada (D37, `empresa/DECISOES.md`)**: hora solar verdadeira continua como padrão único da casa — é exatamente o comportamento que já rodava antes desta rodada, agora formalizado. `relogio` e `diaMudaAs23h` ficam implementados e testados, mas não expostos como opção — reserva técnica.
 
-## Item 4 — Diferenciar a Sinastria Profissional — não iniciado
+## Item 6 — Sistema de faixas honesto — 🟡 DIAGNOSTICADO, proposta pronta, falta decisão
 
-## Item 6 — Sistema de faixas honesto — ⏳ PENDENTE DECISÃO
+**Confirmado o que o red team suspeitava.** Script de validação criado (`fortuneteller/scripts/validar_distribuicao_faixas.mjs`, rodar com `node scripts/validar_distribuicao_faixas.mjs` depois de `npm run build`) — testou ~15 mil pares de mapas reais diversos contra os limiares atuais (`app/pdf/sinastria/build_sinastria.py`: 46/62/78):
 
-Não iniciado — precisa da proposta de limiares/distribuição antes de aplicar (ver missão original).
+| Faixa | Hoje (46/62/78) |
+|---|---|
+| Desafiadora | 4,9% |
+| Crescimento | **74,7%** |
+| Consciente | 20,2% |
+| Natural | **0,3%** |
+
+Três quartos de todos os pares caem em "Crescimento", e "Natural" praticamente não existe na prática — a faixa está no código, mas ninguém a alcança. Causa raiz: a fórmula de score em `fortuneteller/src/lib/compatibility.ts` usa uma base de 60 pontos com ajustes modestos (±10 a ±20) numa média ponderada de 4 sub-notas — estatisticamente isso converge pro meio, então os limiares (pensados como se a distribuição fosse uniforme 0-100) ficaram descalibrados pra distribuição real, que se concentra entre 47 e 65.
+
+**Duas propostas simuladas** (no próprio script, sem aplicar nada):
+
+| Esquema | Limiares | Desafiadora | Crescimento | Consciente | Natural |
+|---|---|---|---|---|---|
+| Quartis exatos | 51 / 56 / 61 | 20% | 27% | 27% | 25% |
+| Meio-termo | 48 / 56 / 64 | 10% | 38% | 38% | 14% |
+
+A correção mais simples é só recalibrar os limiares (baixo risco — não toca na fórmula de score, só em 2 números no `build_sinastria.py`). Uma correção mais funda seria redesenhar a própria fórmula pra distribuir melhor por conta própria (maior risco — mexe no significado do score em qualquer outro lugar que o leia).
+
+**Decisão que falta**: qual dos dois esquemas (ou um customizado) vira o padrão — e se vale a pena investir na correção mais funda da fórmula depois, ou se recalibrar os limiares já resolve o suficiente pra fase de validação atual.
+
+## Item 4 — Diferenciar a Sinastria Profissional — 🚧 em andamento
