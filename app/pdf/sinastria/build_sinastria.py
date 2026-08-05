@@ -586,8 +586,8 @@ def pagina_resumo(c, dados, th, resumo_pares):
 def pagina_nota(c, dados, th, nota):
     fundo(c)
     desenhar_logo(c, W/2, H-150, 150)
-    # Texto sincronizado com relatorios/prompts/sinastria.md item 11 (rascunho — item 3
-    # do checklist de red team; pendente de revisão jurídica antes de publicar).
+    # Texto sincronizado com relatorios/prompts/sinastria.md item 11 (item 3 do
+    # checklist de red team, aprovado por advogado em 05/08/2026).
     nota = nota or ('Este relatório é uma ferramenta de autoconhecimento a dois baseada na tradição coreana '
                     'do gunghap. Nenhum mapa determina uma relação, uma decisão de negócio ou o futuro de '
                     'vocês: ela é construída pelas escolhas, pelo diálogo e pelo cuidado de ambos. Ele não '

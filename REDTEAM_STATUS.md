@@ -22,13 +22,13 @@ A prosa do relatório (texto do LLM) continua endereçando cada pessoa só pelo 
 
 **Pendente, não é código**: o checkbox de consentimento da segunda pessoa no formulário de coleta de dados. Hoje a coleta é manual por e-mail (`docs/FASE4B`), não um formulário web — quando o formulário automático da Fase 5 existir, incluir esse consentimento. Registrado aqui, não em código ainda.
 
-## Item 3 — Disclaimers nas sinastrias — ✅ FEITO (rascunho — pendente revisão jurídica)
+## Item 3 — Disclaimers nas sinastrias — ✅ FECHADO (aprovado por advogado, 05/08/2026)
 
-As duas sinastrias já tinham uma página "NOTA" (`pagina_nota`) com um texto fixo — só que puramente filosófico, sem a cláusula de segurança que o Essencial já tem (`app/pdf/gerar_pdf.py`: "não substitui acompanhamento médico ou psicológico..."). Estendido o texto já aprovado (não reescrito do zero) pra incluir médico/psicológico/jurídico/financeiro + "nenhum mapa determina... uma decisão de negócio" (cobre a Profissional), em dois lugares que precisam ficar sincronizados:
+As duas sinastrias já tinham uma página "NOTA" (`pagina_nota`) com um texto fixo — só que puramente filosófico, sem a cláusula de segurança que o Essencial já tem (`app/pdf/gerar_pdf.py`: "não substitui acompanhamento médico ou psicológico..."). Estendido o texto já aprovado (não reescrito do zero) pra incluir médico/psicológico/jurídico/financeiro + "nenhum mapa determina... uma decisão de negócio" (cobre a Profissional), em dois lugares que ficam sincronizados:
 - `relatorios/prompts/sinastria.md` (item 11, o que o LLM deve escrever)
 - `app/pdf/sinastria/build_sinastria.py` (`pagina_nota`, o texto de fallback se o LLM não escrever)
 
-**Igual ao item 2**: revisão de advogado antes de publicar, mesma ressalva já registrada em `empresa/textos/LANCAMENTO_MANUAL_TEXTOS.md` pra política de reembolso.
+Texto aprovado pelo advogado do Ivã. **Ainda pendente, fora deste checklist**: a política de reembolso em `empresa/textos/LANCAMENTO_MANUAL_TEXTOS.md` segue com a mesma ressalva jurídica, separada desta rodada de red team.
 
 ## Item 8 — Logo/assets — ✅ FEITO
 
