@@ -38,6 +38,18 @@ Confirmado: não existe nenhum arquivo vetorial do logo (SVG, AI, EPS) em lugar 
 
 **SSL/www**: confirmado que não existe `.htaccess` nem qualquer config de servidor versionada no repositório — é 100% fora do escopo de código, fica pendente direto com o Ivã (cPanel).
 
+## Item 5 — Convenção de hora + "hora desconhecida" — 🟡 ESTRUTURA PRONTA, falta decisão de padrão
+
+**"Hora desconhecida" já estava implementado** (não sabia disso quando escrevi a primeira versão desta seção) — `app/server.mjs`, função `montarLeitura` (usada tanto por `/leitura` quanto por `/sinastria`, para qualquer uma das duas pessoas): usa meio-dia só como placeholder técnico pro cálculo, mas deleta o pilar da Hora do resultado (`delete leitura.pilares.hora`) e marca `horaDesconhecida: true` + `nascimento.hora = 'desconhecida'`. Nunca inventa hora nem finge precisão que não tem.
+
+**Estrutura de convenção de hora, construída agora**: `calculateSaju()` ganhou um 7º parâmetro opcional `OpcoesCalculoSaju` (retrocompatível — sem passar, nada muda):
+- `horaConvencao: 'solar' | 'relogio'` — solar é o padrão atual (correção de longitude); relógio pula essa correção, usa só a hora civil com horário de verão histórico já aplicado.
+- `diaMudaAs23h: boolean` — convenção "zi cedo" (早子時): nascimentos às 23h+ usam o pilar do Dia do dia seguinte. Padrão `false` (comportamento atual).
+
+Testado contra a coluna do oráculo do Fagundes que eu não conseguia verificar antes (hora do relógio = 戊寅) — bateu certo depois de corrigir um bug no primeiro rascunho (detalhes no commit `c4ab77c`). 137/137 testes passam, nenhuma mudança no comportamento padrão.
+
+**Decisão que falta**: qual convenção vira o padrão de fato (`solar`, `relogio`, ou `diaMudaAs23h` ligado) — ou se cada uma fica disponível como opção no formulário, sem um "padrão da casa". Ver missão original, item 5.
+
 ## Item 4 — Diferenciar a Sinastria Profissional — não iniciado
 
 ## Item 6 — Sistema de faixas honesto — ⏳ PENDENTE DECISÃO
