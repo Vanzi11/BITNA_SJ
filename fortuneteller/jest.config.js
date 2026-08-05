@@ -15,6 +15,7 @@ export default {
     ],
   },
   testMatch: ['**/tests/**/*.test.ts'],
+  setupFiles: ['<rootDir>/tests/jest.setup.ts'],
   collectCoverageFrom: [
     'src/**/*.ts',
     '!src/index.ts',
