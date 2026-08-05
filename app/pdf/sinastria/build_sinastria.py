@@ -52,9 +52,9 @@ def nome_arquivo(dados):
     s2 = _iniciais_curtas(dados.get('pessoa2', {}).get('nome', ''))
     return f"{tipo}_{s1}&{s2}_{DOC_VERSION}_{ANO_DOC}"
 
-def _iniciais_curtas(nome):
+def _iniciais_curtas(nome, fallback='XX'):
     ign = {'de', 'da', 'do', 'das', 'dos', 'e'}
-    return ''.join(p[0].upper() for p in (nome or '').split() if p and p.lower() not in ign) or 'XX'
+    return ''.join(p[0].upper() for p in (nome or '').split() if p and p.lower() not in ign) or fallback
 
 # ---------- paleta base (Livraria de Seul) ----------
 IVORY    = HexColor('#f7f3ea')
@@ -281,15 +281,17 @@ def pagina_capa(c, dados, th):
         c.drawCentredString(W/2, H-320 - i*34, ln)
     c.setFillColor(MUTED); c.setFont(SANS, 9.5)
     c.drawCentredString(W/2, H-398, rastreado(th['titulo'].upper()))
-    # nomes das duas pessoas (completos) + dados de nascimento, como na capa do Essencial (D36)
+    # iniciais das duas pessoas (nunca nome completo — o PDF circula fora do site
+    # e pode conter dado pessoal de alguém que não é o comprador, ver REDTEAM_STATUS.md
+    # item 2) + dados de nascimento, como na capa do Essencial (D36)
     c.setFillColor(BODY_C); c.setFont(DISPLAY, 20)
-    c.drawCentredString(W/2, 344, p1.get('nome', 'Pessoa 1'))
+    c.drawCentredString(W/2, 344, _iniciais_curtas(p1.get('nome'), 'Pessoa 1'))
     c.setFillColor(MUTED); c.setFont(SANS, 8.5)
     c.drawCentredString(W/2, 328, _nasc_linha(p1))
     c.setFillColor(th['accent']); c.setFont(BODY_I, 15)
     c.drawCentredString(W/2, 302, 'e')
     c.setFillColor(BODY_C); c.setFont(DISPLAY, 20)
-    c.drawCentredString(W/2, 278, p2.get('nome', 'Pessoa 2'))
+    c.drawCentredString(W/2, 278, _iniciais_curtas(p2.get('nome'), 'Pessoa 2'))
     c.setFillColor(MUTED); c.setFont(SANS, 8.5)
     c.drawCentredString(W/2, 262, _nasc_linha(p2))
     selo(c, W/2, 192, 40, th['accent'], th['selo'])
@@ -303,9 +305,9 @@ def card_pessoa(c, x, w, p, th):
     c.setStrokeColor(HAIRLINE); c.setLineWidth(0.8)
     c.roundRect(x, y_top - alt, w, alt, 6, stroke=1, fill=0)
     cx = x + w/2
+    # iniciais, não nome completo — mesma razão da capa (ver acima)
     c.setFillColor(BODY_C); c.setFont(DISPLAY, 15)
-    for i, ln in enumerate(quebrar(p.get('nome', ''), DISPLAY, 15, w-24)[:2]):
-        c.drawCentredString(cx, y_top-26 - i*17, ln)
+    c.drawCentredString(cx, y_top-26, _iniciais_curtas(p.get('nome'), '??'))
     c.setFillColor(MUTED); c.setFont(SANS, 7.3)
     c.drawCentredString(cx, y_top-58, f"{_data_br(p)}  ·  {_cidade_uf(p)}")
     hj = hanja_de(p.get('mestreDoDia', ''))
@@ -580,9 +582,13 @@ def pagina_resumo(c, dados, th, resumo_pares):
 def pagina_nota(c, dados, th, nota):
     fundo(c)
     desenhar_logo(c, W/2, H-150, 150)
+    # Texto sincronizado com relatorios/prompts/sinastria.md item 11 (rascunho — item 3
+    # do checklist de red team; pendente de revisão jurídica antes de publicar).
     nota = nota or ('Este relatório é uma ferramenta de autoconhecimento a dois baseada na tradição coreana '
-                    'do gunghap. Nenhum mapa determina uma relação: ela é construída pelas escolhas, pelo '
-                    'diálogo e pelo cuidado de ambos.')
+                    'do gunghap. Nenhum mapa determina uma relação, uma decisão de negócio ou o futuro de '
+                    'vocês: ela é construída pelas escolhas, pelo diálogo e pelo cuidado de ambos. Ele não '
+                    'substitui acompanhamento médico, psicológico, jurídico ou financeiro — as decisões são '
+                    'sempre de vocês.')
     if CJK: nota = CJK_RE.sub(lambda m: f'<font name="CJK">{m.group(0)}</font>', nota)
     else: nota = limpar_cjk(nota)
     c.setFillColor(th['accent']); c.setFont(SANS, 8.5)

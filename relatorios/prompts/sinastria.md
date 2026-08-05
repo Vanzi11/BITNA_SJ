@@ -45,7 +45,7 @@ O relatório precisa responder a **TODOS** os pontos que a oferta promete para a
 8. **Para cada um de vocês** — seção OBRIGATÓRIA de orientação **individual e direta**, endereçando cada pessoa pelo nome, com conselhos concretos e específicos do mapa dela dentro dessa relação. Formato: *"[Nome1], neste ponto você deve... / na hora de X, cuide de..."* e depois *"[Nome2], neste ponto você deve... / quando Y, lembre de..."*. Cada pessoa recebe 3–4 orientações práticas, ancoradas no que o mapa DELA pede (elemento em excesso/ausente, força do Mestre). É a seção que faz cada leitor sentir que o relatório falou com ele, não só sobre o casal/dupla.
 9. **Combinados a dois** — orientações práticas conjuntas para cultivarem o melhor da combinação (no societário: cláusulas a acordar antes de assinar).
 10. **Resumo de bolso** — "✦ Vocês dois em 4 linhas" (compartilhável).
-11. **Nota final** — *"Este relatório é uma ferramenta de autoconhecimento a dois baseada na tradição coreana do gunghap. Nenhum mapa determina uma relação: ela é construída pelas escolhas, pelo diálogo e pelo cuidado de ambos."*
+11. **Nota final** — *"Este relatório é uma ferramenta de autoconhecimento a dois baseada na tradição coreana do gunghap. Nenhum mapa determina uma relação, uma decisão de negócio ou o futuro de vocês: ela é construída pelas escolhas, pelo diálogo e pelo cuidado de ambos. Ele não substitui acompanhamento médico, psicológico, jurídico ou financeiro — as decisões são sempre de vocês."* (rascunho revisado — item 3 do checklist de red team; pendente de revisão jurídica antes de publicar, ver REDTEAM_STATUS.md)
 
 ## Extensão
 
