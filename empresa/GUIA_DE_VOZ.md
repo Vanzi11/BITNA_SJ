@@ -46,6 +46,7 @@ A diferença não é o tamanho do texto — é que a segunda versão dá ao leit
 - Se o termo **reaparecer páginas depois**, não presuma retenção — um lembrete curto entre parênteses resolve ("o mesmo arquétipo que já vimos — quem cria por prazer, não por comando").
 - **Quando a explicação já nasce com cena concreta** (ex.: "Terra Yang é a montanha: firme, confiável, difícil de derrubar por pressão externa"), não é preciso reescrever — mas vale **acrescentar** uma frase curta de tradução prática logo depois, começando com "Na prática, isso quer dizer:", conectando a imagem a um comportamento de decisão real. Ex.: *"Na prática, isso quer dizer: Ivã não muda de posição no calor da reunião — ele escuta, pondera, e quando finalmente decide, é difícil convencê-lo do contrário no dia seguinte."*
 - Vale para **todos os produtos da casa** (Essencial, Completa, as duas Sinastrias), não só onde foi identificado pela primeira vez (relatório de Sinastria Profissional, 05/08/2026 — feedback do Ivã).
+- **Nem todo termo abstrato precisa virar cena.** Se a expressão já é vívida e o leitor visualiza na hora, forçar uma cena pode enfraquecer, não fortalecer. Exemplo testado duas vezes pelo Ivã (Sinastria Profissional e Amorosa, 05/08/2026): Flor de Pessegueiro (桃花殺) como "**magnetismo pessoal**, facilidade de atrair gente e atenção" foi mantida como está nas duas revisões — o termo já comunica sozinho. Use o teste da seção acima como guia, não como obrigação de sempre reescrever.
 
 ## Vocabulário
 
