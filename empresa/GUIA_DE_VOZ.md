@@ -25,6 +25,23 @@ Clara · respeitosa · acolhedora · racional · curiosa · profunda · detalhis
 
 **Honestidade acolhedora**: nomeamos o bloqueio e a sombra — com o carinho de quem quer ver a pessoa crescer, nunca com o tapa do "sem filtro". Acolher primeiro, orientar depois, sempre aterrissar no concreto.
 
+## Espírito Poético Explicativo do Saju
+
+Todo termo técnico (arquétipo, dez-deus, sinsal, dinâmica entre elementos) precisa de tradução — isso já era regra (ver "Como falamos" acima e D36 no `DECISOES.md`). O que este princípio acrescenta é **como** traduzir bem: a diferença entre uma tradução que só soa bonita e uma que o leitor guarda.
+
+**O teste**: depois de escrever a explicação, pergunte — *isso ajudaria alguém que nunca ouviu falar de Saju a entender de verdade, e ainda ficar curioso pra saber mais? Ou só soa elegante sem dizer nada que se possa visualizar?* Se for só um adjetivo bonito colado no termo, reescreva. Se o leitor consegue **ver a cena** ou **reconhecer o comportamento** em alguém que conhece, está certo.
+
+**Errado (rótulo poético, não ancora em nada concreto):**
+> "Deus do Alimento (食神 — no Saju, o arquétipo ligado à criação serena, produção sem pressa, gerar valor pelo que se faz, não pelo que se persegue)."
+
+**Certo (mesmo termo, ancorado numa cena/comportamento reconhecível):**
+> "Deus do Alimento (食神 — no Saju, o arquétipo de quem produz por prazer, não por meta: é o tipo que termina um projeto e, antes de comemorar, já está esboçando o próximo, porque criar é o próprio combustível, não um meio pra chegar em outro lugar)."
+
+A diferença não é o tamanho do texto — é que a segunda versão dá ao leitor uma **imagem que ele já viu em alguém**, não uma lista de substantivos abstratos (criação, produção, valor). Regras práticas:
+- Prefira um **comportamento observável** ("termina um projeto e já está esboçando o próximo") a um **substantivo abstrato** ("produção serena").
+- Se o termo **reaparecer páginas depois**, não presuma retenção — um lembrete curto entre parênteses resolve ("o mesmo arquétipo que já vimos — quem cria por prazer, não por comando").
+- Vale para **todos os produtos da casa** (Essencial, Completa, as duas Sinastrias), não só onde foi identificado pela primeira vez (relatório de Sinastria Profissional, 05/08/2026 — feedback do Ivã).
+
 ## Vocabulário
 
 **Sempre:** tendência · padrão · inclinação · contexto · comportamento · decisão · equilíbrio · interpretação · alinhamento.
