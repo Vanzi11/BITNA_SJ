@@ -97,6 +97,26 @@ Até já,
 padrões para decidir melhor."
 ```
 
+## 4. Política de reembolso (uma frase para a página de vendas)
+
+```
+Seu relatório é produzido sob medida a partir dos seus dados de
+nascimento. Por isso, o reembolso integral vale até o momento em
+que você envia esses dados — depois que o relatório entra em
+produção, não é possível reembolsar, já que o produto já foi
+gerado especificamente para você.
+```
+
+Versão curta (rodapé/checkout):
+
+```
+Reembolso integral disponível até o envio dos seus dados de
+nascimento. Após esse ponto, por ser um produto personalizado,
+não há reembolso.
+```
+
+> **Atenção — isto não é aconselhamento jurídico.** O Código de Defesa do Consumidor (art. 49) garante 7 dias de arrependimento em compras online, e o texto acima ainda não foi verificado contra essa regra especificamente para produtos digitais personalizados. Antes de publicar, vale uma checada rápida com um contador/advogado — é barato resolver agora e caro resolver depois de um cliente pedir reembolso e citar o CDC.
+
 ## Notas de implementação
 
 - **[X] dias úteis**: defina um prazo real que você consegue cumprir no fluxo manual (digitar dados → gerar → revisar → enviar). Melhor prometer 3 dias e entregar em 1 do que o contrário.

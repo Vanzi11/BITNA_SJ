@@ -45,6 +45,7 @@ from reportlab.pdfbase.ttfonts import TTFont
 HERE = os.path.dirname(os.path.abspath(__file__))
 FONT_DIR = os.path.join(HERE, "fonts")
 ICON_DIR = os.path.join(HERE, "assets", "icons")
+LOGO_PATH = os.path.join(HERE, "..", "..", "..", "empresa", "marca", "logo", "logo_hero_branco.png")
 
 # Pedido do Ivã: o corpo do PDF estava pequeno demais pra ler confortavelmente
 # no celular. Em vez de tocar em ~80 chamadas de setFont() espalhadas pelo
@@ -72,24 +73,27 @@ MARGIN_X = 92
 MARGIN_Y = 84
 
 # Palette — D9 "Livraria de Seul": marfim, roxo profundo, dourado, cinza quente + selo vermelho.
+# D40 (05/08/2026): 2 acentos aproximados da paleta institucional do site (D24),
+# opção "intermediária" escolhida pelo Ivã — vermelho e dourado migram um pouco
+# em direção ao Seal Red / Matte Bronze do site, sem abandonar o conceito "livraria".
 IVORY      = HexColor("#f7f3ea")
 INK        = HexColor("#2b2540")
 BODY       = HexColor("#3a3324")
 MUTED      = HexColor("#8a7f6a")
 HAIRLINE   = HexColor("#c9bfa8")
-ACCENT     = HexColor("#a03a2d")   # selo vermelho (dojang)
-GOLD       = HexColor("#b58b3a")
+ACCENT     = HexColor("#a83226")   # selo vermelho (dojang) — antes #a03a2d, aproximado do Seal Red institucional #B22222
+GOLD       = HexColor("#ad8b50")   # antes #b58b3a, aproximado do Matte Bronze institucional #A68B67
 GHOST      = HexColor("#e6dcc4")
 
 COL_MADEIRA = HexColor("#4a6b46")
-COL_FOGO    = HexColor("#a03a2d")
-COL_TERRA   = HexColor("#b58b3a")
+COL_FOGO    = HexColor("#a83226")
+COL_TERRA   = HexColor("#ad8b50")
 COL_METAL   = HexColor("#8a7f6a")
 COL_AGUA    = HexColor("#3b5a7a")
 ELEM_ORDER  = ["Madeira", "Fogo", "Terra", "Metal", "Água"]
 ELEM_CH     = {"Madeira": "木", "Fogo": "火", "Terra": "土", "Metal": "金", "Água": "水"}
 COR_ELEM    = {"Madeira": COL_MADEIRA, "Fogo": COL_FOGO, "Terra": COL_TERRA, "Metal": COL_METAL, "Água": COL_AGUA}
-HEX_ELEM    = {"Madeira": "#4a6b46", "Fogo": "#a03a2d", "Terra": "#b58b3a", "Metal": "#8a7f6a", "Água": "#3b5a7a"}
+HEX_ELEM    = {"Madeira": "#4a6b46", "Fogo": "#a83226", "Terra": "#ad8b50", "Metal": "#8a7f6a", "Água": "#3b5a7a"}
 HEX_INK     = "#2b2540"
 
 def _register_latin_fonts() -> None:
@@ -218,7 +222,7 @@ def draw_footer(c: canvas.Canvas, chapter: str, page: int) -> None:
     c.drawString(MARGIN_X, y, chapter)
     c.setFont("Sans", 7.5)
     c.drawCentredString(PAGE_W/2, y, f"— {page:02d} —")
-    c.drawRightString(PAGE_W - MARGIN_X, y, "BITNA SAJU")
+    c.drawRightString(PAGE_W - MARGIN_X, y, "BITNASAJU.COM.BR")
 
 def draw_hanja_glyph(c: canvas.Canvas, ch: str, x: float, y: float, size: float, color=ACCENT) -> None:
     if not CJK or not ch:
@@ -399,41 +403,57 @@ def _draw_lines(c, lines, x, y, size, leading, color, align):
 def draw_wrapped(c, text, x, y, w, size=10.5, leading=15, base_family="Body", color=BODY, align="left"):
     leading = leading + FONT_BUMP
     lines = _wrap_lines(text, w, size, base_family)
-    for ln in lines:
+    n = len(lines)
+    for idx, ln in enumerate(lines):
         line_width = sum(_measure(a, size) for a, s, sp in ln)
+        n_spaces = sum(1 for _a, _s, sp in ln if sp)
+        justify_here = align == "justify" and idx < n - 1 and n_spaces > 0
+        extra_per_space = (w - line_width) / n_spaces if justify_here else 0
         if align == "center": cx = x + (w - line_width)/2
         elif align == "right": cx = x + w - line_width
         else: cx = x
-        for atoms, style, _sp in ln:
+        for atoms, style, sp in ln:
             for atext, afont, astyle in atoms:
                 c.setFont(afont, size); c.setFillColor(color)
                 c.drawString(cx, y, atext)
                 aw = pdfmetrics.stringWidth(atext, afont, size)
                 if astyle == "b": c.drawString(cx + 0.35, y, atext)
                 cx += aw
+            if sp and justify_here:
+                cx += extra_per_space
         y -= leading
     return y
 
-def draw_wrapped_paginated(c, text, x, y, w, min_y, new_page_fn, size=10.5, leading=15, base_family="Body", color=BODY):
+def draw_wrapped_paginated(c, text, x, y, w, min_y, new_page_fn, size=10.5, leading=15, base_family="Body", color=BODY, align="left"):
     """Como draw_wrapped, mas quebra a página NO MEIO do parágrafo se preciso —
-    é o que garante que o layout aguenta textos de qualquer tamanho (tarefa 1c)."""
+    é o que garante que o layout aguenta textos de qualquer tamanho (tarefa 1c).
+    D40: ganhou align="justify" (mesmo padrão do relatório Profissional) — a
+    última linha de cada parágrafo nunca é esticada (convenção tipográfica)."""
     leading = leading + FONT_BUMP
     lines = _wrap_lines(text, w, size, base_family)
+    n = len(lines)
     i = 0
     while i < len(lines):
         if y - leading < min_y:
             y = new_page_fn()
         avail = max(1, int((y - min_y) / leading))
         chunk = lines[i:i+avail]
-        for ln in chunk:
+        for k, ln in enumerate(chunk):
+            idx = i + k
+            line_width = sum(_measure(a, size) for a, s, sp in ln)
+            n_spaces = sum(1 for _a, _s, sp in ln if sp)
+            justify_here = align == "justify" and idx < n - 1 and n_spaces > 0
+            extra_per_space = (w - line_width) / n_spaces if justify_here else 0
             cx = x
-            for atoms, style, _sp in ln:
+            for atoms, style, sp in ln:
                 for atext, afont, astyle in atoms:
                     c.setFont(afont, size); c.setFillColor(color)
                     c.drawString(cx, y, atext)
                     aw = pdfmetrics.stringWidth(atext, afont, size)
                     if astyle == "b": c.drawString(cx + 0.35, y, atext)
                     cx += aw
+                if sp and justify_here:
+                    cx += extra_per_space
             y -= leading
         i += len(chunk)
     return y
@@ -493,6 +513,16 @@ def motif_seal(c, cx, cy, ch="四柱", size=10):
 
 def hairline(c, x1, y1, x2, y2, color=HAIRLINE, w=0.5):
     c.setStrokeColor(color); c.setLineWidth(w); c.line(x1, y1, x2, y2)
+
+def desenhar_logo(c, cx, cy, larg):
+    """Logo aprovada (D30/D40) — máscara de branco pra assentar no fundo
+    marfim; degradação graciosa (não desenha nada) se o arquivo faltar."""
+    try:
+        ir = ImageReader(LOGO_PATH); iw, ih = ir.getSize(); h = larg * ih / iw
+        c.drawImage(ir, cx - larg/2, cy - h/2, larg, h,
+                    mask=[245, 255, 245, 255, 245, 255], preserveAspectRatio=True)
+    except Exception:
+        pass
 
 def centered_ornament(c, cx, cy, color=ACCENT):
     c.setStrokeColor(color); c.setLineWidth(0.6)
@@ -723,26 +753,31 @@ ANIMAL_ICONS = {
     'Porco': icon_porco,
 }
 
-# Os dez arquetipos (dez deuses / 十神) - enumeracao fixa e completa (nao vem
-# do LLM: sao exatamente 10 possiveis, igual FRASES_MESTRE). Portado do
-# gerador v4 (app/pdf/gerar_pdf.py), que ja tinha esse quadro - o v5 original
-# nao tinha (pedido de revisao do Iva).
+# Os 10 Arquétipos (十神) - enumeracao fixa e completa (nao vem do LLM: sao
+# exatamente 10 possiveis, igual FRASES_MESTRE). Portado do gerador v4
+# (app/pdf/gerar_pdf.py), que ja tinha esse quadro - o v5 original nao tinha
+# (pedido de revisao do Ivã).
+# D40 (05/08/2026): nomenclatura banida de "Deus/Deuses" — cada entrada ganhou
+# um nome-papel novo (nome oficial completo em relatorios/prompts/arquetipos_10.md).
+# O 1º campo de cada tupla é a CHAVE TÉCNICA ANTIGA (só pra bater com
+# dezDeuses.distribuicao, que o motor continua calculando com o nome velho —
+# não é texto de cliente); o 2º é o nome-papel curto exibido no cartão.
 ARQUETIPOS = [
     ('RELAÇÕES DE IGUAL', [
-        ('Companheiro', '比肩', 'autonomia e irmandade', 'você funciona como referência solitária'),
-        ('Rival', '劫財', 'ousadia e competição', 'competição não te move')]),
+        ('Companheiro', 'Amigo', '比肩', 'parceria e conexão de igual pra igual', 'não precisa de espelho pra se afirmar'),
+        ('Rival', 'Competidor', '劫財', 'carisma competitivo, jogo social', 'competição não é o que te move')]),
     ('EXPRESSÃO CRIATIVA', [
-        ('Deus do Alimento', '食神', 'criação serena e prazer', 'sua criação nasce de outra fonte'),
-        ('Oficial Ferido', '傷官', 'o olhar que vê o que está errado — e como melhorar', 'a crítica não é seu motor')]),
+        ('Deus do Alimento', 'Criador Confiante', '食神', 'criação serena e prazer', 'sua criação nasce de outra fonte'),
+        ('Oficial Ferido', 'Executor', '傷官', 'o olhar que vê o que está errado — e como melhorar', 'a crítica não é seu motor')]),
     ('GERAÇÃO DE VALOR', [
-        ('Riqueza Indireta', '偏財', 'o caçador de oportunidades', 'oportunidade não é seu chamado natural'),
-        ('Riqueza Direta', '正財', 'renda estável e gestão', 'salário fixo não é seu caminho natural')]),
+        ('Riqueza Indireta', 'Empreendedor', '偏財', 'o caçador de oportunidades', 'oportunidade não é seu chamado natural'),
+        ('Riqueza Direta', 'Administrador', '正財', 'renda estável e gestão', 'salário fixo não é seu caminho')]),
     ('ORDEM E AUTORIDADE', [
-        ('Oficial Direto', '正官', 'ordem e responsabilidade', 'hierarquia não tem morada no seu mapa'),
-        ('Oficial Indireto (Sete Matanças)', '偏官', 'coragem sob pressão', 'pressão externa não te comanda')]),
+        ('Oficial Direto', 'Diplomata', '正官', 'ordem e responsabilidade', 'hierarquia não tem morada no seu mapa'),
+        ('Oficial Indireto (Sete Matanças)', 'Guerreiro', '七殺', 'coragem sob pressão', 'pressão externa não te comanda')]),
     ('SABER E AMPARO', [
-        ('Selo Direto', '正印', 'o amparo do conhecimento', 'seu saber vem da experiência'),
-        ('Selo Indireto', '偏印', 'intuição e caminhos alternativos', 'sua intuição atua discreta')]),
+        ('Selo Direto', 'Mentor Erudito', '正印', 'o amparo do conhecimento', 'seu saber vem da experiência'),
+        ('Selo Indireto', 'Místico', '偏印', 'intuição e caminhos alternativos', 'sua intuição atua discreta')]),
 ]
 
 def pontos_intensidade(c, x, y, nivel, r=4.4, cor=ACCENT):
@@ -947,8 +982,7 @@ def page_cover(c, dados):
     L_ = 22; m = 46
     for (x, y, dx, dy) in [(m, PAGE_H-m,1,-1), (PAGE_W-m, PAGE_H-m,-1,-1), (m, m,1,1), (PAGE_W-m, m,-1,1)]:
         c.line(x, y, x + dx*L_, y); c.line(x, y, x, y + dy*L_)
-    c.setFillColor(MUTED); c.setFont("Sans", 9)
-    c.drawCentredString(PAGE_W/2, PAGE_H - 140, "S A J U   B R A S I L")
+    desenhar_logo(c, PAGE_W/2, PAGE_H - 132, 200)
     hairline(c, PAGE_W/2 - 14, PAGE_H - 154, PAGE_W/2 + 14, PAGE_H - 154, MUTED)
     mk = mestre_chave(l)
     if mk and CJK:
@@ -1031,9 +1065,9 @@ def page_intro(c, ctx):
     p3 = ("Não para saber \"o que vai acontecer\" — mas para entender **com que padrões estão "
           "jogando**. É assim que a Bitna Saju trabalha: *não é sobre prever sua vida — é sobre "
           "entender seus padrões para decidir melhor.*")
-    y = draw_wrapped(c, p1, x, y, w); y -= 6
-    y = draw_wrapped(c, p2, x, y, w); y -= 6
-    y = draw_wrapped(c, p3, x, y, w)
+    y = draw_wrapped(c, p1, x, y, w, align="justify"); y -= 6
+    y = draw_wrapped(c, p2, x, y, w, align="justify"); y -= 6
+    y = draw_wrapped(c, p3, x, y, w, align="justify")
     motif_bamboo(c, PAGE_W - MARGIN_X - 20, 160, 36, color=INK)
     draw_footer(c, "i · abertura", ctx['page'])
 
@@ -1208,15 +1242,15 @@ def page_archetypes(c, dados, ctx, roman, label="Núcleo"):
     dist = (l.get('dezDeuses') or {}).get('distribuicao') or {}
     draw_chapter_header(c, roman, label, "Os Dez", "Arquétipos",
                         (nome + ' · ' if nome else '') + 'como cada energia se relaciona com o seu centro')
-    cw, ch, gapx, gapy = 240, 58, 22, 26
+    cw, ch, gapx, gapy = 240, 70, 22, 18
     x0 = (PAGE_W - 2*cw - gapx)/2; y = PAGE_H - 300
     for rotulo, par in ARQUETIPOS:
         c.setFillColor(ACCENT); c.setFont("Sans", 7.5)
         c.drawString(x0 + 2, y + 3, rotulo)
         c.setStrokeColor(HAIRLINE); c.setLineWidth(0.4)
         c.line(x0 + 2 + pdfmetrics.stringWidth(rotulo, "Sans", 7.5) + 8, y + 6, x0 + 2*cw + gapx, y + 6)
-        for j, (nomeA, hanja, desc_a, desc_x) in enumerate(par):
-            v = dist.get(nomeA, 0)
+        for j, (chave_json, nome_curto, hanja, desc_a, desc_x) in enumerate(par):
+            v = dist.get(chave_json, 0)
             x = x0 + j*(cw + gapx); yc = y - ch
             ativo = v > 0
             c.setStrokeColor(INK if ativo else HAIRLINE); c.setLineWidth(0.9 if ativo else 0.5)
@@ -1224,15 +1258,24 @@ def page_archetypes(c, dados, ctx, roman, label="Núcleo"):
             if v >= 1.5:
                 c.setStrokeColor(ACCENT); c.setLineWidth(0.5)
                 c.roundRect(x + 3.5, yc + 3.5, cw - 7, ch - 7, 3, stroke=1, fill=0)
-            nome_curto = nomeA.replace(' (Sete Matanças)', '')
             txt = f'{nome_curto}  {hanja}'
-            larg = _draw_mixed_line(c, x + 14, yc + ch - 21, txt, "Display" if ativo else "Body", 12, INK if ativo else MUTED)
+            larg = _draw_mixed_line(c, x + 14, yc + ch - 18, txt, "Display" if ativo else "Body", 12, INK if ativo else MUTED)
             if ativo:
-                pontos_intensidade(c, x + 14 + larg + 14, yc + ch - 16, 2 if v >= 1.5 else (1 if v >= 1 else 0.5))
-            c.setFillColor(MUTED if ativo else HexColor('#bdb4a4')); c.setFont("Sans", 7.8)
+                pontos_intensidade(c, x + 14 + larg + 14, yc + ch - 13, 2 if v >= 1.5 else (1 if v >= 1 else 0.5))
+            c.setFillColor(MUTED if ativo else HexColor('#bdb4a4'))
             pref = 'DOMINANTE — ' if v >= 1.5 else ('presença leve — ' if 0 < v < 1 else ('' if ativo else 'ausente — '))
             desc_full = pref + (desc_a if ativo else desc_x)
-            c.drawString(x + 14, yc + 13, _fit_line(desc_full, "Sans", 7.8, cw - 24))
+            # nunca truncar com "…" (D40): reduz fonte + quebra em até 2 linhas
+            # em vez de cortar informação que o cliente pagou pra ler.
+            desc_lines = _wrap_lines(desc_full, cw - 24, 7.3, "Sans")[:2]
+            dy = ch - 38
+            for ln in desc_lines:
+                cx2 = x + 14
+                for atoms, _style, _sp in ln:
+                    for atext, afont, _astyle in atoms:
+                        c.setFont(afont, 7.3); c.drawString(cx2, yc + dy, atext)
+                        cx2 += pdfmetrics.stringWidth(atext, afont, 7.3)
+                dy -= 10
         y -= ch + gapy
     itens = [(2, 'dominante'), (1, 'ativo'), (0.5, 'presença leve')]
     larguras = []
@@ -1361,6 +1404,11 @@ def page_animals(c, dados, ctx, roman, label="Animais"):
     draw_footer(c, f"{roman.lower()} · {label.lower()}", ctx['page'])
 
 def page_cycles(c, dados, ctx, roman, label="Tempo"):
+    """D40: layout refeito — descrição passa pra uma 2ª sub-linha (indentada
+    sob a faixa etária) em vez de disputar espaço na mesma linha do ganji e do
+    "você está aqui". Isso quase triplica a largura disponível pro texto do
+    tronco/ramo; quando mesmo assim não coube, quebra em até 2 linhas em vez
+    de truncar com "…" (regra geral do D40: nunca aceitar reticências)."""
     draw_bg(c); draw_top_hanja(c, "運")
     l = dados.get('leitura') or {}
     ciclos = l.get('ciclosDeDecada') or []
@@ -1370,43 +1418,53 @@ def page_cycles(c, dados, ctx, roman, label="Tempo"):
     x_line = MARGIN_X + 90
     y_top = PAGE_H - 300
     rows = ciclos[:10]
-    row_h = 42
-    if rows:
-        hairline(c, x_line, y_top - row_h*(len(rows)-1) - 8, x_line, y_top + 8, HAIRLINE, 0.6)
-    for i, cic in enumerate(rows):
+    row_pitch = 46; line_gap = 12
+    right_margin = PAGE_W - MARGIN_X
+    desc_max_w = right_margin - 40 - (x_line + 18)  # 40pt reservados pro ganji compacto
+
+    # 1ª passada: mede quantas linhas cada descrição precisa, pra saber a
+    # posição y de cada marcador antes de desenhar (permite traçar a linha do
+    # tempo do tamanho certo, e a segunda passada só desenha).
+    medidos = []
+    y = y_top
+    for cic in rows:
         faixa = cic.get('faixaEtaria') or ''
         nums = [int(n) for n in re.findall(r'\d+', faixa)[:2]]
         atual = idade is not None and len(nums) == 2 and nums[0] <= idade <= nums[1]
-        y = y_top - i*row_h
-        if atual:
-            c.setFillColor(ACCENT); c.setStrokeColor(ACCENT); c.circle(x_line, y, 4, fill=1, stroke=0)
-        else:
-            c.setFillColor(IVORY); c.setStrokeColor(HAIRLINE); c.setLineWidth(0.8); c.circle(x_line, y, 3.5, fill=1, stroke=1)
-        c.setFillColor(ACCENT if atual else INK); c.setFont("Display", 13)
-        c.drawString(x_line + 18, y - 4, faixa)
         tronco = (cic.get('tronco') or '').split(' — ')[-1]
         ramo = cic.get('ramo') or ''
         desc = f"{tronco} sobre {ramo}" if tronco else ramo
         desc_font = "Body-It" if atual else "Body"
-        # largura disponível pra descrição: reserva espaço pro ganji (canto
-        # direito) e, na linha atual, também pro "você está aqui" - com a
-        # fonte maior (D17) esses três elementos passaram a colidir sem essa
-        # conta, sobretudo quando tronco/ramo do LLM vêm mais longos.
-        right_edge = PAGE_W - MARGIN_X
-        if CJK and cic.get('ganji'):
-            right_edge -= pdfmetrics.stringWidth(ganji_para_hanja(cic['ganji']), CJK, 16) + 14
+        desc_lines = _wrap_lines(desc, desc_max_w, 9.3, desc_font)[:2]
+        medidos.append((cic, faixa, atual, desc_lines, desc_font, y))
+        y -= row_pitch + (line_gap if len(desc_lines) > 1 else 0)
+
+    if medidos:
+        hairline(c, x_line, medidos[-1][5] - 8, x_line, medidos[0][5] + 8, HAIRLINE, 0.6)
+
+    for cic, faixa, atual, desc_lines, desc_font, ry in medidos:
         if atual:
-            right_edge -= pdfmetrics.stringWidth("você está aqui", "Body-It", 9) + 18
-        max_desc_w = max(60, right_edge - (x_line + 100))
-        c.setFillColor(ACCENT if atual else BODY); c.setFont(desc_font, 9.5)
-        c.drawString(x_line + 100, y - 4, _fit_line(desc, desc_font, 9.5, max_desc_w))
+            c.setFillColor(ACCENT); c.setStrokeColor(ACCENT); c.circle(x_line, ry, 4, fill=1, stroke=0)
+        else:
+            c.setFillColor(IVORY); c.setStrokeColor(HAIRLINE); c.setLineWidth(0.8); c.circle(x_line, ry, 3.5, fill=1, stroke=1)
+        c.setFillColor(ACCENT if atual else INK); c.setFont("Display", 13)
+        c.drawString(x_line + 18, ry - 4, faixa)
         if atual:
             c.setFillColor(ACCENT); c.setFont("Body-It", 9)
-            c.drawRightString(PAGE_W - MARGIN_X - 44, y - 4, "você está aqui")
+            c.drawString(x_line + 18 + pdfmetrics.stringWidth(faixa, "Display", 13) + 12, ry - 4, "você está aqui")
         if CJK and cic.get('ganji'):
-            c.setFillColor(ACCENT if atual else INK); c.setFont(CJK, 16)
-            c.drawRightString(PAGE_W - MARGIN_X, y, ganji_para_hanja(cic['ganji']))
-    y_q = y_top - row_h*max(len(rows), 1) - 20
+            c.setFillColor(ACCENT if atual else INK); c.setFont(CJK, 14)
+            c.drawRightString(right_margin, ry - 4, ganji_para_hanja(cic['ganji']))
+        dy = ry - 22
+        for ln in desc_lines:
+            cx2 = x_line + 18
+            for atoms, _style, _sp in ln:
+                for atext, afont, _astyle in atoms:
+                    c.setFillColor(ACCENT if atual else BODY); c.setFont(afont, 9.3)
+                    c.drawString(cx2, dy, atext)
+                    cx2 += pdfmetrics.stringWidth(atext, afont, 9.3)
+            dy -= line_gap
+    y_q = (medidos[-1][5] - row_pitch - 4) if medidos else (y_top - 20)
     c.setFillColor(MUTED); c.setFont("Body-It", 10)
     c.drawCentredString(PAGE_W/2, y_q, '"a percepção de sorte aumenta quando comportamento e contexto estão alinhados."')
     draw_footer(c, f"{roman.lower()} · {label.lower()}", ctx['page'])
@@ -1472,13 +1530,17 @@ def page_synth(c, dados, resumo_rows, ctx, roman):
     draw_footer(c, f"{roman.lower()} · síntese", ctx['page'])
 
 def page_closing(c, dados, ctx, disclaimer_override=None):
-    """Última página — TAREFA 1b: reinclui a frase de reanálise + selo vermelho."""
+    """Última página — TAREFA 1b: reinclui a frase de reanálise + selo vermelho.
+    D40: no Premium, a chamada final muda de "reanálise em 1 ano" para um convite
+    a mandar uma crítica pelo site em troca de cupom (pedido do Ivã) — só nesse
+    produto por ora; os demais mantêm a mensagem de reanálise."""
     draw_bg(c)
     l = dados.get('leitura') or {}
+    produto = dados.get('produto', 'premium')
     yons_el = (l.get('yongsin') or {}).get('elementoPrincipal')
-    motif_mountain(c, PAGE_W/2 - 20, PAGE_H/2 + 70, 40, INK)
-    motif_bamboo(c, PAGE_W/2 + 30, PAGE_H/2 + 60, 30, INK)
-    y = PAGE_H/2 - 20
+    motif_mountain(c, PAGE_W/2 - 20, PAGE_H/2 + 90, 40, INK)
+    motif_bamboo(c, PAGE_W/2 + 30, PAGE_H/2 + 80, 30, INK)
+    y = PAGE_H/2
     c.setFillColor(INK); c.setFont("Display-It", 20)
     if yons_el:
         c.drawCentredString(PAGE_W/2, y, f"o seu caminho pede {yons_el.lower()}.")
@@ -1490,10 +1552,25 @@ def page_closing(c, dados, ctx, disclaimer_override=None):
         c.setFillColor(MUTED); c.setFont("Body-It", 10)
         c.drawCentredString(PAGE_W/2, y - 24, "se lembrar de quem você é.")
     centered_ornament(c, PAGE_W/2, y - 62)
-    c.setFillColor(ACCENT); c.setFont("Body-It", 11)
-    c.drawCentredString(PAGE_W/2, y - 90, "recomendamos a reanálise da sua leitura em cerca de um ano.")
-    motif_seal(c, PAGE_W/2, y - 128, "四柱", 10)
-    y2 = 176
+    if produto == 'premium':
+        c.setFillColor(ACCENT); c.setFont("Display-It", 12)
+        c.drawCentredString(PAGE_W/2, y - 88, "gostaríamos muito de ouvir você.")
+        c.setFillColor(BODY); c.setFont("Body-It", 9.8)
+        linhas_cta = [
+            "Entre em bitnasaju.com.br e escreva pra gente: conte o que ressoou nesta leitura,",
+            "o que fez sentido, o que te fez pensar diferente sobre si mesmo.",
+            "Toda crítica sincera vira um cupom de desconto para a sua próxima Leitura Completa.",
+        ]
+        yy = y - 106
+        for ln in linhas_cta:
+            c.drawCentredString(PAGE_W/2, yy, ln); yy -= 14
+        motif_seal(c, PAGE_W/2, yy - 24, "四柱", 10)
+    else:
+        c.setFillColor(ACCENT); c.setFont("Body-It", 11)
+        c.drawCentredString(PAGE_W/2, y - 90, "recomendamos a reanálise da sua leitura em cerca de um ano.")
+        motif_seal(c, PAGE_W/2, y - 128, "四柱", 10)
+    desenhar_logo(c, PAGE_W/2, 210, 110)
+    y2 = 160
     linhas_disc = None
     if disclaimer_override:
         linhas_disc = [p.strip('* ').strip() for p in _split_paragraphs(disclaimer_override)]
@@ -1561,7 +1638,7 @@ def render_narrative(c, ctx, dados, chapters, emit):
         for para in sec['paragraphs']:
             if y - 10.5 < BODY_BOTTOM:
                 y = new_page()
-            y = draw_wrapped_paginated(c, para, x, y, w, BODY_BOTTOM, new_page)
+            y = draw_wrapped_paginated(c, para, x, y, w, BODY_BOTTOM, new_page, align="justify")
             y -= 8
         draw_footer(c, chapter_tag, ctx['page'])
         emit()

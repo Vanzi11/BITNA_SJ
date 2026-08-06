@@ -27,7 +27,14 @@ Clara · respeitosa · acolhedora · racional · curiosa · profunda · detalhis
 
 ## Nomenclatura oficial: 10 Arquétipos, nunca "dez deuses"
 
-O termo técnico coreano é 十神 (romanizado shí shén / 십성), tradicionalmente traduzido como "dez deuses". **Na Bitna Saju, a categoria é sempre "os 10 Arquétipos"** em qualquer texto voltado ao cliente (relatórios, prompts, site, marketing) — "deuses" soa místico e contraria a regra de anti-misticismo da casa (ver "Vocabulário" abaixo). Os nomes individuais de cada um dos dez continuam exatamente como são (Deus do Alimento, Riqueza Direta, Oficial Ferido etc.) — a mudança é só no nome da **categoria**, não de cada entrada. Decisão registrada em `DECISOES.md` D39 (05/08/2026, feedback do Ivã na revisão da Sinastria Profissional).
+O termo técnico coreano é 十神 (romanizado shí shén / 십성), tradicionalmente traduzido como "dez deuses". **Na Bitna Saju, a categoria é sempre "os 10 Arquétipos"** em qualquer texto voltado ao cliente (relatórios, prompts, site, marketing) — "deuses" soa místico e contraria a regra de anti-misticismo da casa (ver "Vocabulário" abaixo). Decisão registrada em `DECISOES.md` D39 (05/08/2026, feedback do Ivã na revisão da Sinastria Profissional).
+
+**Atualização D40 (05/08/2026, revisão da Leitura Completa): a palavra "Deuses" está banida por completo do texto de cliente — inclusive nos nomes individuais**, que até então continuavam com nomes como "Deus do Alimento". A partir de agora:
+- **Nunca** usar "Deus"/"Deuses" em nenhum nome, nem de categoria nem de entrada individual.
+- Prioridade de palavra: **"Arquétipo"** sempre que couber; **"Estrela"** só como segunda opção, se o ritmo da frase não comportar "Arquétipo" de novo tão perto do anterior.
+- Os **10 nomes individuais também mudaram** (não é mais só "Deus do Alimento" → precisa virar "O Arquétipo do Alimento / Criador Confiante"). A tabela completa dos 10 nomes oficiais + romanização + hanja, mais um banco de conteúdo ("o que é" / "como se manifesta") para cada um, vive em **`relatorios/prompts/arquetipos_10.md`** — fonte única, todo relatório que menciona um Arquétipo parte dali.
+- O JSON calculado pelo motor (`dezDeuses.distribuicao`, `dezDeuses.porPilar`) continua usando os nomes técnicos antigos como chave interna — isso é dado, não texto de cliente. A tradução pro nome oficial novo acontece na camada de exibição (prompt/prosa e gerador de PDF), nunca no motor.
+- Ao escrever o conteúdo do banco de referência (`arquetipos_10.md`) dentro de um relatório real, **sempre passar pelo teste do Espírito Poético** abaixo — o banco é matéria-prima (estilo "o que é / como se manifesta"), não texto pronto para colar.
 
 ## Espírito Poético Explicativo do Saju
 
