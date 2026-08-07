@@ -8,3 +8,8 @@ __pycache__/
 
 # DOCX originais dos brandbooks (grandes, só referência local — o PDF aprovado e os MDs já cobrem o conteúdo)
 empresa/marca/fontes-originais/
+
+# Dados e relatórios de clientes reais — NUNCA versionar (repo é público no GitHub;
+# nome completo + data/hora/local de nascimento é dado pessoal real, LGPD).
+# relatorios/exemplos/ continua rastreado normalmente (só cobaias de teste da casa).
+relatorios/clientes/

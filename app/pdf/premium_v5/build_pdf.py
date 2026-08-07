@@ -1173,6 +1173,16 @@ def page_elements(c, dados, ctx):
         cx = MARGIN_X + step*(i + 0.5)
         col = COR_ELEM[elem]
         r = 22
+        # D42 (pedido do Ivã): mesmos ícones da página "Seus elementos, pilar
+        # a pilar" (raster, com fallback vetorial), acima dos círculos —
+        # aproveita o respiro que já existia entre o subtítulo e os círculos.
+        hexcol = HEX_ELEM.get(elem, HEX_INK)
+        mask = ELEM_ICON_FILES.get(elem)
+        icon_drawn = draw_icon_png(c, mask, cx, cy + 85, 46, hexcol) if mask else False
+        if not icon_drawn:
+            icon_fn = ELEM_ICON.get(elem)
+            if icon_fn:
+                icon_fn(c, cx, cy + 85, 18, col)
         dominante = maxv > 0 and v == maxv
         if dominante:
             c.setFillColor(col); c.setStrokeColor(col); c.circle(cx, cy, r, fill=1, stroke=0); c.setFillColor(IVORY)
@@ -1590,18 +1600,24 @@ def page_closing(c, dados, ctx, disclaimer_override=None):
 _KIND_PAGE = {'cycles': page_cycles, 'archetypes': page_archetypes, 'animals': page_animals,
               'structure': page_structure_elements}
 
-def render_narrative(c, ctx, dados, chapters, emit):
+def render_narrative(c, ctx, dados, chapters, emit, roman_start=5, used_labels=None):
     """Desenha os capítulos do relatório com paginação automática. Retorna o
     próximo índice romano livre (para a página de síntese que vem depois).
 
     Capítulos com 'kind' (ciclos/arquétipos/animais) ganham a página de
     dados/gráfico ANTES da prosa — mesmo número romano e label, a prosa
     continua como página de continuação (sem repetir o título grande),
-    como um capítulo de livro que abre com uma ilustração de página cheia."""
-    roman_idx = 5  # I..IV já usados pelas páginas fixas/estruturais
+    como um capítulo de livro que abre com uma ilustração de página cheia.
+
+    D42: pode ser chamada mais de uma vez (ex.: 1x só para "Dinâmica completa
+    dos elementos", logo após a página fixa de elementos, e 1x para o resto)
+    — roman_start/used_labels permitem continuar a numeração e evitar rótulo
+    repetido entre as chamadas."""
+    roman_idx = roman_start  # I..IV já usados pelas páginas fixas/estruturais
     # rótulos já usados no livro (páginas fixas antes e a Síntese depois) -
     # evita que um capítulo do LLM repita o mesmo rótulo no rodapé/cabeçalho
-    used_labels = {'abertura', 'método', 'metodo', 'estrutura', 'balança', 'balanca', 'respiro', 'síntese', 'sintese'}
+    if used_labels is None:
+        used_labels = {'abertura', 'método', 'metodo', 'estrutura', 'balança', 'balanca', 'respiro', 'síntese', 'sintese'}
     for hi, sec in enumerate(chapters):
         roman = to_roman(roman_idx); roman_idx += 1
         heading = sec['heading'] or 'Sua leitura'
@@ -1670,13 +1686,31 @@ def gerar(entrada: str, saida: str) -> None:
     page_method(c, ctx); emit()
     page_pillars(c, dados, ctx); emit()
     page_elements(c, dados, ctx); emit()
+
+    chapters, resumo_rows, disclaimer = parse_relatorio(relatorio_md)
+
+    # D42 (05/08/2026, pedido do Ivã): "Dinâmica completa dos elementos" passa
+    # a vir imediatamente após a página fixa "Os Cinco Elementos" — antes até
+    # da página-respiro e da Abertura pessoal — em vez de aparecer mais tarde,
+    # depois do núcleo/bloqueio. Separamos esse capítulo do resto ANTES do
+    # respiro e da abertura, e retomamos a numeração romana/rótulos depois.
+    dinamica_idx = next(
+        (i for i, ch in enumerate(chapters)
+         if ch['heading'] and re.search(r'din[aâ]mica.*elemento', ch['heading'].lower())),
+        None,
+    )
+    dinamica_chapter = chapters.pop(dinamica_idx) if dinamica_idx is not None else None
+
+    used_labels = {'abertura', 'método', 'metodo', 'estrutura', 'balança', 'balanca', 'respiro', 'síntese', 'sintese'}
+    next_idx = 5
+    if dinamica_chapter:
+        next_idx = render_narrative(c, ctx, dados, [dinamica_chapter], emit, roman_start=next_idx, used_labels=used_labels)
+
     if mestre_chave(dados['leitura']):
         page_breath_mestre(c, dados, ctx); emit()
 
-    chapters, resumo_rows, disclaimer = parse_relatorio(relatorio_md)
-    next_idx = 5
     if chapters:
-        next_idx = render_narrative(c, ctx, dados, chapters, emit)
+        next_idx = render_narrative(c, ctx, dados, chapters, emit, roman_start=next_idx, used_labels=used_labels)
 
     page_synth(c, dados, resumo_rows, ctx, to_roman(next_idx)); emit()
     page_closing(c, dados, ctx, disclaimer); emit()
