@@ -63,9 +63,12 @@ Missão em curso: 4 páginas de venda + 4 páginas de obrigado/formulário (`/le
 
 **Formulários de sinastria resolvem a pendência do redteam** (`REDTEAM_STATUS.md`, item 2): checkbox de consentimento dedicado pra quem compra confirmar que tem autorização da segunda pessoa para informar os dados dela.
 
+**Renomeação (D48):** as 4 páginas de coleta de dados vivem agora em `/enviar-dados/{produto}/` (`essencial`/`completa`/`sinastria-amorosa`/`sinastria-profissional`), não mais em `/{produto}/obrigado/`. Ganharam também o campo "País de nascimento" (pré-preenchido "Brasil", editável) — mas **o motor só calcula cidades brasileiras hoje** (`fortuneteller/src/data/brazil_cities.ts`); ampliar isso é pendência técnica separada, sem data.
+
 **Pendências reais antes de publicar (valem para as 8 páginas):**
 - `[HOTMART_*]` nos botões de compra — placeholders até os links reais da Hotmart existirem.
-- `[FORM_ENDPOINT_*]` no `action` dos formulários de obrigado — o backend (Fase 5, Railway) ainda não existe; os formulários não funcionam de verdade até isso ser construído. Campos já nomeados pra bater com o contrato de `app/server.mjs` (`pessoa1_*`/`pessoa2_*`, `tipoRelacao`, `produto`).
+- `[FORM_ENDPOINT_*]` no `action` dos formulários de `/enviar-dados/` — o backend (Fase 5, Railway) ainda não existe; os formulários não funcionam de verdade até isso ser construído. Campos já nomeados pra bater com o contrato de `app/server.mjs` (`pessoa1_*`/`pessoa2_*`, `tipoRelacao`, `produto`), mais os campos novos `pais`/`pessoa1_pais`/`pessoa2_pais` que o backend ainda não consome.
+- PDF de Boas-vindas (entregue via área de acesso da Hotmart, linkando pro formulário) — decisão explícita do Ivã de não escrever agora.
 - Seção "Exemplo do relatório" com mockups reais das páginas internas do PDF — pulado por decisão do Ivã, substituído pela imagem ilustrativa do produto.
 - Tensão de página count da Essencial (ver D45) ainda não resolvida.
 - Publicação no cPanel (upload dos 8 diretórios + `Site/assets/`) e o próprio backend da Fase 5 (webhook, formulário público real, storage de pedido, e-mail, hospedagem Railway — ver D44) continuam como próximos passos, fora do escopo desta rodada.
