@@ -56,45 +56,51 @@ Dores principais:
 - 💞 Sinastria Amorosa → *Como funciona nossa relação?*
 - 🤝 Sinastria Profissional → *Como funciona nossa parceria?*
 
-## 🌿 Leitura Essencial — R$ 47
+## 🌿 Leitura Essencial — R$ 47,60
 *Descubra quem você é.* Para quem está iniciando a jornada de autoconhecimento pela tradição coreana do Saju. Apresenta os principais padrões do mapa natal — personalidade e forma natural de agir no mundo.
 - Seu Elemento Mestre
 - Seus principais talentos naturais
 - Sua forma de pensar, agir e tomar decisões
-- Relatório personalizado em PDF (9 páginas)
+- Relatório personalizado em PDF (10 a 15 páginas)
 - Entrega em até 48 horas
+
+> **Nota (14/08/2026, D45):** preço e faixa de páginas atualizados para bater com o que já está publicado na home (`Site/Bitna Saju - Home Institucional.dc.html`) — o Ivã confirmou que a home é a fonte correta. **Tensão não resolvida:** a amostra canônica testada (`relatorios/exemplos/Essencial_IvaMRSantos_V3_2026.pdf`) tem 9 páginas com dado real, abaixo do piso de "10 a 15" agora publicado — vale conferir com o Ivã se o gerador precisa produzir mais conteúdo ou se a faixa anunciada deve descer.
 
 > **Escopo reduzido (D26) + 9 correções de padrão (D30) — ✅ implementados:** foco em "Quem sou eu?" (ciclos, cinco elementos e sinsal saíram para a Completa; núcleo do Mestre do Dia aprofundado). Padrão do PDF atualizado (D30): nome completo + "Cidade - UF" na capa, logo aprovada na capa e no fecho, fonte +1, eyebrow "EDIÇÃO ESSENCIAL · V3 · Ano", página final com os diferenciais da Completa, nome de arquivo `Tipo_Iniciais_Versão_Ano`. Refinado em D31 (nome de arquivo primeiro+último nome completo, fonte +1 só no texto corrido preservando títulos, logo maior na capa, cards da p.3 alargados, "www." no site, tópicos da p.9 maiores). Amostra canônica: `relatorios/exemplos/Essencial_IvaMRSantos_V3_2026.pdf` (9 páginas, testada com dado real). *Implementação: `app/pdf/gerar_pdf.py` + `app/server.mjs` + `relatorios/prompts/leitura_individual.md` (id técnico `essencial`).*
 
-## ⭐ Leitura Completa — R$ 97 (de R$ 120)
+## ⭐ Leitura Completa — R$ 98,00 (de R$ 149,30, promoção de lançamento)
 *Descubra como sua vida funciona.* Amplia a Leitura Essencial com uma visão aprofundada dos ciclos, potenciais e padrões do mapa. Inclui tudo da Essencial +
 - Os Quatro Pilares completos (Ano, Mês, Dia e Hora)
 - Mapa dos Cinco Elementos: equilíbrios e excessos naturais
 - Ciclos da Vida e tendências de prosperidade e desafios
 - Períodos de aprendizado
 - Estratégias para harmonizar seus padrões
-- Relatório completo e aprofundado em PDF (cerca de 26 páginas; varia com o mapa)
+- Relatório completo e aprofundado em PDF (20 a 25 páginas)
 - Prioridade de entrega
+
+> **Nota (14/08/2026, D45):** preço e faixa de páginas atualizados para bater com a home — ver nota acima na Essencial.
 
 *Nome comercial "Leitura Completa" (renomeado de "Premium" — D27); id técnico interno segue `premium`. Implementação: `app/pdf/premium_v5/build_pdf.py` + `relatorios/prompts/leitura_premium.md`.*
 
-## 💞 Sinastria Amorosa (Saju de Casal) — R$ 97
+## 💞 Sinastria Amorosa (Saju de Casal) — R$ 98,00
 *Como funciona nossa relação?* Para casais, pessoas se conhecendo ou quem quer compreender uma relação afetiva. Não descreve indivíduos — descreve o relacionamento.
 - Pontos de conexão e fontes de conflito
 - Como cada um demonstra carinho, expressa afeto e segurança
 - O que fortalece a relação e o que merece atenção
 - Estratégias para uma relação mais harmoniosa
-- Relatório especial em PDF (12–16 páginas — estimativa; gerador a construir, D28)
+- Relatório especial em PDF (10 a 15 páginas)
 - Entrega em até 48 horas
 
-## 🤝 Sinastria Profissional — R$ 97
+## 🤝 Sinastria Profissional — R$ 98,00
 *Como funciona nossa parceria?* Para sócios, parceiros de negócios, colegas de trabalho ou amizades importantes. Como duas pessoas funcionam juntas em ambientes profissionais.
 - Compatibilidade e complementaridade entre os perfis e talentos
 - Como cada pessoa toma decisões e se comunica
 - Pontos fortes da parceria e possíveis fontes de conflito
 - Estratégias para fortalecer a parceria
-- Relatório especial em PDF (12–16 páginas — estimativa; gerador a construir, D28)
+- Relatório especial em PDF (10 a 15 páginas)
 - Entrega em até 48 horas
+
+> **Nota (14/08/2026, D45):** preços/páginas das duas Sinastrias atualizados para bater com a home (10–16 páginas testadas em produção no gerador único `build_sinastria.py`, D34 — dentro da faixa agora publicada, sem tensão como a Essencial).
 
 *Implementação (Amorosa e Profissional): mesmo motor + mesmo prompt-base `relatorios/prompts/sinastria.md` + **mesmo gerador de PDF** `app/pdf/sinastria/build_sinastria.py`, diferenciados pelo campo `tipoRelacao`. 1 SKU técnico, 2 posicionamentos, com tema por tipo (Seal Red amorosa / Matte Bronze profissional). **PDF construído e testado (D34), 10 páginas com 2 diagramas (ciclo dos elementos + complementaridade) e orientação individual a cada pessoa.** Amostras em `relatorios/exemplos/sinastria_*_AMOSTRA_v2.pdf`.*
 
