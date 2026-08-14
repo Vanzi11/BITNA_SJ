@@ -51,6 +51,21 @@ Lote grande implementado e testado — amostras `relatorios/exemplos/sinastria_*
 
 **Insight estratégico do Ivã a preservar:** *"a Bitna não vende Saju, vende tradução — quanto menos o cliente perceber o motor, melhor / o diferencial é transformar a tradição coreana em decisões práticas."* A Sinastria Profissional tem cara de **ferramenta de gestão** → potencial B2B.
 
+## [EM ANDAMENTO, 14/08/2026] 8 páginas de venda + pós-compra do site (D43–D45)
+
+Missão em curso: 4 páginas de venda + 4 páginas de obrigado/formulário (`/leitura-essencial/`, `/leitura-completa/`, `/sinastria-amorosa/`, `/sinastria-profissional/`, cada uma com `/obrigado/`). Auditoria inicial corrigiu a premissa (não é WordPress/Elementor — o site é HTML standalone exportado do "Claude Design", publicado manualmente no cPanel). Decisões fechadas: checkout **Hotmart** (D43), hospedagem do backend automatizado **Railway** (D44), preços/páginas corrigidos no `EMPRESA.md` para bater com a home publicada (D45).
+
+**Caminho técnico escolhido:** HTML estático independente por página (sem o bundler multi-página do Claude Design, que é a causa raiz do bug antigo dos artigos — ver `empresa/textos/PROMPT_CLAUDE_DESIGN_ATUALIZACAO_SITE.md`). Cada página replica manualmente o header/rodapé da home (mesma paleta/tipografia: Newsreader + Work Sans, `#F7F4EE`/`#24211E`/`#A67C52`). Usado como referência de conteúdo/estrutura o protótipo `https://bitnasaju-inspired-pages.lovable.app` (feito no Lovable, aprovado pelo Ivã como coerente).
+
+**Feito:** `Site/leitura-essencial/index.html` (venda) e `Site/leitura-essencial/obrigado/index.html` (formulário de 1 pessoa + LGPD) — o par-modelo pras outras 6 páginas. Testado sem overflow horizontal em mobile (375px) e FAQ em `<details>/<summary>` nativo, sem JS.
+
+**Pendências explícitas destas 2 páginas (e que se repetem nas outras 6):**
+- Imagem oficial do produto no Hero — hoje é um diagrama SVG genérico; as imagens de capa reais (as que o Ivã mandou no chat) precisam ser salvas como arquivo em `Site/assets/produtos/` pra serem referenciadas.
+- Seção "Exemplo do relatório" com placeholder `[IMAGENS_OFICIAIS_DO_RELATORIO]` — mockups reais pendentes (decisão do Ivã: pular por ora).
+- `[HOTMART_LEITURA_ESSENCIAL]` no botão de compra — placeholder até o link real da Hotmart existir.
+- `[FORM_ENDPOINT_LEITURA_ESSENCIAL]` no `action` do formulário de obrigado — o backend (Fase 5, Railway) ainda não existe; o formulário não funciona de verdade até isso ser construído.
+- Replicar pras 6 páginas restantes (3 de venda + 3 obrigado, as 2 últimas com formulário de 2 pessoas).
+
 ## Demais pendências (ordem sugerida)
 
 1. ~~**[D28] Construir o gerador de PDF de Sinastria**~~ — ✅ **CONCLUÍDO (04/08/2026, D34).** `app/pdf/sinastria/build_sinastria.py`: 1 gerador, 2 produtos por tema (`tipoRelacao`) — Seal Red amorosa / Matte Bronze profissional. 10 páginas com 2 diagramas (ciclo dos 5 elementos + "o que um traz ao outro") e orientação individual a cada pessoa (D33). Testado com 2 pares reais → amostras `relatorios/exemplos/sinastria_*_AMOSTRA_v2.pdf`. Pendências menores: rota `/pdf-sinastria` no `server.mjs`, paletas formais, apagar amostras v1. **Destrava as Jornadas Bitna (D29), agora construíveis.**

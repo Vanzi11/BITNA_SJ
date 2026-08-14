@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Obrigada pela compra — Leitura Essencial | Bitna Saju</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,300;0,400;0,500;1,400&family=Work+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#F7F4EE; --ink:#24211E; --ink-soft:#4d473f; --muted:#6b6255; --faint:#9c8f7e;
+    --accent:#A67C52; --sage:#8F9C8B; --line:#e9e2d3; --dark:#24211E; --dark-text:#F7F4EE; --dark-muted:#cfc7ba;
+  }
+  *{box-sizing:border-box;}
+  body{margin:0; background:var(--bg); color:var(--ink); font-family:'Work Sans',sans-serif;}
+  a{color:var(--ink);}
+  h1,h2{font-family:'Newsreader',serif; font-weight:400; margin:0;}
+  .nav{display:flex; align-items:center; justify-content:center; padding:28px 24px; border-bottom:1px solid var(--line);}
+  .wrap{max-width:640px; margin:0 auto; padding:64px 24px 96px;}
+  .eyebrow{font-size:11px; letter-spacing:3px; text-transform:uppercase; color:var(--accent); margin-bottom:16px; text-align:center;}
+  h1{font-size:32px; text-align:center; line-height:1.3; margin-bottom:16px;}
+  .lead{font-size:15px; line-height:1.8; color:var(--ink-soft); text-align:center; max-width:520px; margin:0 auto 48px;}
+  .prazo{background:#fff; border:1px solid var(--line); padding:20px 24px; font-size:14px; color:var(--ink-soft); text-align:center; margin-bottom:48px;}
+  fieldset{border:none; padding:0; margin:0 0 36px;}
+  legend{font-family:'Newsreader',serif; font-size:19px; margin-bottom:18px; padding:0;}
+  label{display:block; font-size:13px; letter-spacing:0.3px; color:var(--muted); margin-bottom:6px;}
+  .field{margin-bottom:22px;}
+  .hint{font-size:12px; color:var(--faint); margin-top:6px; line-height:1.5;}
+  input[type=text], input[type=date], input[type=time]{
+    width:100%; padding:14px 16px; font-size:16px; font-family:'Work Sans',sans-serif;
+    border:1px solid #cabfa9; background:#fff; color:var(--ink);
+  }
+  input:focus{outline:2px solid var(--accent); outline-offset:1px;}
+  .row2{display:grid; grid-template-columns:1fr 1fr; gap:16px;}
+  .consent{display:flex; gap:12px; align-items:flex-start; font-size:13px; color:var(--ink-soft); line-height:1.6; margin:32px 0;}
+  .consent input{margin-top:3px; width:18px; height:18px; flex-shrink:0;}
+  .btn-solid{display:block; width:100%; padding:16px; font-size:15px; letter-spacing:0.5px; background:var(--ink); color:var(--dark-text); border:none; cursor:pointer;}
+  .btn-solid:hover{background:#3a362f;}
+  footer{text-align:center; padding:32px; font-size:11px; letter-spacing:1px; color:var(--faint); border-top:1px solid var(--line);}
+  @media (max-width:520px){ .row2{grid-template-columns:1fr;} h1{font-size:26px;} }
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <a href="/" style="text-align:center;">
+    <div style="font-size:11px; color:var(--accent); letter-spacing:2px;">빛나</div>
+    <div style="font-family:'Newsreader',serif; font-size:18px; letter-spacing:4px;">BITNA SAJU</div>
+  </a>
+</nav>
+
+<div class="wrap">
+  <div class="eyebrow">Recebemos sua compra 🌿</div>
+  <h1>Seu Saju está a um passo de ficar pronto.</h1>
+  <p class="lead">Precisamos só de alguns dados de nascimento para calcular seu mapa com precisão. Preencha o formulário abaixo — leva menos de dois minutos.</p>
+
+  <div class="prazo">📧 Prazo de entrega: <strong>até 48 horas</strong> após o envio dos seus dados, direto no seu e-mail.</div>
+
+  <!-- TODO (Fase 5): action aponta para o endpoint público do backend (Railway) quando estiver no ar. -->
+  <form action="[FORM_ENDPOINT_LEITURA_ESSENCIAL]" method="POST">
+    <input type="hidden" name="produto" value="essencial">
+
+    <fieldset>
+      <legend>Seus dados de nascimento</legend>
+
+      <div class="field">
+        <label for="nome">Nome completo</label>
+        <input type="text" id="nome" name="nome" required autocomplete="name">
+      </div>
+
+      <div class="row2">
+        <div class="field">
+          <label for="data">Data de nascimento</label>
+          <input type="date" id="data" name="data" required>
+        </div>
+        <div class="field">
+          <label for="hora">Hora exata de nascimento</label>
+          <input type="time" id="hora" name="hora">
+          <p class="hint">Se não souber, deixe em branco — o cálculo se ajusta, mas a precisão da leitura melhora bastante com o horário certo. Vale checar a certidão de nascimento.</p>
+        </div>
+      </div>
+
+      <div class="field">
+        <label for="cidade">Cidade e estado de nascimento</label>
+        <input type="text" id="cidade" name="cidade" required placeholder="Ex.: São Paulo - SP">
+      </div>
+
+      <div class="field">
+        <label for="sexo">Sexo</label>
+        <select id="sexo" name="sexo" required style="width:100%; padding:14px 16px; font-size:16px; font-family:'Work Sans',sans-serif; border:1px solid #cabfa9; background:#fff; color:var(--ink);">
+          <option value="">Selecione</option>
+          <option value="feminino">Feminino</option>
+          <option value="masculino">Masculino</option>
+        </select>
+        <p class="hint">Usamos para ajustar a concordância de gênero do texto do relatório.</p>
+      </div>
+    </fieldset>
+
+    <label class="consent">
+      <input type="checkbox" name="consentimento" required>
+      <span>Concordo que meus dados sejam usados exclusivamente para gerar meu relatório, com apoio de inteligência artificial na escrita do texto interpretativo (o cálculo do mapa é determinístico, não gerado por IA). Li a <a href="/#politica-privacidade" target="_blank" rel="noopener" style="text-decoration:underline;">Política de Privacidade</a>.</span>
+    </label>
+
+    <button type="submit" class="btn-solid">Enviar meus dados</button>
+  </form>
+</div>
+
+<footer>© 2026 BITNA SAJU</footer>
+
+</body>
+</html>
