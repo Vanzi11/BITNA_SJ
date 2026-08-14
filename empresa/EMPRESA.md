@@ -15,7 +15,7 @@ A prioridade é:
 # Modelo de Negócio
 Empresa extremamente enxuta.
 Estrutura inicial:
-Instagram → Conteúdo → Anúncios → Landing Page → Hotmart ou Kiwify → Pagamento → Formulário → IA gera relatório → Revisão humana → Envio por e-mail
+Instagram → Conteúdo → Anúncios → Landing Page → Hotmart → Pagamento → Formulário → IA gera relatório → Revisão humana → Envio por e-mail
 Todo o processo deve ser simples, rápido e escalável.
 ---
 # Posicionamento

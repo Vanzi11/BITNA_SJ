@@ -20,10 +20,10 @@ Lançar com **Essencial e Premium primeiro** — são os dois já completos de p
 ## Fluxo operacional manual (sem código novo)
 
 ```
-1. Cliente compra pelo link de checkout da Hotmart/Kiwify
+1. Cliente compra pelo link de checkout da Hotmart
    (link de pagamento simples — não precisa de webhook nem integração)
         ↓
-2. Página de "obrigado" da própria Hotmart/Kiwify (configurável sem código)
+2. Página de "obrigado" da própria Hotmart (configurável sem código)
    pede pro cliente mandar os dados de nascimento por e-mail ou WhatsApp
    (nome, data, hora ou "não sei", cidade, e para sinastria: dados da 2ª pessoa)
         ↓
@@ -61,7 +61,7 @@ Quando qualquer um bater, `docs/FASE5_AUTOMACAO_VENDAS.md` já está pronto pra 
 
 ```
 Agora → Fechar as 3-4 decisões de negócio acima (rápido)
-      → Configurar link de checkout + página de obrigado na Hotmart/Kiwify (sem código)
+      → Configurar link de checkout + página de obrigado na Hotmart (sem código)
       → Vender Essencial e Premium manualmente
       → PDF de Sinastria fica pronto em paralelo (dev, quando der)
       → Adicionar Sinastria ao catálogo manual

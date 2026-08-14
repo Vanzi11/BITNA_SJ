@@ -1,6 +1,6 @@
 # Fase 5 (plano) — Automação de vendas: webhook → formulário → geração → aprovação → envio
 
-> Status: **plano, não implementado**. Hospedagem 24h ainda não decidida (Ivã optou por não tratar isso agora — o desenho abaixo não muda se rodar local ou hospedado). Plataforma de venda (Hotmart/Kiwify/ambas) também em aberto — o desenho suporta qualquer uma, ver seção "Webhook".
+> Status: **plano, não implementado**. Hospedagem 24h ainda não decidida (Ivã optou por não tratar isso agora — o desenho abaixo não muda se rodar local ou hospedado). Plataforma de venda: **Hotmart** (decisão fechada, D43).
 
 ## Objetivo
 
@@ -13,7 +13,7 @@ Guardado como JSON por enquanto (sem banco novo — mesma filosofia zero-depend�
 ```
 {
   id: string (uuid),
-  plataforma: "hotmart" | "kiwify",
+  plataforma: "hotmart",
   produto: "essencial" | "premium" | "sinastria_amorosa" | "sinastria_societaria",
   emailCliente: string,
   nomeCliente: string,
@@ -35,7 +35,6 @@ Guardado como JSON por enquanto (sem banco novo — mesma filosofia zero-depend�
 | Rota | Método | Função |
 |---|---|---|
 | `/webhook/hotmart` | POST | Recebe aviso de compra da Hotmart. Valida assinatura (`hottok`). Cria `pedido` com status `aguardando_dados`. Envia e-mail ao cliente com link do formulário. |
-| `/webhook/kiwify` | POST | Mesma função, adaptador pro formato da Kiwify. |
 | `/pedidos/:token/formulario` | GET | Serve a página HTML de coleta de nascimento (campos condicionais se for sinastria). |
 | `/pedidos/:token/dados` | POST | Recebe os dados preenchidos. Muda status pra `aguardando_geracao` e **dispara a geração na hora** (chama internamente a mesma lógica de `/leitura` ou `/sinastria` com `gerarRelatorio:true`, depois `/pdf`). Ao terminar: status `aguardando_aprovacao`, e-mail pra Ivã com PDF anexado + link de aprovação. |
 | `/pedidos/:id/aprovar` | GET | Link clicável no e-mail do Ivã. Valida `tokenAprovacao`. Muda status pra `aprovado`, dispara e-mail final ao cliente com o PDF, muda status pra `enviado`. |
@@ -53,7 +52,7 @@ Isso fica como pendência de decisão — não bloqueia o resto do desenho, só 
 
 ## Segurança (não pular)
 
-- **Assinatura do webhook**: Hotmart manda um `hottok` no payload, Kiwify tem verificação própria por token de conta — validar sempre, senão qualquer um pode fabricar um "pedido pago" falso e gerar relatório de graça.
+- **Assinatura do webhook**: Hotmart manda um `hottok` no payload — validar sempre, senão qualquer um pode fabricar um "pedido pago" falso e gerar relatório de graça.
 - **Tokens de formulário e aprovação**: gerados aleatórios (ex: `crypto.randomUUID()`), de uso único, com expiração (ex: 15 dias) — evita que um link vazado gere problema depois.
 - **Rate limit** no `/webhook` e no `/pedidos/:token/dados` — já estava listado como pendência geral do backend (`FASE4_PRODUTO.md`), fica ainda mais importante com rota pública.
 
@@ -62,7 +61,7 @@ Isso fica como pendência de decisão — não bloqueia o resto do desenho, só 
 1. **Fila de pedidos + formulário de nascimento** (funciona standalone, sem webhook — dá pra testar criando pedido manualmente)
 2. **Geração automática ao submeter o formulário** (conecta o formulário ao que já existe: `/leitura`/`/sinastria` + `/pdf`)
 3. **E-mail de aprovação pro Ivã + rota de aprovar**
-4. **Webhook real da Hotmart/Kiwify** (só entra depois dos passos 1–3 estarem testados manualmente — é a peça mais fácil de testar por último, porque dá pra simular "pedido criado" na mão)
+4. **Webhook real da Hotmart** (só entra depois dos passos 1–3 estarem testados manualmente — é a peça mais fácil de testar por último, porque dá pra simular "pedido criado" na mão)
 5. **Envio final ao cliente**
 6. **Hospedagem 24h** (fica por último de propósito — só importa quando o resto já está validado local)
 

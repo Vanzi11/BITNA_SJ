@@ -1,8 +1,8 @@
 # Textos do lançamento manual — página de obrigado + e-mail de coleta de dados
 
-> Deriva de `empresa/GUIA_DE_VOZ.md` (slogan, vocabulário permitido/proibido, regras invioláveis). Cobre a Etapa 2 do fluxo descrito em `docs/FASE4B_LANCAMENTO_MANUAL_VALIDACAO.md`. Textos prontos pra colar na página de "obrigado" da Hotmart/Kiwify e no e-mail de acompanhamento.
+> Deriva de `empresa/GUIA_DE_VOZ.md` (slogan, vocabulário permitido/proibido, regras invioláveis). Cobre a Etapa 2 do fluxo descrito em `docs/FASE4B_LANCAMENTO_MANUAL_VALIDACAO.md`. Textos prontos pra colar na página de "obrigado" da Hotmart e no e-mail de acompanhamento.
 
-## 1. Página de obrigado (redirecionamento pós-compra, configurável sem código na Hotmart/Kiwify)
+## 1. Página de obrigado (redirecionamento pós-compra, configurável sem código na Hotmart)
 
 ```
 Recebemos sua compra! 🌿
