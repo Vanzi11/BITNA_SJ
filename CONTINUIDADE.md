@@ -59,12 +59,12 @@ Missão em curso: 4 páginas de venda + 4 páginas de obrigado/formulário (`/le
 
 **Feito:** `Site/leitura-essencial/index.html` (venda) e `Site/leitura-essencial/obrigado/index.html` (formulário de 1 pessoa + LGPD) — o par-modelo pras outras 6 páginas. Testado sem overflow horizontal em mobile (375px) e FAQ em `<details>/<summary>` nativo, sem JS.
 
+**Resolvido:** imagens oficiais dos produtos (fonte: `Site/Imagens/`, geradas no ChatGPT) salvas em `Site/assets/produtos/` (JPEG 900×900, ~100-125KB cada, otimizadas de PNGs de ~2MB). Usadas no Hero e na seção "Exemplo do relatório" da Leitura Essencial, sempre com aviso explícito de que são **meramente ilustrativas** e que o produto entregue é um PDF digital, não um livro físico — pedido direto do Ivã para não confundir o cliente sobre o formato de entrega.
+
 **Pendências explícitas destas 2 páginas (e que se repetem nas outras 6):**
-- Imagem oficial do produto no Hero — hoje é um diagrama SVG genérico; as imagens de capa reais (as que o Ivã mandou no chat) precisam ser salvas como arquivo em `Site/assets/produtos/` pra serem referenciadas.
-- Seção "Exemplo do relatório" com placeholder `[IMAGENS_OFICIAIS_DO_RELATORIO]` — mockups reais pendentes (decisão do Ivã: pular por ora).
 - `[HOTMART_LEITURA_ESSENCIAL]` no botão de compra — placeholder até o link real da Hotmart existir.
 - `[FORM_ENDPOINT_LEITURA_ESSENCIAL]` no `action` do formulário de obrigado — o backend (Fase 5, Railway) ainda não existe; o formulário não funciona de verdade até isso ser construído.
-- Replicar pras 6 páginas restantes (3 de venda + 3 obrigado, as 2 últimas com formulário de 2 pessoas).
+- Replicar pras 6 páginas restantes (3 de venda + 3 obrigado, as 2 últimas com formulário de 2 pessoas) — imagens de `Leitura Completa`, `Sinastria Amorosa` e `Sinastria Profissional` já estão prontas em `Site/assets/produtos/`.
 
 ## Demais pendências (ordem sugerida)
 
