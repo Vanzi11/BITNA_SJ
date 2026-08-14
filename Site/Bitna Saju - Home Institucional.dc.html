@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <template id="__bundler_thumbnail">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"><rect width="200" height="200" fill="#24211E"/><text x="100" y="112" font-family="serif" font-size="34" fill="#F7F4EE" text-anchor="middle" letter-spacing="4">빛나</text></svg>
+  </template>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,300;0,400;0,500;1,400&family=Work+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <script src="./image-slot.js"></script>
+  <script>
+    (function(){
+      if (!location.hash) return;
+      var tries = 0;
+      function tryScroll(){
+        var el = document.querySelector(location.hash);
+        if (el) {
+          var y = el.getBoundingClientRect().top + window.pageYOffset;
+          window.scrollTo(0, y);
+        }
+        tries++;
+        if (tries < 15) setTimeout(tryScroll, 200);
+      }
+      window.addEventListener('load', function(){ setTimeout(tryScroll, 100); });
+    })();
+  </script>
+  <style>
+    body { margin: 0; background: #F7F4EE; }
+    a { color: #24211E; text-decoration: none; }
+    a:hover { color: #A67C52; }
+    ::selection { background: #e3dccb; color: #24211E; }
+    @media (max-width: 860px) {
+      .bs-nav { padding: 18px 24px !important; }
+      .bs-nav-links { display: none !important; }
+      .bs-section-pad { padding-left: 24px !important; padding-right: 24px !important; }
+      .bs-section-pad-v { padding-top: 64px !important; padding-bottom: 64px !important; }
+      .bs-hero-title { font-size: 34px !important; }
+      .bs-hero { padding-bottom: 48px !important; min-height: 560px !important; }
+      .bs-h2 { font-size: 26px !important; }
+      .bs-p-lead { font-size: 22px !important; }
+      .bs-2col { grid-template-columns: 1fr !important; gap: 32px !important; }
+      .bs-grid-5 { grid-template-columns: repeat(2, 1fr) !important; }
+      .bs-grid-4 { grid-template-columns: 1fr !important; }
+      .bs-grid-4-photo { grid-template-columns: 1fr !important; height:auto !important; }
+      .bs-grid-4-photo > div { height: 340px !important; }
+      .bs-grid-3 { grid-template-columns: 1fr !important; }
+      .bs-steps { gap: 32px !important; }
+      .bs-footer-grid { grid-template-columns: 1fr 1fr !important; }
+    }
+  </style>
+</helmet>
+
+<div style="background:#F7F4EE; color:#24211E; font-family:'Work Sans',sans-serif;">
+
+  <!-- NAV -->
+  <nav class="bs-nav" style="position:sticky; top:0; z-index:10; background:rgba(247,244,238,0.92); backdrop-filter:blur(6px); display:flex; align-items:center; justify-content:space-between; padding:22px 64px; border-bottom:1px solid #e9e2d3;">
+    <div>
+      <div style="font-size:11px; color:#A67C52; letter-spacing:2px;">빛나</div>
+      <div style="font-family:'Newsreader',serif; font-size:19px; letter-spacing:4px;">BITNA SAJU</div>
+    </div>
+    <div class="bs-nav-links" style="display:flex; gap:40px; font-size:13px; letter-spacing:0.5px;">
+      <a href="#saju">O que é Saju</a>
+      <a href="#descobrir">Descubra</a>
+      <a href="#produtos">Produtos</a>
+      <a href="#artigos">Artigos</a>
+    </div>
+    <a href="#produtos" style="border:1px solid #24211E; padding:11px 22px; font-size:13px; letter-spacing:0.5px;">Descubra seu Saju</a>
+  </nav>
+
+  <!-- SECTION 1: HERO -->
+  <section data-screen-label="Hero" class="bs-hero" style="position:relative; min-height:88vh; height:auto; display:flex; align-items:flex-start;">
+    <image-slot id="hero-photo" placeholder="luz de janela ao amanhecer · fotografia editorial" shape="rect" style="position:absolute; inset:0; width:100%; height:100%; z-index:0;"></image-slot>
+    <div style="position:absolute; inset:0; background:linear-gradient(180deg, rgba(36,33,30,0.05) 0%, rgba(36,33,30,0.15) 45%, rgba(36,33,30,0.85) 100%); pointer-events:none;"></div>
+    <div class="bs-section-pad" style="position:relative; z-index:1; padding:72px 64px 40px; margin:0; color:#F7F4EE; max-width:600px; background:rgba(36,33,30,0.1);">
+      <div style="font-size:13px; color:#e3dccb; letter-spacing:2px; margin-bottom:14px;">빛나</div>
+      <h1 class="bs-hero-title" style="font-family:'Newsreader',serif; font-weight:300; font-size:56px; line-height:1.15; margin:0 0 18px;">Autoconhecimento pela tradição coreana.</h1>
+      <div style="display:flex; gap:16px; margin-top:32px; flex-wrap:wrap;">
+        <a href="#produtos" style="background:#F7F4EE; color:#24211E; padding:14px 28px; font-size:14px; letter-spacing:0.5px;">Descubra seu Saju</a>
+        <a href="#saju" style="border:1px solid #F7F4EE; color:#F7F4EE; padding:14px 28px; font-size:14px; letter-spacing:0.5px;">Conheça o Saju</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 2: PERGUNTA -->
+  <section class="bs-section-pad-v" style="max-width:760px; margin:0 auto; padding:130px 40px; text-align:center;">
+    <p class="bs-p-lead" style="font-family:'Newsreader',serif; font-style:italic; font-weight:400; font-size:32px; line-height:1.55; margin:0 0 40px; color:#24211E;">Você já se perguntou por que pessoas vivem situações parecidas, mas tomam decisões completamente diferentes?</p>
+    <p style="font-size:16px; line-height:1.8; color:#4d473f; max-width:560px; margin:0 auto;">O Saju é um sistema coreano milenar para compreender padrões humanos — não astrologia, não previsão. Uma forma de traduzir sua maneira natural de pensar, sentir e decidir.</p>
+  </section>
+
+  <!-- SECTION 3: O QUE É SAJU -->
+  <section id="saju" data-screen-label="O que é Saju" class="bs-section-pad bs-section-pad-v" style="background:#fff; border-top:1px solid #e9e2d3; border-bottom:1px solid #e9e2d3; padding:120px 64px;">
+    <div class="bs-2col" style="display:grid; grid-template-columns:0.9fr 1.1fr; gap:72px; max-width:1200px; margin:0 auto; align-items:center;">
+      <image-slot id="saju-photo" placeholder="caligrafia · tinta sobre papel hanji" shape="rect" style="width:100%; aspect-ratio:4/5;"></image-slot>
+      <div>
+        <p style="font-size:11px; letter-spacing:3px; text-transform:uppercase; color:#A67C52; margin-bottom:20px;">O que é o Saju</p>
+        <h2 class="bs-h2" style="font-family:'Newsreader',serif; font-weight:400; font-size:36px; line-height:1.3; margin:0 0 24px;">Uma tradição coreana para entender a si mesmo.</h2>
+        <p style="font-size:15px; line-height:1.8; color:#4d473f; margin:0 0 16px;">Saju significa, literalmente, "os quatro pilares do nascimento". Um método que lê data e hora de nascimento para revelar tendências — não fatos fixos.</p>
+        <p style="font-size:15px; line-height:1.8; color:#4d473f; margin:0 0 16px;">Praticado há séculos na Coreia, ainda orienta decisões importantes na vida cotidiana.</p>
+        <p style="font-size:15px; line-height:1.8; color:#4d473f; margin:0;">Não prevemos o futuro. Ajudamos você a compreender seus padrões.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 4: CINCO ELEMENTOS -->
+  <section class="bs-section-pad bs-section-pad-v" style="padding:130px 64px;">
+    <div style="text-align:center; max-width:640px; margin:0 auto 64px;">
+      <p style="font-size:11px; letter-spacing:3px; text-transform:uppercase; color:#A67C52; margin-bottom:20px;">Os Cinco Elementos</p>
+      <h2 class="bs-h2" style="font-family:'Newsreader',serif; font-weight:400; font-size:34px; margin:0;">Como sua energia se expressa no dia a dia</h2>
+    </div>
+    <div class="bs-grid-5" style="display:grid; grid-template-columns:repeat(5,1fr); gap:1px; max-width:1200px; margin:0 auto; background:#e9e2d3;">
+      <div style="background:#F7F4EE; padding:40px 24px; text-align:center;">
+        <img src="./assets/elemento-madeira-circle.png" alt="Madeira" style="width:112px; height:112px; border-radius:50%; object-fit:cover; margin:0 auto 18px; display:block;">
+        <div style="font-family:'Newsreader',serif; font-size:22px; margin-bottom:14px;">Madeira</div>
+        <p style="font-size:13px; color:#4d473f; line-height:1.6;">Crescimento, iniciativa, vontade de expandir.</p>
+      </div>
+      <div style="background:#F7F4EE; padding:40px 24px; text-align:center;">
+        <img src="./assets/elemento-fogo-circle.png" alt="Fogo" style="width:112px; height:112px; border-radius:50%; object-fit:cover; margin:0 auto 18px; display:block;">
+        <div style="font-family:'Newsreader',serif; font-size:22px; margin-bottom:14px;">Fogo</div>
+        <p style="font-size:13px; color:#4d473f; line-height:1.6;">Expressão, entusiasmo, conexão com o outro.</p>
+      </div>
+      <div style="background:#F7F4EE; padding:40px 24px; text-align:center;">
+        <img src="./assets/elemento-terra-circle.png" alt="Terra" style="width:112px; height:112px; border-radius:50%; object-fit:cover; margin:0 auto 18px; display:block;">
+        <div style="font-family:'Newsreader',serif; font-size:22px; margin-bottom:14px;">Terra</div>
+        <p style="font-size:13px; color:#4d473f; line-height:1.6;">Estabilidade, cuidado, senso prático.</p>
+      </div>
+      <div style="background:#F7F4EE; padding:40px 24px; text-align:center;">
+        <img src="./assets/elemento-metal-circle.png" alt="Metal" style="width:112px; height:112px; border-radius:50%; object-fit:cover; margin:0 auto 18px; display:block;">
+        <div style="font-family:'Newsreader',serif; font-size:22px; margin-bottom:14px;">Metal</div>
+        <p style="font-size:13px; color:#4d473f; line-height:1.6;">Clareza, disciplina, senso de justiça.</p>
+      </div>
+      <div style="background:#F7F4EE; padding:40px 24px; text-align:center;">
+        <img src="./assets/elemento-agua-circle.png" alt="Água" style="width:112px; height:112px; border-radius:50%; object-fit:cover; margin:0 auto 18px; display:block;">
+        <div style="font-family:'Newsreader',serif; font-size:22px; margin-bottom:14px;">Água</div>
+        <p style="font-size:13px; color:#4d473f; line-height:1.6;">Reflexão, intuição, adaptabilidade.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 5: QUATRO PILARES -->
+  <section data-screen-label="Quatro Pilares" style="background:#24211E;">
+    <div class="bs-section-pad" style="text-align:center; max-width:640px; margin:0 auto; padding:100px 40px 56px;">
+      <p style="font-size:11px; letter-spacing:3px; text-transform:uppercase; color:#8F9C8B; margin-bottom:20px;">Os Quatro Pilares</p>
+      <h2 class="bs-h2" style="font-family:'Newsreader',serif; font-weight:400; font-size:34px; margin:0 0 20px; color:#F7F4EE;">Quatro dimensões que todo mundo carrega</h2>
+      <p style="font-size:15px; color:#cfd9dc; line-height:1.7;">O que os seus revelam?</p>
+    </div>
+    <div class="bs-grid-4-photo" style="display:grid; grid-template-columns:repeat(4,1fr); height:760px;">
+      <div style="position:relative; height:100%;">
+        <image-slot id="pilar-ano-photo" src="./assets/pilar-ano.png" placeholder="origem · pedra e papel antigo" shape="rect" style="position:absolute; inset:0; width:100%; height:100%;"></image-slot>
+        <div style="position:absolute; inset:0; background:linear-gradient(180deg, rgba(36,33,30,0.15) 0%, rgba(36,33,30,0) 35%, rgba(36,33,30,0.75) 100%); pointer-events:none;"></div>
+        <div style="position:absolute; top:32px; left:28px; right:16px; color:#F7F4EE; font-size:12px; letter-spacing:1.5px; text-transform:uppercase; opacity:0.8;">Pilar do Ano</div>
+        <h3 style="position:absolute; top:56px; left:28px; right:16px; color:#F7F4EE; font-family:'Newsreader',serif; font-weight:400; font-size:32px; line-height:1.15; margin:0;">Origem</h3>
+        <p style="position:absolute; bottom:28px; left:28px; right:24px; color:#e6e0d3; font-size:13px; line-height:1.6; margin:0;">As fundações de onde você vem — o que herdou e carrega.</p>
+      </div>
+      <div style="position:relative; height:100%;">
+        <image-slot id="pilar-mes-photo" src="./assets/pilar-mes.png" placeholder="seu lugar no mundo · casa tradicional coreana" shape="rect" style="position:absolute; inset:0; width:100%; height:100%;"></image-slot>
+        <div style="position:absolute; inset:0; background:linear-gradient(180deg, rgba(36,33,30,0.15) 0%, rgba(36,33,30,0) 35%, rgba(36,33,30,0.75) 100%); pointer-events:none;"></div>
+        <div style="position:absolute; top:32px; left:28px; right:16px; color:#F7F4EE; font-size:12px; letter-spacing:1.5px; text-transform:uppercase; opacity:0.8;">Pilar do Mês</div>
+        <h3 style="position:absolute; top:56px; left:28px; right:16px; color:#F7F4EE; font-family:'Newsreader',serif; font-weight:400; font-size:32px; line-height:1.15; margin:0;">Seu lugar no mundo</h3>
+        <p style="position:absolute; bottom:28px; left:28px; right:24px; color:#e6e0d3; font-size:13px; line-height:1.6; margin:0;">Como você se relaciona com família, contexto e sociedade.</p>
+      </div>
+      <div style="position:relative; height:100%;">
+        <image-slot id="pilar-dia-photo" src="./assets/pilar-dia.png" placeholder="seu eu verdadeiro · cerâmica sobre madeira" shape="rect" style="position:absolute; inset:0; width:100%; height:100%;"></image-slot>
+        <div style="position:absolute; inset:0; background:linear-gradient(180deg, rgba(36,33,30,0.15) 0%, rgba(36,33,30,0) 35%, rgba(36,33,30,0.75) 100%); pointer-events:none;"></div>
+        <div style="position:absolute; top:32px; left:28px; right:16px; color:#F7F4EE; font-size:12px; letter-spacing:1.5px; text-transform:uppercase; opacity:0.8;">Pilar do Dia</div>
+        <h3 style="position:absolute; top:56px; left:28px; right:16px; color:#F7F4EE; font-family:'Newsreader',serif; font-weight:400; font-size:32px; line-height:1.15; margin:0;">Seu eu verdadeiro</h3>
+        <p style="position:absolute; bottom:28px; left:28px; right:24px; color:#e6e0d3; font-size:13px; line-height:1.6; margin:0;">Sua essência — o Mestre do Dia.</p>
+      </div>
+      <div style="position:relative; height:100%;">
+        <image-slot id="pilar-hora-photo" src="./assets/pilar-hora.png" placeholder="potencial futuro · biblioteca e janela" shape="rect" style="position:absolute; inset:0; width:100%; height:100%;"></image-slot>
+        <div style="position:absolute; inset:0; background:linear-gradient(180deg, rgba(36,33,30,0.15) 0%, rgba(36,33,30,0) 35%, rgba(36,33,30,0.75) 100%); pointer-events:none;"></div>
+        <div style="position:absolute; top:32px; left:28px; right:16px; color:#F7F4EE; font-size:12px; letter-spacing:1.5px; text-transform:uppercase; opacity:0.8;">Pilar da Hora</div>
+        <h3 style="position:absolute; top:56px; left:28px; right:16px; color:#F7F4EE; font-family:'Newsreader',serif; font-weight:400; font-size:32px; line-height:1.15; margin:0;">Potencial futuro</h3>
+        <p style="position:absolute; bottom:28px; left:28px; right:24px; color:#e6e0d3; font-size:13px; line-height:1.6; margin:0;">Suas ambições e os caminhos possíveis à frente.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 6: HORA DE NASCIMENTO -->
+  <section class="bs-section-pad bs-section-pad-v" style="padding:120px 64px;">
+    <div class="bs-2col" style="display:grid; grid-template-columns:1.1fr 0.9fr; gap:72px; max-width:1200px; margin:0 auto; align-items:center;">
+      <div>
+        <p style="font-size:11px; letter-spacing:3px; text-transform:uppercase; color:#A67C52; margin-bottom:20px;">Por que a hora importa</p>
+        <h2 class="bs-h2" style="font-family:'Newsreader',serif; font-weight:400; font-size:32px; line-height:1.3; margin:0 0 20px;">Um mesmo dia, quatro pilares diferentes</h2>
+        <p style="font-size:15px; line-height:1.8; color:#4d473f;">Ano, mês, dia e hora formam quatro pilares distintos. Mudar a hora muda o quarto pilar — e com ele, parte da leitura. Por isso pedimos o horário mais preciso possível.</p>
+      </div>
+      <image-slot id="birthtime-photo" placeholder="relógio antigo · luz e sombra" shape="rect" style="width:100%; aspect-ratio:4/5;"></image-slot>
+    </div>
+  </section>
+
+  <!-- SECTION 7: HISTÓRIA -->
+  <section class="bs-section-pad bs-section-pad-v" style="background:#fff; border-top:1px solid #e9e2d3; border-bottom:1px solid #e9e2d3; padding:130px 64px; text-align:center;">
+    <div style="max-width:700px; margin:0 auto;">
+      <p style="font-size:11px; letter-spacing:3px; text-transform:uppercase; color:#A67C52; margin-bottom:20px;">Uma tradição preservada por séculos</p>
+      <h2 class="bs-h2" style="font-family:'Newsreader',serif; font-weight:400; font-size:34px; margin:0 0 24px;">Por que a Coreia guarda o Saju até hoje</h2>
+      <p style="font-size:15px; line-height:1.8; color:#4d473f;">Por gerações, famílias coreanas consultaram o Saju antes de decisões importantes — carreira, casamento, novos começos. Não como superstição, mas como uma lente cultural para entender a própria natureza antes de agir.</p>
+    </div>
+  </section>
+
+  <!-- SECTION 8: O QUE VOCÊ DESCOBRE -->
+  <section id="descobrir" class="bs-section-pad bs-section-pad-v" style="padding:130px 64px;">
+    <div style="text-align:center; max-width:640px; margin:0 auto 64px;">
+      <p style="font-size:11px; letter-spacing:3px; text-transform:uppercase; color:#A67C52; margin-bottom:20px;">O que você pode descobrir</p>
+      <h2 class="bs-h2" style="font-family:'Newsreader',serif; font-weight:400; font-size:34px; margin:0;">Autoconhecimento aplicado à vida real</h2>
+    </div>
+    <div class="bs-grid-4" style="display:grid; grid-template-columns:repeat(4,1fr); gap:1px; max-width:1200px; margin:0 auto; background:#e9e2d3;">
+      <div style="background:#F7F4EE; padding:36px 28px;"><div style="font-family:'Newsreader',serif; font-size:19px; margin-bottom:8px;">Carreira</div><p style="font-size:13px; color:#4d473f; line-height:1.6;">Seus talentos naturais e caminhos de crescimento.</p></div>
+      <div style="background:#F7F4EE; padding:36px 28px;"><div style="font-family:'Newsreader',serif; font-size:19px; margin-bottom:8px;">Relacionamentos</div><p style="font-size:13px; color:#4d473f; line-height:1.6;">Como você se conecta e o que busca no outro.</p></div>
+      <div style="background:#F7F4EE; padding:36px 28px;"><div style="font-family:'Newsreader',serif; font-size:19px; margin-bottom:8px;">Talentos</div><p style="font-size:13px; color:#4d473f; line-height:1.6;">O que já é natural em você, mesmo sem perceber.</p></div>
+      <div style="background:#F7F4EE; padding:36px 28px;"><div style="font-family:'Newsreader',serif; font-size:19px; margin-bottom:8px;">Pontos cegos</div><p style="font-size:13px; color:#4d473f; line-height:1.6;">Padrões que se repetem sem você notar.</p></div>
+      <div style="background:#F7F4EE; padding:36px 28px;"><div style="font-family:'Newsreader',serif; font-size:19px; margin-bottom:8px;">Tomada de decisão</div><p style="font-size:13px; color:#4d473f; line-height:1.6;">Como você naturalmente pesa escolhas.</p></div>
+      <div style="background:#F7F4EE; padding:36px 28px;"><div style="font-family:'Newsreader',serif; font-size:19px; margin-bottom:8px;">Ciclos pessoais</div><p style="font-size:13px; color:#4d473f; line-height:1.6;">Momentos de fluidez e de desafio ao longo da vida.</p></div>
+      <div style="background:#F7F4EE; padding:36px 28px;"><div style="font-family:'Newsreader',serif; font-size:19px; margin-bottom:8px;">Forças</div><p style="font-size:13px; color:#4d473f; line-height:1.6;">O que já funciona bem em você.</p></div>
+      <div style="background:#F7F4EE; padding:36px 28px;"><div style="font-family:'Newsreader',serif; font-size:19px; margin-bottom:8px;">Crescimento</div><p style="font-size:13px; color:#4d473f; line-height:1.6;">Onde há espaço real para evoluir.</p></div>
+    </div>
+  </section>
+
+  <!-- SECTION 9: COMO FUNCIONA -->
+  <section class="bs-section-pad bs-section-pad-v" style="background:#fff; border-top:1px solid #e9e2d3; border-bottom:1px solid #e9e2d3; padding:130px 64px;">
+    <div style="text-align:center; max-width:640px; margin:0 auto 72px;">
+      <p style="font-size:11px; letter-spacing:3px; text-transform:uppercase; color:#A67C52; margin-bottom:20px;">Como funciona</p>
+      <h2 class="bs-h2" style="font-family:'Newsreader',serif; font-weight:400; font-size:34px; margin:0;">Três passos, simples e diretos</h2>
+    </div>
+    <div class="bs-steps" style="display:flex; justify-content:center; gap:80px; max-width:1000px; margin:0 auto; flex-wrap:wrap;">
+      <div style="text-align:center; max-width:220px;">
+        <div style="font-family:'Newsreader',serif; font-size:38px; color:#A67C52; margin-bottom:16px;">01</div>
+        <p style="font-size:14px; line-height:1.6;">Informe seus dados de nascimento</p>
+      </div>
+      <div style="text-align:center; max-width:220px;">
+        <div style="font-family:'Newsreader',serif; font-size:38px; color:#A67C52; margin-bottom:16px;">02</div>
+        <p style="font-size:14px; line-height:1.6;">Calculamos seu Saju</p>
+      </div>
+      <div style="text-align:center; max-width:220px;">
+        <div style="font-family:'Newsreader',serif; font-size:38px; color:#A67C52; margin-bottom:16px;">03</div>
+        <p style="font-size:14px; line-height:1.6;">Receba sua interpretação personalizada</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 10: PRODUTOS -->
+  <section id="produtos" class="bs-section-pad bs-section-pad-v" style="padding:130px 64px;">
+    <div style="text-align:center; max-width:640px; margin:0 auto 64px;">
+      <p style="font-size:11px; letter-spacing:3px; text-transform:uppercase; color:#A67C52; margin-bottom:20px;">Produtos</p>
+      <h2 class="bs-h2" style="font-family:'Newsreader',serif; font-weight:400; font-size:34px; margin:0;">Sua leitura, no seu ritmo</h2>
+    </div>
+    <div class="bs-grid-4" style="display:grid; grid-template-columns:repeat(4,1fr); gap:1px; max-width:1400px; margin:0 auto; background:#e9e2d3;">
+      <div style="background:#F7F4EE; padding:44px 30px; display:flex; flex-direction:column;">
+        <div style="font-size:11px; letter-spacing:2px; text-transform:uppercase; color:#8F9C8B; margin-bottom:16px;">Leitura Essencial</div>
+        <div style="font-family:'Newsreader',serif; font-size:22px; margin-bottom:6px; line-height:1.25;">Descubra quem você é</div>
+        <p style="font-size:12px; color:#9c8f7e; margin:0 0 16px;">Para quem está iniciando sua jornada de autoconhecimento pela tradição coreana do Saju.</p>
+        <p style="font-size:13px; color:#4d473f; line-height:1.65; margin-bottom:20px;">Apresenta os principais padrões do seu mapa natal — uma visão clara sobre sua personalidade e sua forma natural de agir no mundo.</p>
+        <div style="font-size:11px; letter-spacing:1px; text-transform:uppercase; color:#8F9C8B; margin-bottom:10px;">Você vai descobrir</div>
+        <ul style="list-style:none; margin:0 0 20px; padding:0; display:flex; flex-direction:column; gap:8px; font-size:13px; color:#4d473f;">
+          <li>✅ Seu Elemento Mestre</li>
+          <li>✅ Seus principais talentos naturais</li>
+          <li>✅ Sua forma de pensar, agir e tomar decisões</li>
+        </ul>
+        <p style="font-size:12px; color:#6b6255; line-height:1.7; margin:0 0 auto;">📄 Relatório personalizado (10 a 15 páginas)<br>📧 Entrega em até 48 horas</p>
+        <div style="margin-top:24px;">
+          <div style="font-family:'Newsreader',serif; font-size:22px; color:#24211E; margin-bottom:12px;">R$ 47,60</div>
+          <a href="#" style="border-bottom:1px solid #24211E; font-size:13px; padding-bottom:2px;">Saiba mais</a>
+        </div>
+      </div>
+      <div style="background:#24211E; color:#F7F4EE; padding:44px 30px; display:flex; flex-direction:column;">
+        <div style="font-size:11px; letter-spacing:2px; text-transform:uppercase; color:#A67C52; margin-bottom:16px;">Leitura Completa</div>
+        <div style="font-family:'Newsreader',serif; font-size:22px; margin-bottom:6px; line-height:1.25;">Entenda como você funciona ao longo da vida</div>
+        <p style="font-size:12px; color:#a89f8f; margin:0 0 16px;">Para quem deseja uma interpretação completa do próprio mapa.</p>
+        <p style="font-size:13px; color:#cfc7ba; line-height:1.65; margin-bottom:20px;">Amplia a Leitura Essencial: como os quatro pilares se relacionam e como seus ciclos influenciam diferentes fases da vida.</p>
+        <div style="font-size:11px; letter-spacing:1px; text-transform:uppercase; color:#A67C52; margin-bottom:10px;">Inclui tudo da Essencial +</div>
+        <ul style="list-style:none; margin:0 0 20px; padding:0; display:flex; flex-direction:column; gap:8px; font-size:13px; color:#cfc7ba;">
+          <li>✅ Os Quatro Pilares completos (Ano, Mês, Dia e Hora)</li>
+          <li>✅ Mapa dos Cinco Elementos</li>
+          <li>✅ Equilíbrios e excessos naturais</li>
+          <li>✅ Ciclos da Vida</li>
+          <li>✅ Os dez Arquétipos</li>
+          <li>✅ Animais e Estrelas</li>
+          <li>✅ Tendências de prosperidade e desafios</li>
+          <li>✅ Períodos de aprendizado</li>
+          <li>✅ Estratégias para harmonizar seus padrões</li>
+        </ul>
+        <p style="font-size:12px; color:#a89f8f; line-height:1.7; margin:0 0 auto;">📄 Relatório Completo e Aprofundado (20 a 25 páginas)<br>📧 Prioridade de entrega</p>
+        <div style="margin-top:24px;">
+          <div style="font-size:13px; color:#a89f8f; margin-bottom:4px;"><span style="text-decoration:line-through;">R$ 149,30</span> · <span style="color:#9B3A32;">promoção de lançamento</span></div>
+          <div style="font-family:'Newsreader',serif; font-size:22px; color:#F7F4EE; margin-bottom:12px;">R$ 98,00</div>
+          <a href="#" style="border-bottom:1px solid #F7F4EE; font-size:13px; padding-bottom:2px;">Saiba mais</a>
+        </div>
+      </div>
+      <div style="background:#F7F4EE; padding:44px 30px; display:flex; flex-direction:column;">
+        <div style="font-size:11px; letter-spacing:2px; text-transform:uppercase; color:#8F9C8B; margin-bottom:16px;">Sinastria Amorosa</div>
+        <div style="font-family:'Newsreader',serif; font-size:22px; margin-bottom:6px; line-height:1.25;">Como funciona nossa relação?</div>
+        <p style="font-size:12px; color:#9c8f7e; margin:0 0 16px;">Para casais e amigos, ou para quem deseja compreender melhor uma relação afetiva. Esta leitura não descreve indivíduos — ela descreve o relacionamento.</p>
+        <div style="font-size:11px; letter-spacing:1px; text-transform:uppercase; color:#8F9C8B; margin-bottom:10px;">Você descobrirá</div>
+        <ul style="list-style:none; margin:0 0 20px; padding:0; display:flex; flex-direction:column; gap:8px; font-size:13px; color:#4d473f;">
+          <li>❤️ Como vocês funcionam juntos</li>
+          <li>❤️ Onde a relação floresce naturalmente</li>
+          <li>❤️ Onde surgem os atritos</li>
+          <li>❤️ Como cada um demonstra amor e busca segurança</li>
+          <li>❤️ O que fortalece a relação no dia a dia</li>
+          <li>❤️ Combinados práticos para cultivar uma relação mais harmoniosa</li>
+        </ul>
+        <p style="font-size:12px; color:#6b6255; line-height:1.7; margin:0 0 auto;">📄 Relatório Especial em PDF (10 a 15 páginas)<br>📧 Entrega em até 48 horas</p>
+        <div style="margin-top:24px;">
+          <div style="font-family:'Newsreader',serif; font-size:22px; color:#24211E; margin-bottom:4px;">R$ 98,00</div>
+          <p style="font-size:11px; color:#9c8f7e; margin:0 0 12px;">Sinastria de duas pessoas</p>
+          <a href="#" style="border-bottom:1px solid #24211E; font-size:13px; padding-bottom:2px;">Saiba mais</a>
+        </div>
+      </div>
+      <div style="background:#F7F4EE; padding:44px 30px; display:flex; flex-direction:column;">
+        <div style="font-size:11px; letter-spacing:2px; text-transform:uppercase; color:#8F9C8B; margin-bottom:16px;">Sinastria Profissional</div>
+        <div style="font-family:'Newsreader',serif; font-size:22px; margin-bottom:6px; line-height:1.25;">Como funciona nossa parceria?</div>
+        <p style="font-size:12px; color:#9c8f7e; margin:0 0 16px;">Ideal para sócios, parceiros de negócios, colegas de trabalho ou amizades importantes — como duas pessoas funcionam juntas em ambientes profissionais ou colaborativos.</p>
+        <div style="font-size:11px; letter-spacing:1px; text-transform:uppercase; color:#8F9C8B; margin-bottom:10px;">Você descobrirá</div>
+        <ul style="list-style:none; margin:0 0 20px; padding:0; display:flex; flex-direction:column; gap:8px; font-size:13px; color:#4d473f;">
+          <li>🤝 Como vocês funcionam como parceiros</li>
+          <li>🤝 Onde os talentos se complementam</li>
+          <li>🤝 Como cada um decide, lidera e assume riscos</li>
+          <li>🤝 Como evitar conflitos de ritmo e comunicação</li>
+          <li>🤝 Como tomar decisões importantes sobre dinheiro, liderança e responsabilidades</li>
+          <li>🤝 Acordos práticos para fortalecer a parceria</li>
+        </ul>
+        <p style="font-size:12px; color:#6b6255; line-height:1.7; margin:0 0 auto;">📄 Relatório Especial em PDF (10 a 15 páginas)<br>📧 Entrega em até 48 horas</p>
+        <div style="margin-top:24px;">
+          <div style="font-family:'Newsreader',serif; font-size:22px; color:#24211E; margin-bottom:4px;">R$ 98,00</div>
+          <p style="font-size:11px; color:#9c8f7e; margin:0 0 12px;">Sinastria de duas pessoas</p>
+          <a href="#" style="border-bottom:1px solid #24211E; font-size:13px; padding-bottom:2px;">Saiba mais</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 11: DEPOIMENTOS -->
+  <section class="bs-section-pad bs-section-pad-v" style="background:#fff; border-top:1px solid #e9e2d3; border-bottom:1px solid #e9e2d3; padding:120px 64px;">
+    <div style="text-align:center; max-width:640px; margin:0 auto 64px;">
+      <p style="font-size:11px; letter-spacing:3px; text-transform:uppercase; color:#A67C52; margin-bottom:20px;">Depoimentos</p>
+      <h2 class="bs-h2" style="font-family:'Newsreader',serif; font-weight:400; font-size:34px; margin:0;">Quem já descobriu seu Saju</h2>
+    </div>
+    <div class="bs-grid-3" style="display:grid; grid-template-columns:repeat(3,1fr); gap:48px; max-width:1100px; margin:0 auto;">
+      <div style="text-align:center;">
+        <div style="width:56px; height:56px; border-radius:50%; margin:0 auto 20px;"><image-slot id="testimonial-1" placeholder="foto" shape="circle" style="width:100%;height:100%;"></image-slot></div>
+        <p style="font-family:'Newsreader',serif; font-style:italic; font-size:16px; line-height:1.6; color:#24211E; margin-bottom:14px;">"Sempre soube que agia diferente da minha irmã em situações parecidas, mas nunca entendia o porquê. A leitura me ajudou a ver isso com clareza, sem parecer genérica."</p>
+        <p style="font-size:12px; letter-spacing:1px; color:#9c8f7e;">— Camila R., São Paulo</p>
+      </div>
+      <div style="text-align:center;">
+        <div style="width:56px; height:56px; border-radius:50%; margin:0 auto 20px;"><image-slot id="testimonial-2" placeholder="foto" shape="circle" style="width:100%;height:100%;"></image-slot></div>
+        <p style="font-family:'Newsreader',serif; font-style:italic; font-size:16px; line-height:1.6; color:#24211E; margin-bottom:14px;">"Fiz a Sinastria Profissional com meu sócio antes de fecharmos a empresa. Ajudou a colocar em palavras diferenças que já sentíamos, mas não sabíamos como conversar sobre."</p>
+        <p style="font-size:12px; letter-spacing:1px; color:#9c8f7e;">— Rafael M., Belo Horizonte</p>
+      </div>
+      <div style="text-align:center;">
+        <div style="width:56px; height:56px; border-radius:50%; margin:0 auto 20px;"><image-slot id="testimonial-3" placeholder="foto" shape="circle" style="width:100%;height:100%;"></image-slot></div>
+        <p style="font-family:'Newsreader',serif; font-style:italic; font-size:16px; line-height:1.6; color:#24211E; margin-bottom:14px;">"Não esperava um relatório tão bem escrito. Reconheci padrões meus dos últimos dez anos organizados de um jeito que fazia sentido, sem soar como horóscopo."</p>
+        <p style="font-size:12px; letter-spacing:1px; color:#9c8f7e;">— Juliana T., Curitiba</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 12: ARTIGOS -->
+  <section id="artigos" class="bs-section-pad bs-section-pad-v" style="padding:130px 64px;">
+    <div style="text-align:center; max-width:640px; margin:0 auto 64px;">
+      <p style="font-size:11px; letter-spacing:3px; text-transform:uppercase; color:#A67C52; margin-bottom:20px;">Para continuar aprendendo</p>
+      <h2 class="bs-h2" style="font-family:'Newsreader',serif; font-weight:400; font-size:34px; margin:0;">Artigos</h2>
+    </div>
+    <div class="bs-grid-3" style="display:grid; grid-template-columns:repeat(3,1fr); gap:40px; max-width:1200px; margin:0 auto;">
+      <a href="./Artigo - Elemento Mestre.dc.html" style="display:block;">
+        <image-slot id="article-1" placeholder="fotografia editorial" shape="rect" style="width:100%; aspect-ratio:4/3; margin-bottom:18px;"></image-slot>
+        <div style="font-size:11px; letter-spacing:1.5px; text-transform:uppercase; color:#8F9C8B; margin-bottom:8px;">Fundamentos</div>
+        <div style="font-family:'Newsreader',serif; font-size:19px; color:#24211E; line-height:1.4;">O que é o Elemento Mestre?</div>
+      </a>
+      <a href="./Artigo - Sinastria.dc.html" style="display:block;">
+        <image-slot id="article-2" placeholder="fotografia editorial" shape="rect" style="width:100%; aspect-ratio:4/3; margin-bottom:18px;"></image-slot>
+        <div style="font-size:11px; letter-spacing:1.5px; text-transform:uppercase; color:#8F9C8B; margin-bottom:8px;">Relacionamentos</div>
+        <div style="font-family:'Newsreader',serif; font-size:19px; color:#24211E; line-height:1.4;">Como funciona a Sinastria</div>
+      </a>
+      <a href="./Artigo - Hora de Nascimento.dc.html" style="display:block;">
+        <image-slot id="article-3" placeholder="fotografia editorial" shape="rect" style="width:100%; aspect-ratio:4/3; margin-bottom:18px;"></image-slot>
+        <div style="font-size:11px; letter-spacing:1.5px; text-transform:uppercase; color:#8F9C8B; margin-bottom:8px;">Origens</div>
+        <div style="font-family:'Newsreader',serif; font-size:19px; color:#24211E; line-height:1.4;">Por que a hora de nascimento importa</div>
+      </a>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="bs-section-pad" style="background:#24211E; color:#cfc7ba; padding:80px 64px 40px;">
+    <div class="bs-footer-grid" style="display:grid; grid-template-columns:1.2fr 1fr 1fr 1fr 1fr; gap:48px; max-width:1200px; margin:0 auto 56px;">
+      <div>
+        <div style="font-size:11px; color:#A67C52; letter-spacing:2px; margin-bottom:8px;">빛나</div>
+        <div style="font-family:'Newsreader',serif; font-size:20px; letter-spacing:3px; color:#F7F4EE; margin-bottom:14px;">BITNA SAJU</div>
+        <p style="font-size:13px; line-height:1.7; max-width:280px;">Autoconhecimento pela tradição coreana.</p>
+      </div>
+      <div>
+        <div style="font-size:12px; letter-spacing:1.5px; text-transform:uppercase; color:#F7F4EE; margin-bottom:16px;">Navegação</div>
+        <div style="display:flex; flex-direction:column; gap:10px; font-size:13px;">
+          <a href="#saju" style="color:#cfc7ba;">O que é Saju</a>
+          <a href="#produtos" style="color:#cfc7ba;">Produtos</a>
+          <a href="#artigos" style="color:#cfc7ba;">Artigos</a>
+        </div>
+      </div>
+      <div>
+        <div style="font-size:12px; letter-spacing:1.5px; text-transform:uppercase; color:#F7F4EE; margin-bottom:16px;">Empresa</div>
+        <div style="display:flex; flex-direction:column; gap:10px; font-size:13px;">
+          <a href="#" style="color:#cfc7ba;">Sobre a Bitna</a>
+          <a href="mailto:contato@bitnasaju.com.br" style="color:#cfc7ba;">contato@bitnasaju.com.br</a>
+        </div>
+      </div>
+      <div>
+        <div style="font-size:12px; letter-spacing:1.5px; text-transform:uppercase; color:#F7F4EE; margin-bottom:16px;">Redes</div>
+        <div style="display:flex; flex-direction:column; gap:10px; font-size:13px;">
+          <a href="#" style="color:#cfc7ba;">Instagram</a>
+        </div>
+      </div>
+      <div>
+        <div style="font-size:12px; letter-spacing:1.5px; text-transform:uppercase; color:#F7F4EE; margin-bottom:16px;">Legal</div>
+        <div style="display:flex; flex-direction:column; gap:10px; font-size:13px;">
+          <a href="./Bitna Saju - Politica de Privacidade.dc.html" style="color:#cfc7ba;">Política de Privacidade</a>
+        </div>
+      </div>
+    </div>
+    <div style="border-top:1px solid #3a362f; padding-top:24px; text-align:center; font-size:11px; letter-spacing:1px; color:#8a8375; max-width:1200px; margin:0 auto;">
+      © 2026 BITNA SAJU — TODOS OS DIREITOS RESERVADOS
+    </div>
+  </footer>
+
+</div>
+
+</x-dc>
+</body>
+</html>

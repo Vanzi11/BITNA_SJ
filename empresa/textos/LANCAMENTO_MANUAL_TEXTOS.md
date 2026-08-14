@@ -117,6 +117,62 @@ não há reembolso.
 
 > **Atenção — isto não é aconselhamento jurídico.** O Código de Defesa do Consumidor (art. 49) garante 7 dias de arrependimento em compras online, e o texto acima ainda não foi verificado contra essa regra especificamente para produtos digitais personalizados. Antes de publicar, vale uma checada rápida com um contador/advogado — é barato resolver agora e caro resolver depois de um cliente pedir reembolso e citar o CDC.
 
+## 5. Política de Privacidade (página do site)
+
+```
+Política de Privacidade — Bitna Saju
+
+Última atualização: [data]
+
+1. Quem somos
+A Bitna Saju é responsável pelo tratamento dos dados pessoais
+descritos nesta política. Dúvidas ou pedidos sobre seus dados
+podem ser enviados para contato@bitnasaju.com.br.
+
+2. Quais dados coletamos
+Para gerar sua leitura de Saju, coletamos: nome completo, data
+de nascimento, horário de nascimento (quando informado), cidade
+e estado de nascimento, e sexo. Esses dados são fornecidos
+diretamente por você, no momento da compra.
+
+3. Por que coletamos
+Usamos esses dados exclusivamente para calcular o seu mapa de
+Saju e produzir o relatório interpretativo que você comprou. O
+cálculo do mapa é determinístico (feito por um motor próprio,
+não por inteligência artificial); a escrita do texto
+interpretativo conta com apoio de inteligência artificial,
+sempre com revisão humana antes do envio.
+
+4. Com quem compartilhamos
+Não compartilhamos, vendemos ou cedemos seus dados a terceiros
+para nenhuma outra finalidade. Seus dados de nascimento não são
+usados para treinar modelos de inteligência artificial de
+terceiros.
+
+5. Por quanto tempo guardamos
+Guardamos seus dados pelo tempo necessário para produzir e
+entregar seu relatório, e por mais [X] [período] após a entrega,
+para eventual suporte ou reenvio. Após esse prazo, os dados são
+excluídos, salvo obrigação legal de retenção.
+
+6. Seus direitos
+Como titular dos dados, você pode a qualquer momento pedir para:
+acessar os dados que temos sobre você, corrigir dados incorretos,
+ou solicitar a exclusão dos seus dados. Basta escrever para
+contato@bitnasaju.com.br.
+
+7. Cookies
+[preencher se o site usar Analytics, Pixel do Meta ou similar —
+diga quais ferramentas de rastreamento estão ativas e ofereça
+opção de recusa]
+
+8. Alterações desta política
+Podemos atualizar esta política eventualmente. Mudanças
+relevantes serão comunicadas nesta mesma página.
+```
+
+> **Atenção — isto não é aconselhamento jurídico**, igual a política de reembolso acima. É um rascunho estrutural cobrindo os pontos que a LGPD exige (art. 9º — direito à informação; arts. 17-22 — direitos do titular), mas os campos entre colchetes precisam ser preenchidos com dado real, e o texto inteiro merece revisão de um advogado antes de publicar — principalmente a seção 7 (cookies), que muda dependendo de quais ferramentas de rastreamento o site realmente usa.
+
 ## Notas de implementação
 
 - **[X] dias úteis**: defina um prazo real que você consegue cumprir no fluxo manual (digitar dados → gerar → revisar → enviar). Melhor prometer 3 dias e entregar em 1 do que o contrário.

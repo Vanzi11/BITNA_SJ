@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Manrope:wght@300;400;500;600;700&family=Noto+Serif+KR:wght@400;600&display=swap" rel="stylesheet">
+  <script src="./image-slot.js"></script>
+  <style>
+    body { margin: 0; background: #f7f3ea; }
+    a { color: #33254f; }
+    a:hover { color: #a63a2b; }
+    ::selection { background: #b9aed0; color: #33254f; }
+  </style>
+</helmet>
+
+<div style="background:#f7f3ea; color:#33254f; font-family:'Manrope',sans-serif; min-width:1000px;">
+
+  <!-- COVER -->
+  <section data-screen-label="Capa" style="position:relative; background:#33254f; color:#f7f3ea; padding:120px 80px 100px; text-align:center; overflow:hidden;">
+    <div style="position:absolute; inset:28px; border:1px solid #a8894a; opacity:0.6; pointer-events:none;"></div>
+    <div style="position:absolute; top:40px; left:40px; width:26px; height:26px; border-top:1px solid #a8894a; border-left:1px solid #a8894a;"></div>
+    <div style="position:absolute; top:40px; right:40px; width:26px; height:26px; border-top:1px solid #a8894a; border-right:1px solid #a8894a;"></div>
+    <div style="position:absolute; bottom:40px; left:40px; width:26px; height:26px; border-bottom:1px solid #a8894a; border-left:1px solid #a8894a;"></div>
+    <div style="position:absolute; bottom:40px; right:40px; width:26px; height:26px; border-bottom:1px solid #a8894a; border-right:1px solid #a8894a;"></div>
+
+    <div style="font-family:'Noto Serif KR',serif; font-size:20px; letter-spacing:6px; color:#b9aed0; margin-bottom:28px;">四柱</div>
+    <h1 style="font-family:'Cormorant Garamond',serif; font-weight:500; font-size:96px; margin:0; letter-spacing:2px;">Bitna Saju</h1>
+    <p style="font-family:'Manrope',sans-serif; font-weight:300; font-size:15px; letter-spacing:4px; text-transform:uppercase; color:#b9aed0; margin:22px 0 0;">Guia de Identidade Visual</p>
+    <p style="font-family:'Cormorant Garamond',serif; font-style:italic; font-size:22px; color:#f7f3ea; max-width:560px; margin:56px auto 0; line-height:1.6;">"Não é sobre prever sua vida — é sobre entender seus padrões para decidir melhor."</p>
+  </section>
+
+  <!-- INTRO / POSICIONAMENTO -->
+  <section data-screen-label="Posicionamento" style="max-width:900px; margin:0 auto; padding:96px 40px; text-align:center;">
+    <div style="font-size:12px; letter-spacing:3px; text-transform:uppercase; color:#a8894a; margin-bottom:18px;">Posicionamento</div>
+    <p style="font-family:'Cormorant Garamond',serif; font-weight:400; font-size:32px; line-height:1.5; color:#33254f; margin:0;">Autoconhecimento e análise de relacionamentos através do Saju coreano — analítico, comportamental, nunca esotérico. Elegância silenciosa para mulheres de 18 a 34 anos apaixonadas por cultura coreana.</p>
+    <div style="display:flex; gap:14px; justify-content:center; flex-wrap:wrap; margin-top:36px;">
+      <span style="border:1px solid #6e6459; color:#6e6459; font-size:12px; letter-spacing:1px; padding:8px 16px; border-radius:2px;">clara</span>
+      <span style="border:1px solid #6e6459; color:#6e6459; font-size:12px; letter-spacing:1px; padding:8px 16px; border-radius:2px;">acolhedora</span>
+      <span style="border:1px solid #6e6459; color:#6e6459; font-size:12px; letter-spacing:1px; padding:8px 16px; border-radius:2px;">racional</span>
+      <span style="border:1px solid #6e6459; color:#6e6459; font-size:12px; letter-spacing:1px; padding:8px 16px; border-radius:2px;">profunda</span>
+      <span style="border:1px solid #6e6459; color:#6e6459; font-size:12px; letter-spacing:1px; padding:8px 16px; border-radius:2px;">orientada à decisão</span>
+    </div>
+  </section>
+
+  <!-- LOGO -->
+  <section data-screen-label="Logo" style="padding:96px 80px; background:#fff; border-top:1px solid rgba(51,37,79,0.1); border-bottom:1px solid rgba(51,37,79,0.1);">
+    <div style="font-size:12px; letter-spacing:3px; text-transform:uppercase; color:#a8894a; margin-bottom:48px; text-align:center;">Marca</div>
+
+    <div style="display:flex; gap:64px; align-items:center; justify-content:center; flex-wrap:wrap; margin-bottom:80px;">
+      <div style="text-align:center;">
+        <div style="width:180px; height:180px; border-radius:50%; border:1px solid #a8894a; display:flex; align-items:center; justify-content:center; margin:0 auto;">
+          <div style="width:96px; height:96px; border:1.5px solid #a63a2b; display:flex; align-items:center; justify-content:center; transform:rotate(45deg);">
+            <span style="transform:rotate(-45deg); font-family:'Noto Serif KR',serif; color:#a63a2b; font-size:34px;">四柱</span>
+          </div>
+        </div>
+        <p style="font-size:12px; letter-spacing:2px; text-transform:uppercase; color:#6e6459; margin-top:20px;">Selo / Monograma</p>
+      </div>
+      <div style="text-align:center;">
+        <div style="font-family:'Cormorant Garamond',serif; font-weight:500; font-size:64px; color:#33254f;">Bitna Saju</div>
+        <div style="width:64px; height:1px; background:#a8894a; margin:14px auto;"></div>
+        <p style="font-size:12px; letter-spacing:2px; text-transform:uppercase; color:#6e6459;">Wordmark</p>
+      </div>
+    </div>
+
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:48px; max-width:900px; margin:0 auto;">
+      <div>
+        <p style="font-size:12px; letter-spacing:2px; text-transform:uppercase; color:#6e6459; margin-bottom:16px;">Área de respiro</p>
+        <div style="border:1px dashed #b9aed0; padding:36px; display:flex; justify-content:center;">
+          <div style="font-family:'Cormorant Garamond',serif; font-size:34px; color:#33254f;">Bitna Saju</div>
+        </div>
+        <p style="font-size:13px; color:#6e6459; margin-top:14px; line-height:1.6;">Espaço livre mínimo ao redor = altura da letra "B" do wordmark, em todos os lados.</p>
+      </div>
+      <div>
+        <p style="font-size:12px; letter-spacing:2px; text-transform:uppercase; color:#6e6459; margin-bottom:16px;">Evitar</p>
+        <div style="border:1px solid rgba(166,58,43,0.4); padding:24px; display:flex; flex-direction:column; gap:14px; font-size:13px; color:#6e6459;">
+          <div>— Recolorir o selo fora da paleta</div>
+          <div>— Distorcer, inclinar ou esticar o wordmark</div>
+          <div>— Aplicar sobre fotos com baixo contraste</div>
+          <div>— Trocar hanja por hangul ou emojis</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PALETA -->
+  <section data-screen-label="Paleta" style="padding:96px 80px;">
+    <div style="font-size:12px; letter-spacing:3px; text-transform:uppercase; color:#a8894a; margin-bottom:48px; text-align:center;">Paleta</div>
+    <div style="display:grid; grid-template-columns:repeat(6,1fr); gap:0; max-width:1100px; margin:0 auto; border:1px solid rgba(51,37,79,0.12);">
+      <div style="background:#f7f3ea;">
+        <div style="height:140px; border-bottom:1px solid rgba(51,37,79,0.12);"></div>
+        <div style="padding:16px 14px;">
+          <p style="font-size:13px; font-weight:600; margin:0 0 4px;">Marfim</p>
+          <p style="font-size:11px; color:#6e6459; margin:0; letter-spacing:1px;">#F7F3EA</p>
+        </div>
+      </div>
+      <div style="background:#33254f;">
+        <div style="height:140px; border-bottom:1px solid rgba(255,255,255,0.15);"></div>
+        <div style="padding:16px 14px; color:#f7f3ea;">
+          <p style="font-size:13px; font-weight:600; margin:0 0 4px;">Roxo Profundo</p>
+          <p style="font-size:11px; color:#b9aed0; margin:0; letter-spacing:1px;">#33254F</p>
+        </div>
+      </div>
+      <div style="background:#b9aed0;">
+        <div style="height:140px; border-bottom:1px solid rgba(51,37,79,0.12);"></div>
+        <div style="padding:16px 14px;">
+          <p style="font-size:13px; font-weight:600; margin:0 0 4px; color:#33254f;">Lavanda Suave</p>
+          <p style="font-size:11px; color:#33254f; margin:0; letter-spacing:1px; opacity:0.7;">#B9AED0</p>
+        </div>
+      </div>
+      <div style="background:#a8894a;">
+        <div style="height:140px; border-bottom:1px solid rgba(255,255,255,0.15);"></div>
+        <div style="padding:16px 14px; color:#f7f3ea;">
+          <p style="font-size:13px; font-weight:600; margin:0 0 4px;">Dourado Fosco</p>
+          <p style="font-size:11px; margin:0; letter-spacing:1px; opacity:0.85;">#A8894A</p>
+        </div>
+      </div>
+      <div style="background:#6e6459;">
+        <div style="height:140px; border-bottom:1px solid rgba(255,255,255,0.15);"></div>
+        <div style="padding:16px 14px; color:#f7f3ea;">
+          <p style="font-size:13px; font-weight:600; margin:0 0 4px;">Cinza Quente</p>
+          <p style="font-size:11px; margin:0; letter-spacing:1px; opacity:0.85;">#6E6459</p>
+        </div>
+      </div>
+      <div style="background:#a63a2b;">
+        <div style="height:140px; border-bottom:1px solid rgba(255,255,255,0.15);"></div>
+        <div style="padding:16px 14px; color:#f7f3ea;">
+          <p style="font-size:13px; font-weight:600; margin:0 0 4px;">Vermelho de Selo</p>
+          <p style="font-size:11px; margin:0; letter-spacing:1px; opacity:0.85;">#A63A2B</p>
+        </div>
+      </div>
+    </div>
+    <p style="max-width:700px; margin:36px auto 0; text-align:center; font-size:14px; color:#6e6459; line-height:1.7;">Marfim e roxo profundo são a base (fundo e texto). Lavanda e dourado são acentos de apoio. Vermelho de selo é reservado — usar só no monograma/selo e em pontos únicos de destaque.</p>
+  </section>
+
+  <!-- TIPOGRAFIA -->
+  <section data-screen-label="Tipografia" style="padding:96px 80px; background:#fff; border-top:1px solid rgba(51,37,79,0.1); border-bottom:1px solid rgba(51,37,79,0.1);">
+    <div style="font-size:12px; letter-spacing:3px; text-transform:uppercase; color:#a8894a; margin-bottom:48px; text-align:center;">Tipografia</div>
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:64px; max-width:1100px; margin:0 auto;">
+      <div>
+        <p style="font-size:12px; letter-spacing:2px; text-transform:uppercase; color:#6e6459; margin-bottom:8px;">Títulos — Cormorant Garamond</p>
+        <div style="font-family:'Cormorant Garamond',serif; font-size:56px; color:#33254f; line-height:1.15; margin-bottom:12px;">Seus padrões, claros</div>
+        <p style="font-size:13px; color:#6e6459;">Regular 400 · Medium 500 · Itálico para citações</p>
+      </div>
+      <div>
+        <p style="font-size:12px; letter-spacing:2px; text-transform:uppercase; color:#6e6459; margin-bottom:8px;">Corpo &amp; UI — Manrope</p>
+        <div style="font-family:'Manrope',sans-serif; font-size:18px; color:#33254f; line-height:1.6; margin-bottom:12px;">Compreenda sua personalidade, seus talentos e sua compatibilidade com clareza e contexto — sem previsões absolutas.</div>
+        <p style="font-size:13px; color:#6e6459;">Regular 400 · Medium 500 · Semibold 600 para ênfase e botões</p>
+      </div>
+    </div>
+    <div style="max-width:1100px; margin:56px auto 0; padding-top:36px; border-top:1px solid rgba(51,37,79,0.1); display:flex; justify-content:center;">
+      <div style="font-family:'Noto Serif KR',serif; font-size:15px; color:#a8894a; letter-spacing:4px;">四柱 · 궁합 · Noto Serif KR para hanja/hangul</div>
+    </div>
+  </section>
+
+  <!-- APLICAÇÃO -->
+  <section data-screen-label="Aplicação" style="padding:96px 80px;">
+    <div style="font-size:12px; letter-spacing:3px; text-transform:uppercase; color:#a8894a; margin-bottom:48px; text-align:center;">Aplicação — Instagram</div>
+    <div style="display:flex; gap:40px; justify-content:center; flex-wrap:wrap;">
+      <div style="width:380px; height:380px; background:#33254f; position:relative; display:flex; flex-direction:column; justify-content:space-between; padding:32px;">
+        <div style="display:flex; justify-content:space-between; align-items:flex-start;">
+          <div style="font-family:'Noto Serif KR',serif; color:#b9aed0; font-size:13px; letter-spacing:3px;">四柱</div>
+          <div style="width:34px; height:34px; border-radius:50%; border:1px solid #a8894a;"></div>
+        </div>
+        <div>
+          <div style="font-family:'Cormorant Garamond',serif; font-size:34px; color:#f7f3ea; line-height:1.25; margin-bottom:14px;">Sua sorte é você quem faz.</div>
+          <div style="width:40px; height:1px; background:#a8894a; margin-bottom:14px;"></div>
+          <div style="font-size:12px; letter-spacing:2px; text-transform:uppercase; color:#b9aed0;">Bitna Saju</div>
+        </div>
+      </div>
+      <div style="width:380px; height:380px; background:#f7f3ea; border:1px solid rgba(51,37,79,0.12); overflow:hidden;">
+        <image-slot id="ig-post-photo" placeholder="foto editorial · retrato ou still de estúdio" shape="rect" style="width:100%; height:100%;"></image-slot>
+      </div>
+    </div>
+    <p style="max-width:700px; margin:36px auto 0; text-align:center; font-size:14px; color:#6e6459; line-height:1.7;">Cartelas de texto: fundo roxo profundo, moldura fina dourada opcional nos cantos, wordmark ou selo sempre presente. Cartelas de foto: enquadramento editorial, sem filtro pesado, respeitando a paleta.</p>
+  </section>
+
+  <footer style="background:#33254f; color:#b9aed0; text-align:center; padding:48px; font-size:12px; letter-spacing:2px;">
+    BITNA SAJU — GUIA DE IDENTIDADE VISUAL · V1
+  </footer>
+
+</div>
+
+</x-dc>
+</body>
+</html>
