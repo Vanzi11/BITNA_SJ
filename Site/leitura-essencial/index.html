@@ -41,8 +41,6 @@
   .hero-grid{display:grid; grid-template-columns:1.05fr 0.95fr; gap:64px; max-width:1200px; margin:0 auto; align-items:center;}
   .hero-title{font-size:48px; line-height:1.15; margin:14px 0 20px;}
   .hero-price{font-family:'Newsreader',serif; font-size:28px; margin:24px 0 20px;}
-  .diagram-wrap{background:var(--dark); border-radius:2px; padding:48px; display:flex; align-items:center; justify-content:center;}
-  .diagram-wrap svg{width:100%; height:auto; max-width:280px;}
   ul.plain{list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:12px;}
   .grid-3{display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:var(--line); max-width:1100px; margin:40px auto 0;}
   .card{background:var(--bg); padding:36px 30px;}
@@ -61,7 +59,6 @@
   summary::after{content:'+'; font-size:22px; color:var(--accent); flex-shrink:0;}
   details[open] summary::after{content:'–';}
   details p{margin:14px 0 0; font-size:14px; line-height:1.75; color:var(--ink-soft);}
-  .mock-box{max-width:640px; margin:40px auto 0; border:1px dashed #cabfa9; padding:56px 32px; text-align:center; color:var(--faint); font-size:13px; line-height:1.7;}
   .cta-final{text-align:center; padding:120px 64px;}
   footer{padding:80px 64px 40px;}
   .footer-grid{display:grid; grid-template-columns:1.2fr 1fr 1fr 1fr 1fr; gap:48px; max-width:1200px; margin:0 auto 56px;}
@@ -82,7 +79,6 @@
     .steps{grid-template-columns:1fr 1fr; gap:32px;}
     .footer-grid{grid-template-columns:1fr 1fr; gap:24px;}
     .cta-final{padding:72px 24px;}
-    .diagram-wrap{padding:24px;}
   }
 </style>
 </head>
@@ -114,24 +110,9 @@
         <a href="#o-que-e" class="btn btn-ghost">Como funciona ↓</a>
       </div>
     </div>
-    <div class="diagram-wrap">
-      <!-- Diagrama Saju em SVG — evita depender de imagem externa -->
-      <svg width="280" height="280" viewBox="0 0 280 280" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Diagrama circular dos quatro pilares do Saju">
-        <circle cx="140" cy="140" r="128" fill="none" stroke="#4d473f" stroke-width="1"/>
-        <circle cx="140" cy="140" r="96" fill="none" stroke="#4d473f" stroke-width="1"/>
-        <g fill="#F7F4EE" opacity="0.75">
-          <circle cx="140" cy="20" r="2.5"/><circle cx="260" cy="140" r="2.5"/>
-          <circle cx="140" cy="260" r="2.5"/><circle cx="20" cy="140" r="2.5"/>
-        </g>
-        <g font-family="Newsreader, serif" font-size="13" fill="#cfc7ba" text-anchor="middle">
-          <text x="140" y="42">年 · ANO</text>
-          <text x="140" y="248">日 · DIA</text>
-        </g>
-        <circle cx="140" cy="140" r="30" fill="#A67C52"/>
-        <path d="M140,110 a30,30 0 0 1 0,60 a15,15 0 0 1 0,-30 a15,15 0 0 0 0,-30 z" fill="#F7F4EE"/>
-        <circle cx="140" cy="125" r="5" fill="#F7F4EE"/>
-        <circle cx="140" cy="155" r="5" fill="#A67C52"/>
-      </svg>
+    <div>
+      <img src="/assets/produtos/leitura-essencial.jpg" alt="Peça ilustrativa da Leitura Essencial da Bitna Saju" width="900" height="900" style="width:100%; aspect-ratio:1/1; object-fit:cover;">
+      <p style="font-size:11px; color:var(--faint); text-align:center; margin-top:10px;">Imagem meramente ilustrativa — o produto entregue é um relatório digital em PDF.</p>
     </div>
   </div>
 </section>
@@ -245,27 +226,15 @@
 </section>
 
 <!-- EXEMPLO DO RELATÓRIO -->
-<section id="exemplo" class="section">
+<section id="exemplo" class="section" style="background:#fff; border-top:1px solid var(--line); border-bottom:1px solid var(--line);">
   <div class="section-tight">
     <div class="eyebrow">Exemplo do relatório</div>
-    <h2 style="font-size:32px;">Como o material chega até você</h2>
-    <p style="font-size:14px; color:var(--faint); margin-top:12px;">Um exemplo de estrutura, sem dados de clientes reais.</p>
+    <h2 style="font-size:32px;">A identidade visual da sua leitura</h2>
   </div>
-  <div class="grid-3">
-    <div class="card">
-      <h3 style="font-family:'Newsreader',serif; font-size:19px; margin-bottom:10px;">Capa e visão geral</h3>
-      <p style="font-size:14px; color:var(--ink-soft); line-height:1.7;">Seu mapa em resumo, com os pilares já calculados.</p>
-    </div>
-    <div class="card">
-      <h3 style="font-family:'Newsreader',serif; font-size:19px; margin-bottom:10px;">Capítulos de leitura</h3>
-      <p style="font-size:14px; color:var(--ink-soft); line-height:1.7;">Cada tema em texto corrido, com os termos explicados na primeira aparição.</p>
-    </div>
-    <div class="card">
-      <h3 style="font-family:'Newsreader',serif; font-size:19px; margin-bottom:10px;">Fechamento prático</h3>
-      <p style="font-size:14px; color:var(--ink-soft); line-height:1.7;">O que fazer com o que você acabou de ler.</p>
-    </div>
+  <div style="max-width:420px; margin:40px auto 0;">
+    <img src="/assets/produtos/leitura-essencial.jpg" alt="Peça ilustrativa da Leitura Essencial da Bitna Saju" width="900" height="900" style="width:100%; aspect-ratio:1/1; object-fit:cover;">
+    <p style="font-size:12px; color:var(--faint); text-align:center; margin-top:14px; line-height:1.6;">Imagem meramente ilustrativa, usada apenas para representar a identidade visual da marca. O relatório de verdade é entregue como um <strong>PDF digital</strong>, não como um livro físico.</p>
   </div>
-  <div class="mock-box">[IMAGENS_OFICIAIS_DO_RELATORIO] — substituir por mockups reais do PDF.</div>
 </section>
 
 <!-- FAQ -->
