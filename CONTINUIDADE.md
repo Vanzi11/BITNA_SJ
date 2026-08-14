@@ -51,7 +51,7 @@ Lote grande implementado e testado — amostras `relatorios/exemplos/sinastria_*
 
 **Insight estratégico do Ivã a preservar:** *"a Bitna não vende Saju, vende tradução — quanto menos o cliente perceber o motor, melhor / o diferencial é transformar a tradição coreana em decisões práticas."* A Sinastria Profissional tem cara de **ferramenta de gestão** → potencial B2B.
 
-## [EM ANDAMENTO, 14/08/2026] 8 páginas de venda + pós-compra do site (D43–D45)
+## [✅ CONCLUÍDO, 14/08/2026] 8 páginas de venda + pós-compra do site (D43–D46)
 
 Missão em curso: 4 páginas de venda + 4 páginas de obrigado/formulário (`/leitura-essencial/`, `/leitura-completa/`, `/sinastria-amorosa/`, `/sinastria-profissional/`, cada uma com `/obrigado/`). Auditoria inicial corrigiu a premissa (não é WordPress/Elementor — o site é HTML standalone exportado do "Claude Design", publicado manualmente no cPanel). Decisões fechadas: checkout **Hotmart** (D43), hospedagem do backend automatizado **Railway** (D44), preços/páginas corrigidos no `EMPRESA.md` para bater com a home publicada (D45).
 
@@ -59,12 +59,16 @@ Missão em curso: 4 páginas de venda + 4 páginas de obrigado/formulário (`/le
 
 **Feito:** `Site/leitura-essencial/index.html` (venda) e `Site/leitura-essencial/obrigado/index.html` (formulário de 1 pessoa + LGPD) — o par-modelo pras outras 6 páginas. Testado sem overflow horizontal em mobile (375px) e FAQ em `<details>/<summary>` nativo, sem JS.
 
-**Resolvido:** imagens oficiais dos produtos (fonte: `Site/Imagens/`, geradas no ChatGPT) salvas em `Site/assets/produtos/` (JPEG 900×900, ~100-125KB cada, otimizadas de PNGs de ~2MB). Usadas no Hero e na seção "Exemplo do relatório" da Leitura Essencial, sempre com aviso explícito de que são **meramente ilustrativas** e que o produto entregue é um PDF digital, não um livro físico — pedido direto do Ivã para não confundir o cliente sobre o formato de entrega.
+**Todas as 8 páginas construídas e testadas** (`Site/leitura-essencial/`, `Site/leitura-completa/`, `Site/sinastria-amorosa/`, `Site/sinastria-profissional/`, cada uma com `/obrigado/`). Padrão final do Hero (D46, decisão do Ivã após ver as opções): a paisagem de montanhas (`Site/assets/hero-paisagem-montanhas.jpg`, fonte `Site/Imagens/Janela Yin-Yang de Montanhas Nebulosas.png`) é o visual de marca consistente nas 4 páginas de venda; a imagem individual de cada produto (fonte: `Site/Imagens/`, geradas no ChatGPT, otimizadas em `Site/assets/produtos/`) aparece só na seção "A identidade visual da sua leitura" (3 cards descritivos + imagem completa, sem crop, sempre com aviso de que é **meramente ilustrativa** e que o produto entregue é um PDF digital, não um livro físico).
 
-**Pendências explícitas destas 2 páginas (e que se repetem nas outras 6):**
-- `[HOTMART_LEITURA_ESSENCIAL]` no botão de compra — placeholder até o link real da Hotmart existir.
-- `[FORM_ENDPOINT_LEITURA_ESSENCIAL]` no `action` do formulário de obrigado — o backend (Fase 5, Railway) ainda não existe; o formulário não funciona de verdade até isso ser construído.
-- Replicar pras 6 páginas restantes (3 de venda + 3 obrigado, as 2 últimas com formulário de 2 pessoas) — imagens de `Leitura Completa`, `Sinastria Amorosa` e `Sinastria Profissional` já estão prontas em `Site/assets/produtos/`.
+**Formulários de sinastria resolvem a pendência do redteam** (`REDTEAM_STATUS.md`, item 2): checkbox de consentimento dedicado pra quem compra confirmar que tem autorização da segunda pessoa para informar os dados dela.
+
+**Pendências reais antes de publicar (valem para as 8 páginas):**
+- `[HOTMART_*]` nos botões de compra — placeholders até os links reais da Hotmart existirem.
+- `[FORM_ENDPOINT_*]` no `action` dos formulários de obrigado — o backend (Fase 5, Railway) ainda não existe; os formulários não funcionam de verdade até isso ser construído. Campos já nomeados pra bater com o contrato de `app/server.mjs` (`pessoa1_*`/`pessoa2_*`, `tipoRelacao`, `produto`).
+- Seção "Exemplo do relatório" com mockups reais das páginas internas do PDF — pulado por decisão do Ivã, substituído pela imagem ilustrativa do produto.
+- Tensão de página count da Essencial (ver D45) ainda não resolvida.
+- Publicação no cPanel (upload dos 8 diretórios + `Site/assets/`) e o próprio backend da Fase 5 (webhook, formulário público real, storage de pedido, e-mail, hospedagem Railway — ver D44) continuam como próximos passos, fora do escopo desta rodada.
 
 ## Demais pendências (ordem sugerida)
 
