@@ -6,6 +6,12 @@ dist/
 *.pyc
 __pycache__/
 
+# Segredos (API keys, credenciais de serviço) — nunca versionar, repo é público no GitHub.
+.env
+.env.*
+*.key.json
+app/credentials/
+
 # DOCX originais dos brandbooks (grandes, só referência local — o PDF aprovado e os MDs já cobrem o conteúdo)
 empresa/marca/fontes-originais/
 
