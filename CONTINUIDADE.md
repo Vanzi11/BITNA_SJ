@@ -57,7 +57,7 @@ Lote grande implementado e testado — amostras `relatorios/exemplos/sinastria_*
 
 **✅ Resolvido (15/08/2026):** backend publicado no Railway (`https://bitnasj-production.up.railway.app`, D54) e os 4 `[FORM_ENDPOINT_*]` das páginas `/enviar-dados/*/` já apontam pra lá em produção (D55) — testado de ponta a ponta com pedido sintético (PDF + planilha + e-mail funcionando ao vivo).
 
-**⚠️ Pendência mais urgente agora:** `ANTHROPIC_API_KEY` ainda não está configurada no Railway. Sem ela, o texto interpretativo do relatório (escrito por IA) não é gerado — o resto do pipeline (cálculo, PDF, planilha, e-mail) funciona normalmente. Pegar a chave no console da Anthropic (console.anthropic.com) e adicionar nas Variables do serviço Railway.
+**✅ Resolvido (15/08/2026):** `ANTHROPIC_API_KEY` configurada no Railway (chave real do Ivã, também salva em `app/.env` local). Testado de ponta a ponta em produção depois de configurada — HTTP 200, sem erro (a função lança exceção se a chave for inválida, então a resposta limpa confirma que o texto interpretativo do relatório está sendo gerado pela IA normalmente). **Pipeline completo agora funciona 100% em produção, sem pendências técnicas conhecidas.**
 
 Missão em curso: 4 páginas de venda + 4 páginas de obrigado/formulário (`/leitura-essencial/`, `/leitura-completa/`, `/sinastria-amorosa/`, `/sinastria-profissional/`, cada uma com `/obrigado/`). Auditoria inicial corrigiu a premissa (não é WordPress/Elementor — o site é HTML standalone exportado do "Claude Design", publicado manualmente no cPanel). Decisões fechadas: checkout **Hotmart** (D43), hospedagem do backend automatizado **Railway** (D44), preços/páginas corrigidos no `EMPRESA.md` para bater com a home publicada (D45).
 
