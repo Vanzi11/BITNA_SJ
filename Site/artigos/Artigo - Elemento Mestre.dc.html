@@ -1,89 +1,68 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html>
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>O que é o Elemento Mestre? — Bitna Saju</title>
-<meta name="description" content="O Mestre do Dia é o ponto de referência de todo mapa de Saju. Entenda o que é, por que importa e como funciona.">
-<style>
-  * { margin:0; padding:0; box-sizing:border-box; }
-  body {
-    background:#F9F8F4; color:#2D2D2D;
-    font-family: Arial, Helvetica, sans-serif;
-    line-height:1.7; font-size:16px;
-  }
-  .serif { font-family: Georgia, 'Times New Roman', Times, serif; }
-  a { color:#1B263B; }
-  .wrap { max-width:680px; margin:0 auto; padding:0 24px; }
-
-  header { padding:40px 0 24px; border-bottom:1px solid #e4ded0; }
-  .logo { display:flex; align-items:center; justify-content:center; gap:10px; text-decoration:none; }
-  .logo .bitna { font-family: Georgia, serif; font-size:22px; letter-spacing:6px; color:#2D2D2D; }
-  .logo .saju { font-family: Arial, sans-serif; font-size:11px; letter-spacing:4px; color:#2D2D2D; display:flex; align-items:center; gap:8px; }
-  .seal { display:inline-flex; align-items:center; justify-content:center; width:18px; height:18px; background:#B22222; color:#F9F8F4; font-family:Georgia,serif; font-size:7px; line-height:9px; text-align:center; }
-
-  .back { display:block; text-align:center; margin:20px 0 0; font-size:13px; color:#8a8172; text-decoration:none; }
-  .back:hover { color:#1B263B; }
-
-  main { padding:48px 0 64px; }
-  .eyebrow { font-size:11px; letter-spacing:3px; text-transform:uppercase; color:#A68B67; margin-bottom:14px; }
-  h1 { font-weight:400; font-style:italic; font-size:34px; line-height:1.25; color:#1B263B; margin-bottom:32px; }
-  h2 { font-family: Georgia, serif; font-weight:400; font-size:20px; color:#2D2D2D; margin:36px 0 12px; }
-  p { color:#3a3630; margin-bottom:16px; }
-  p:first-of-type { font-size:17px; color:#2D2D2D; }
-
-  .cta {
-    margin-top:56px; padding:32px 28px; background:#1B263B; border-radius:4px;
-    text-align:center;
-  }
-  .cta p { color:#d8dce4; margin-bottom:18px; font-size:15px; }
-  .cta a {
-    display:inline-block; background:#F9F8F4; color:#1B263B; text-decoration:none;
-    font-size:13px; letter-spacing:1px; padding:14px 32px; border-radius:3px;
-  }
-
-  footer { padding:32px 0 48px; text-align:center; border-top:1px solid #e4ded0; }
-  footer p { font-size:12px; color:#9a9182; margin:0; }
-  footer a { color:#9a9182; }
-</style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
 </head>
 <body>
-  <header>
-    <a class="logo" href="https://bitnasaju.com.br/">
-      <span class="bitna">BITNA</span>
-      <span class="saju">SAJU <span class="seal">빛나</span></span>
+<x-dc>
+<helmet>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,300;0,400;0,500;1,400&family=Work+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    body { margin: 0; background: #F7F4EE; }
+    a { color: #24211E; text-decoration: none; }
+    a:hover { color: #A67C52; }
+    ::selection { background: #e3dccb; color: #24211E; }
+  </style>
+</helmet>
+
+<div style="background:#F7F4EE; color:#24211E; font-family:'Work Sans',sans-serif;">
+
+  <nav style="position:sticky; top:0; z-index:10; background:rgba(247,244,238,0.92); backdrop-filter:blur(6px); display:flex; align-items:center; justify-content:space-between; padding:22px 64px; border-bottom:1px solid #e9e2d3;">
+    <a href="/">
+      <div style="font-size:11px; color:#A67C52; letter-spacing:2px;">빛나</div>
+      <div style="font-family:'Newsreader',serif; font-size:19px; letter-spacing:4px; color:#24211E;">BITNA SAJU</div>
     </a>
-    <a class="back" href="https://bitnasaju.com.br/#artigos">← Voltar para o site</a>
-  </header>
+    <a href="/#artigos" style="font-size:13px; letter-spacing:0.5px; border-bottom:1px solid #24211E; padding-bottom:2px;">← Voltar aos artigos</a>
+  </nav>
 
-  <main class="wrap">
-    <div class="eyebrow">Fundamentos</div>
-    <h1 class="serif">O que é o Elemento Mestre?</h1>
+  <article style="max-width:680px; margin:0 auto; padding:100px 32px 60px;">
+    <div style="font-size:11px; letter-spacing:2px; text-transform:uppercase; color:#8F9C8B; margin-bottom:20px;">Fundamentos</div>
+    <h1 style="font-family:'Newsreader',serif; font-weight:400; font-size:38px; line-height:1.25; margin:0 0 48px;">O que é o Elemento Mestre?</h1>
 
-    <p>Toda pessoa tem um jeito de ser que parece ter estado ali desde sempre — uma forma de reagir, de decidir, de ocupar espaço, que continua reconhecível mesmo quando a vida muda ao redor. O Saju dá um nome a essa constante: o Mestre do Dia, popularmente chamado de elemento mestre.</p>
+    <p style="font-size:16px; line-height:1.85; color:#3a3630; margin:0 0 32px;">Toda pessoa tem um jeito de ser que parece ter estado ali desde sempre — uma forma de reagir, de decidir, de ocupar espaço, que continua reconhecível mesmo quando a vida muda ao redor. O Saju dá um nome a essa constante: o Mestre do Dia, popularmente chamado de elemento mestre.</p>
 
-    <h2>O que é</h2>
-    <p>No sistema dos quatro pilares, cada pilar — ano, mês, dia e hora — é formado por dois caracteres: um tronco celeste e um ramo terrestre. O tronco do pilar do dia recebe um nome específico na tradição: Mestre do Dia. É o caractere que representa o "eu" no mapa — o ponto de referência a partir do qual todos os outros elementos do Saju são lidos.</p>
-    <p>Existem dez troncos celestes possíveis, e cada um pertence a um dos cinco elementos — Madeira, Fogo, Terra, Metal ou Água — em uma de duas polaridades, yang ou yin. Por isso se fala, por exemplo, em "Madeira Yang" ou "Madeira Yin": duas expressões diferentes do mesmo elemento, com temperamentos distintos entre si.</p>
+    <h3 style="font-family:'Newsreader',serif; font-weight:400; font-size:22px; margin:48px 0 16px;">O que é</h3>
+    <p style="font-size:16px; line-height:1.85; color:#3a3630; margin:0 0 20px;">No sistema dos quatro pilares, cada pilar — ano, mês, dia e hora — é formado por dois caracteres: um tronco celeste e um ramo terrestre. O tronco do pilar do dia recebe um nome específico na tradição: Mestre do Dia. É o caractere que representa o "eu" no mapa — o ponto de referência a partir do qual todos os outros elementos do Saju são lidos.</p>
+    <p style="font-size:16px; line-height:1.85; color:#3a3630; margin:0;">Existem dez troncos celestes possíveis, e cada um pertence a um dos cinco elementos — Madeira, Fogo, Terra, Metal ou Água — em uma de duas polaridades, yang ou yin. Por isso se fala, por exemplo, em "Madeira Yang" ou "Madeira Yin": duas expressões diferentes do mesmo elemento, com temperamentos distintos entre si.</p>
 
-    <h2>Por que importa</h2>
-    <p>Um mapa de Saju tem oito caracteres ao todo, e cada um deles conversa com os outros sete. Sem um ponto de referência, essa conversa não tem começo. O Mestre do Dia é esse ponto: é em relação a ele que o Saju organiza o resto do mapa em dez papéis funcionais — como a pessoa cria, como gera valor, como lida com autoridade, de onde vem o que ela sabe. Entender o Mestre do Dia é o primeiro passo de qualquer leitura, porque é a partir dele que o resto começa a fazer sentido.</p>
+    <h3 style="font-family:'Newsreader',serif; font-weight:400; font-size:22px; margin:48px 0 16px;">Por que importa</h3>
+    <p style="font-size:16px; line-height:1.85; color:#3a3630; margin:0;">Um mapa de Saju tem oito caracteres ao todo, e cada um deles conversa com os outros sete. Sem um ponto de referência, essa conversa não tem começo. O Mestre do Dia é esse ponto: é em relação a ele que o Saju organiza o resto do mapa em dez papéis funcionais — como a pessoa cria, como gera valor, como lida com autoridade, de onde vem o que ela sabe. Entender o Mestre do Dia é o primeiro passo de qualquer leitura, porque é a partir dele que o resto começa a fazer sentido.</p>
 
-    <h2>Como funciona</h2>
-    <p>Cada um dos dez troncos celestes carrega uma imagem que a tradição associa a ele havia séculos — não como decoração, mas como forma de tornar o conceito tangível. Madeira Yang, por exemplo, costuma ser associada ao carvalho: cresce reto, não pede licença. Madeira Yin, à hera ou ao bambu: encontra caminho onde não há porta, flexível por fora e decidida por dentro. Metal Yang é a espada já forjada; Metal Yin, a joia pequena e preciosa. Cada uma das dez imagens descreve uma forma diferente de sustentar identidade sob pressão.</p>
-    <p>O elemento do Mestre do Dia também se relaciona com os outros elementos presentes no mapa através de dois ciclos clássicos: o ciclo de geração (um elemento alimenta o seguinte — a Água nutre a Madeira, a Madeira alimenta o Fogo) e o ciclo de controle (um elemento contém o outro — a Terra represa a Água, a Água apaga o Fogo). Nenhum desses ciclos é bom ou ruim por si só: são as engrenagens que explicam por que certas combinações de elementos no mapa de uma pessoa produzem fluidez, e outras produzem atrito.</p>
+    <h3 style="font-family:'Newsreader',serif; font-weight:400; font-size:22px; margin:48px 0 16px;">Como funciona</h3>
+    <p style="font-size:16px; line-height:1.85; color:#3a3630; margin:0 0 20px;">Cada um dos dez troncos celestes carrega uma imagem que a tradição associa a ele havia séculos — não como decoração, mas como forma de tornar o conceito tangível. Madeira Yang, por exemplo, costuma ser associada ao carvalho: cresce reto, não pede licença. Madeira Yin, à hera ou ao bambu: encontra caminho onde não há porta, flexível por fora e decidida por dentro. Metal Yang é a espada já forjada; Metal Yin, a joia pequena e preciosa. Cada uma das dez imagens descreve uma forma diferente de sustentar identidade sob pressão.</p>
+    <p style="font-size:16px; line-height:1.85; color:#3a3630; margin:0;">O elemento do Mestre do Dia também se relaciona com os outros elementos presentes no mapa através de dois ciclos clássicos: o ciclo de geração (um elemento alimenta o seguinte — a Água nutre a Madeira, a Madeira alimenta o Fogo) e o ciclo de controle (um elemento contém o outro — a Terra represa a Água, a Água apaga o Fogo). Nenhum desses ciclos é bom ou ruim por si só: são as engrenagens que explicam por que certas combinações de elementos no mapa de uma pessoa produzem fluidez, e outras produzem atrito.</p>
 
-    <h2>O que muda na vida da pessoa</h2>
-    <p>Saber o próprio Mestre do Dia não é receber um rótulo fixo — é ganhar um vocabulário para reconhecer um padrão que provavelmente você já percebia, mas não sabia nomear. Não é sobre prever o que vai acontecer; é sobre entender por que você reage do jeito que reage quando a pressão aparece, e usar isso como ponto de partida para decidir com mais clareza, não menos.</p>
+    <h3 style="font-family:'Newsreader',serif; font-weight:400; font-size:22px; margin:48px 0 16px;">O que muda na vida da pessoa</h3>
+    <p style="font-size:16px; line-height:1.85; color:#3a3630; margin:0;">Saber o próprio Mestre do Dia não é receber um rótulo fixo — é ganhar um vocabulário para reconhecer um padrão que provavelmente você já percebia, mas não sabia nomear. Não é sobre prever o que vai acontecer; é sobre entender por que você reage do jeito que reage quando a pressão aparece, e usar isso como ponto de partida para decidir com mais clareza, não menos.</p>
+  </article>
 
-    <div class="cta">
-      <p>Curiosa(o) pra saber qual é o seu?</p>
-      <a href="https://bitnasaju.com.br/#produtos">DESCUBRA SEU SAJU</a>
+  <section style="background:#24211E; color:#F7F4EE; padding:72px 32px; text-align:center;">
+    <div style="max-width:520px; margin:0 auto;">
+      <p style="font-size:11px; letter-spacing:2px; text-transform:uppercase; color:#A67C52; margin-bottom:18px;">Descubra o seu</p>
+      <h2 style="font-family:'Newsreader',serif; font-weight:400; font-size:28px; line-height:1.3; margin:0 0 16px;">Conheça seu Elemento Mestre e seus talentos naturais</h2>
+      <p style="font-size:14px; color:#cfc7ba; line-height:1.7; margin:0 0 32px;">A Leitura Essencial revela seu Elemento Mestre, seus principais talentos e sua forma natural de pensar, agir e decidir.</p>
+      <a href="/#produtos" style="background:#F7F4EE; color:#24211E; padding:14px 28px; font-size:14px; letter-spacing:0.5px; display:inline-block;">Conhecer a Leitura Essencial</a>
     </div>
-  </main>
+  </section>
 
-  <footer>
-    <p>Bitna Saju · <a href="https://bitnasaju.com.br/">bitnasaju.com.br</a> · © 2026</p>
+  <footer style="background:#24211E; color:#8a8375; text-align:center; padding:32px; font-size:11px; letter-spacing:1px; border-top:1px solid #3a362f;">
+    © 2026 BITNA SAJU
   </footer>
+</div>
+
+</x-dc>
 </body>
 </html>

@@ -4,6 +4,14 @@ Decisões tomadas em conjunto (Ivã + Claude). Nada aqui é imutável, mas mudan
 
 ## 15/08/2026 — Publicação das 8 páginas
 
+**D53. Ajustes pós-publicação na home e correção de bug antigo dos artigos.** Editado diretamente o arquivo publicado (`Site/Bitna Saju - Site Institucional (standalone).html`), depois sincronizado de volta pro repositório:
+1. **Botões "Saiba mais" → "Compre Aqui"** nos 4 cards de `#produtos`, com o link real da Hotmart de cada produto — antes eram links mortos (`href="#"`).
+2. **Preço da Leitura Completa na home**: removida a promoção (`R$149,30 riscado → R$98,00`), fica só `R$ 149,30` — pedido explícito do Ivã.
+3. **Contraste dos botões**: viraram botões sólidos (fundo escuro nos 3 cards claros, fundo claro no card escuro da Completa) — o CSS global `a { color: #24211E }` deixava o link de "Compre Aqui" da Completa quase invisível, porque `#24211E` é a MESMA cor do fundo daquele card.
+4. **Bug de navegação dos 3 artigos institucionais** (`Site/Artigo - *.dc.html` e `Site/artigos/`): o link "← Voltar aos artigos", o logo do cabeçalho e o CTA de meio de artigo ("Conhecer a Leitura Essencial" etc.) apontavam pro arquivo-fonte bruto (`./Bitna Saju - Home Institucional.dc.html`) em vez do site publicado — por isso, ao voltar de um artigo, o visitante caía numa versão com imagens quebradas e sem os botões atualizados. Corrigido pra `/`, `/#artigos` e `/#produtos`.
+
+Editado direto no arquivo ao vivo (baixado via `curl`, editado com Python fazendo substituição por posição exata + `assert` de verificação antes de cada troca, sem tocar em mais nada do arquivo) porque o Gerenciador de Arquivos do cPanel estava instável na sessão. Testado ao vivo depois de cada mudança (contagem de ocorrências via `curl` direto no servidor, sem cache).
+
 **D52. As 8 páginas do site (D43–D51) publicadas em produção.** Domínio DNS do Resend verificado (4 registros — DKIM, SPF/MX, SPF/TXT, DMARC — adicionados na Zona DNS da HostGator via cPanel). Zip com as 8 páginas + `assets/` gerado e extraído na raiz de `bitnasaju.com.br` pelo Ivã, sem tocar em nenhum arquivo existente. Todas as 8 URLs testadas ao vivo (`/leitura-essencial/`, `/leitura-completa/`, `/sinastria-amorosa/`, `/sinastria-profissional/`, e as 4 `/enviar-dados/*/`): sem erro de console, imagens carregando, links da Hotmart corretos, todos os campos de formulário presentes (incluindo país/sexo por pessoa e os dois consentimentos nas Sinastrias). Homepage existente conferida sem alteração.
 
 **Decisão explícita do Ivã:** publicar as 8 páginas de uma vez, incluindo as 4 de `/enviar-dados/` mesmo com `[FORM_ENDPOINT_*]` ainda em placeholder (backend da Fase 5 não hospedado — Railway pendente). Risco aceito: um cliente que comprar antes do deploy do Railway vai cair num formulário que não envia de verdade. Pendência mais urgente do projeto agora.

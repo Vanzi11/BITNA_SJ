@@ -68,7 +68,7 @@ Dores principais:
 
 > **Escopo reduzido (D26) + 9 correções de padrão (D30) — ✅ implementados:** foco em "Quem sou eu?" (ciclos, cinco elementos e sinsal saíram para a Completa; núcleo do Mestre do Dia aprofundado). Padrão do PDF atualizado (D30): nome completo + "Cidade - UF" na capa, logo aprovada na capa e no fecho, fonte +1, eyebrow "EDIÇÃO ESSENCIAL · V3 · Ano", página final com os diferenciais da Completa, nome de arquivo `Tipo_Iniciais_Versão_Ano`. Refinado em D31 (nome de arquivo primeiro+último nome completo, fonte +1 só no texto corrido preservando títulos, logo maior na capa, cards da p.3 alargados, "www." no site, tópicos da p.9 maiores). Amostra canônica: `relatorios/exemplos/Essencial_IvaMRSantos_V3_2026.pdf` (9 páginas, testada com dado real). *Implementação: `app/pdf/gerar_pdf.py` + `app/server.mjs` + `relatorios/prompts/leitura_individual.md` (id técnico `essencial`).*
 
-## ⭐ Leitura Completa — R$ 98,00 (de R$ 149,30, promoção de lançamento)
+## ⭐ Leitura Completa — R$ 149,30
 *Descubra como sua vida funciona.* Amplia a Leitura Essencial com uma visão aprofundada dos ciclos, potenciais e padrões do mapa. Inclui tudo da Essencial +
 - Os Quatro Pilares completos (Ano, Mês, Dia e Hora)
 - Mapa dos Cinco Elementos: equilíbrios e excessos naturais
@@ -78,7 +78,7 @@ Dores principais:
 - Relatório completo e aprofundado em PDF (20 a 25 páginas)
 - Prioridade de entrega
 
-> **Nota (14/08/2026, D45):** preço e faixa de páginas atualizados para bater com a home — ver nota acima na Essencial.
+> **Nota (15/08/2026, D53):** promoção de lançamento encerrada por decisão do Ivã — preço voltou a R$ 149,30 cheio, sem desconto. Faixa de páginas (20-25) continua batendo com a home (D45).
 
 *Nome comercial "Leitura Completa" (renomeado de "Premium" — D27); id técnico interno segue `premium`. Implementação: `app/pdf/premium_v5/build_pdf.py` + `relatorios/prompts/leitura_premium.md`.*
 
