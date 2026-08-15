@@ -197,8 +197,9 @@ async function tokenGoogle() {
 }
 
 // Colunas da planilha "Pedidos": A carimbo · B produto · C e-mail compra · D telefone compra ·
-// E nome · F data nasc. · G hora nasc. · H cidade nasc. · I país nasc. · J tipo de relação ·
-// K status · L observações — status fica na coluna K (índice 10).
+// Pessoa 1: E nome · F data nasc. · G hora nasc. · H cidade nasc. · I país nasc. · J sexo ·
+// Pessoa 2 (vazio se não for sinastria): K nome · L data nasc. · M hora nasc. · N cidade nasc. ·
+// O país nasc. · P sexo · Q tipo de relação · R status · S observações — status fica na coluna R.
 async function gravarPedidoNaPlanilha(linha) {
   const sheetId = process.env.GOOGLE_SHEET_ID;
   const token = await tokenGoogle();
@@ -220,7 +221,7 @@ async function atualizarStatusNaPlanilha(range, status) {
   const numeroLinha = range?.match(/(\d+)/)?.[1];
   if (!sheetId || !token || !numeroLinha) return;
   const aba = process.env.GOOGLE_SHEET_ABA || 'Pedidos';
-  const celula = encodeURIComponent(`${aba}!K${numeroLinha}`);
+  const celula = encodeURIComponent(`${aba}!R${numeroLinha}`);
   const res = await fetch(
     `https://sheets.googleapis.com/v4/spreadsheets/${sheetId}/values/${celula}?valueInputOption=USER_ENTERED`,
     { method: 'PUT', headers: { authorization: `Bearer ${token}`, 'content-type': 'application/json' }, body: JSON.stringify({ values: [[status]] }) },
@@ -405,7 +406,8 @@ const server = createServer(async (req, res) => {
         nomeArquivoPdf = `Sinastria_${slugNome(b.pessoa1_nome)}_${slugNome(b.pessoa2_nome)}_${new Date().getFullYear()}.pdf`;
         linhaPlanilha = [
           new Date().toISOString(), b.produto, b.email_compra, b.telefone_compra,
-          `${b.pessoa1_nome} / ${b.pessoa2_nome}`, b.pessoa1_data, b.pessoa1_hora || '', b.pessoa1_cidade, b.pessoa1_pais || '',
+          b.pessoa1_nome, b.pessoa1_data, b.pessoa1_hora || '', b.pessoa1_cidade, b.pessoa1_pais || '', b.pessoa1_sexo,
+          b.pessoa2_nome, b.pessoa2_data, b.pessoa2_hora || '', b.pessoa2_cidade, b.pessoa2_pais || '', b.pessoa2_sexo,
           b.tipoRelacao || '', 'aguardando revisão', '',
         ];
       } else {
@@ -419,7 +421,8 @@ const server = createServer(async (req, res) => {
         nomeArquivoPdf = `${nomeArquivo(b.nome, premium)}.pdf`;
         linhaPlanilha = [
           new Date().toISOString(), b.produto, b.email_compra, b.telefone_compra,
-          b.nome, b.data, b.hora || '', b.cidade, b.pais || '',
+          b.nome, b.data, b.hora || '', b.cidade, b.pais || '', b.sexo,
+          '', '', '', '', '', '',
           '', 'aguardando revisão', '',
         ];
       }
@@ -479,7 +482,7 @@ const server = createServer(async (req, res) => {
         try { await atualizarStatusNaPlanilha(readFileSync(rangePath, 'utf8'), 'enviado'); }
         catch (e) { console.error('Falha ao atualizar planilha:', e.message); }
       }
-      try { unlinkSync(jsonPath); unlinkSync(pdfPath); if (existsSync(rangePath)) unlinkSync(rangePath); } catch {}
+      for (const p of [jsonPath, pdfPath, rangePath]) { try { if (existsSync(p)) unlinkSync(p); } catch {} }
       res.writeHead(200, { 'content-type': 'text/html; charset=utf-8' });
       return res.end(paginaConfirmacao('Aprovado e enviado ✅', `O relatório de ${info.nome} foi enviado pra ${info.emailCliente}.`));
     }

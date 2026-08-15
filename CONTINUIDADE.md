@@ -87,7 +87,7 @@ Missão em curso: 4 páginas de venda + 4 páginas de obrigado/formulário (`/le
 
 ```
 cd fortuneteller && npm install && npm run build && cd ..
-node app/server.mjs          # abre http://localhost:3333
+node --env-file-if-exists=app/.env app/server.mjs   # abre http://localhost:3333 (carrega app/.env se existir — credenciais da Fase 5)
 # Windows: pip install reportlab pypdf  (para o PDF)
 ```
 Na UI: aba Leitura → dados + produto → gerar. Sem ANTHROPIC_API_KEY o texto narrativo não sai (aparece o prompt pronto — pode ser colado em qualquer Claude); com a chave, sai automático.
