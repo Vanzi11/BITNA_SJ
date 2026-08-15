@@ -9,6 +9,8 @@ __pycache__/
 # Segredos (API keys, credenciais de serviço) — nunca versionar, repo é público no GitHub.
 .env
 .env.*
+!.env.example
+!**/.env.example
 *.key.json
 app/credentials/
 
