@@ -55,7 +55,9 @@ Lote grande implementado e testado — amostras `relatorios/exemplos/sinastria_*
 
 **As 8 páginas estão ao vivo em `bitnasaju.com.br`** — publicadas via zip extraído no cPanel, testadas uma a uma (sem erro de console, imagens ok, links da Hotmart corretos, campos de formulário completos). Domínio verificado no Resend (DKIM/SPF/DMARC via Zona DNS da HostGator). Ver D52.
 
-**⚠️ Pendência mais urgente agora:** as 4 páginas `/enviar-dados/*/` estão publicadas com `[FORM_ENDPOINT_*]` ainda em placeholder — decisão explícita do Ivã de publicar assim mesmo. **Um cliente que comprar antes do Railway existir vai cair num formulário que não envia os dados de verdade.** Priorizar o deploy da Fase 5 (D44/D50) o quanto antes.
+**✅ Resolvido (15/08/2026):** backend publicado no Railway (`https://bitnasj-production.up.railway.app`, D54) e os 4 `[FORM_ENDPOINT_*]` das páginas `/enviar-dados/*/` já apontam pra lá em produção (D55) — testado de ponta a ponta com pedido sintético (PDF + planilha + e-mail funcionando ao vivo).
+
+**⚠️ Pendência mais urgente agora:** `ANTHROPIC_API_KEY` ainda não está configurada no Railway. Sem ela, o texto interpretativo do relatório (escrito por IA) não é gerado — o resto do pipeline (cálculo, PDF, planilha, e-mail) funciona normalmente. Pegar a chave no console da Anthropic (console.anthropic.com) e adicionar nas Variables do serviço Railway.
 
 Missão em curso: 4 páginas de venda + 4 páginas de obrigado/formulário (`/leitura-essencial/`, `/leitura-completa/`, `/sinastria-amorosa/`, `/sinastria-profissional/`, cada uma com `/obrigado/`). Auditoria inicial corrigiu a premissa (não é WordPress/Elementor — o site é HTML standalone exportado do "Claude Design", publicado manualmente no cPanel). Decisões fechadas: checkout **Hotmart** (D43), hospedagem do backend automatizado **Railway** (D44), preços/páginas corrigidos no `EMPRESA.md` para bater com a home publicada (D45).
 
@@ -71,7 +73,7 @@ Missão em curso: 4 páginas de venda + 4 páginas de obrigado/formulário (`/le
 
 **Pendências reais antes de publicar (valem para as 8 páginas):**
 - ~~`[HOTMART_*]` nos botões de compra~~ — ✅ **resolvido (15/08/2026)**: links reais de checkout nas 4 páginas de venda.
-- `[FORM_ENDPOINT_*]` no `action` dos formulários de `/enviar-dados/` — **já está no ar assim, D52** — o backend (Fase 5) já existe e foi testado localmente com credenciais reais (D50/D51), mas ainda não está publicado num endereço público (falta o deploy no Railway, D44). Prioridade máxima até isso ser resolvido.
+- ~~`[FORM_ENDPOINT_*]` no `action` dos formulários de `/enviar-dados/`~~ — ✅ **resolvido (15/08/2026)**: backend no ar no Railway, formulários ligados (D54/D55).
 - PDF de Boas-vindas (entregue via área de acesso da Hotmart, linkando pro formulário) — decisão explícita do Ivã de não escrever agora.
 - Seção "Exemplo do relatório" com mockups reais das páginas internas do PDF — pulado por decisão do Ivã, substituído pela imagem ilustrativa do produto.
 - Tensão de página count da Essencial (ver D45) ainda não resolvida.
