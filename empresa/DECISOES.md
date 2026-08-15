@@ -2,6 +2,12 @@
 
 Decisões tomadas em conjunto (Ivã + Claude). Nada aqui é imutável, mas mudanças devem ser registradas.
 
+## 15/08/2026 — Publicação das 8 páginas
+
+**D52. As 8 páginas do site (D43–D51) publicadas em produção.** Domínio DNS do Resend verificado (4 registros — DKIM, SPF/MX, SPF/TXT, DMARC — adicionados na Zona DNS da HostGator via cPanel). Zip com as 8 páginas + `assets/` gerado e extraído na raiz de `bitnasaju.com.br` pelo Ivã, sem tocar em nenhum arquivo existente. Todas as 8 URLs testadas ao vivo (`/leitura-essencial/`, `/leitura-completa/`, `/sinastria-amorosa/`, `/sinastria-profissional/`, e as 4 `/enviar-dados/*/`): sem erro de console, imagens carregando, links da Hotmart corretos, todos os campos de formulário presentes (incluindo país/sexo por pessoa e os dois consentimentos nas Sinastrias). Homepage existente conferida sem alteração.
+
+**Decisão explícita do Ivã:** publicar as 8 páginas de uma vez, incluindo as 4 de `/enviar-dados/` mesmo com `[FORM_ENDPOINT_*]` ainda em placeholder (backend da Fase 5 não hospedado — Railway pendente). Risco aceito: um cliente que comprar antes do deploy do Railway vai cair num formulário que não envia de verdade. Pendência mais urgente do projeto agora.
+
 ## 18/07/2026
 
 **D1. Marca e posicionamento** — Saju explícito e na frente (nome, domínio, comunicação), aproveitando a onda K-culture. A especificação V3 ("Sistema Oriental de Análise de Perfil") NÃO substitui a marca: vira a **voz** dos relatórios — analítica, comportamental, anti-mística, anti-fatalista.
