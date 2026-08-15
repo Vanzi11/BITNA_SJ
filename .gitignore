@@ -21,3 +21,4 @@ empresa/marca/fontes-originais/
 # nome completo + data/hora/local de nascimento é dado pessoal real, LGPD).
 # relatorios/exemplos/ continua rastreado normalmente (só cobaias de teste da casa).
 relatorios/clientes/
+app/pedidos_pendentes/

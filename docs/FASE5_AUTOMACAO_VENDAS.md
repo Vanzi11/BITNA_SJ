@@ -1,6 +1,6 @@
 # Fase 5 (plano) — Automação de vendas: webhook → formulário → geração → aprovação → envio
 
-> Status: **plano, não implementado**. Hospedagem: **Railway** (decisão fechada, D44). Plataforma de venda: **Hotmart** (decisão fechada, D43). Painel de pedidos: **Google Sheets + e-mail** (decisão fechada, D49). Formulários: as 8 páginas do site (D43–D48) já existem como HTML estático em `Site/enviar-dados/{produto}/` — isso muda o desenho original abaixo (ver seção "O que mudou").
+> Status: **passos 1–3 implementados e testados localmente (14/08/2026, D50)** — falta configurar credenciais reais (Resend, Google Sheets), o webhook da Hotmart e o deploy no Railway (passos 4–6). Hospedagem: **Railway** (decisão fechada, D44). Plataforma de venda: **Hotmart** (decisão fechada, D43). Painel de pedidos: **Google Sheets + e-mail** (decisão fechada, D49). Formulários: as 8 páginas do site (D43–D48) já existem como HTML estático em `Site/enviar-dados/{produto}/` — isso muda o desenho original abaixo (ver seção "O que mudou").
 
 ## Objetivo
 
@@ -47,12 +47,12 @@ carimboDataHora | produto | emailCompra | telefoneCompra | nome (ou nomePessoa1/
 
 ## Ordem de construção sugerida
 
-1. **Rota `/enviar-dados/:produto/dados` + gravação na planilha** (testável sozinha, submetendo os formulários já publicados)
-2. **Geração automática ao submeter o formulário** (conecta ao que já existe: `/leitura`/`/sinastria` + `/pdf`)
-3. **E-mail de aprovação pro Ivã + rota de aprovar**
-4. **Webhook real da Hotmart** (entra por último — mais fácil de testar depois dos passos 1–3 validados manualmente)
-5. **Envio final ao cliente**
-6. **Deploy no Railway** (D44) — só depois do resto validado local
+1. ~~**Rota `/enviar-dados/:produto/dados` + gravação na planilha**~~ — ✅ implementado (`app/server.mjs`). Grava a linha via `gravarPedidoNaPlanilha` (pula com aviso no console se `GOOGLE_SHEET_ID`/`GOOGLE_SERVICE_ACCOUNT_KEY_PATH` não estiverem configurados — não bloqueia o resto).
+2. ~~**Geração automática ao submeter o formulário**~~ — ✅ implementado, reaproveitando `montarLeitura`/`gerarRelatorioLLM` e um novo helper `gerarPdfBuffer` (usado também pela nova rota `/pdf-sinastria`, que fecha a pendência do `REDTEAM_STATUS.md` item 2).
+3. ~~**E-mail de aprovação pro Ivã + rota de aprovar**~~ — ✅ implementado (`enviarEmail` via Resend, rota `GET /pedidos/:id/aprovar`). Testado localmente sem `RESEND_API_KEY`/planilha configuradas: PDF gerado corretamente, e-mail/planilha pulados com aviso, sem quebrar o fluxo.
+4. **Webhook real da Hotmart** — ainda não implementado. Próximo passo depois de validar 1–3 com credenciais reais.
+5. **Envio final ao cliente** — código pronto (dentro da rota de aprovação), falta testar com `RESEND_API_KEY` real.
+6. **Deploy no Railway** (D44) — pendente, precisa da conta criada pelo Ivã.
 
 ## Não muda em nada
 

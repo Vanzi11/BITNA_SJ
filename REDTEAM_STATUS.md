@@ -14,13 +14,15 @@ Com o TZ genuinamente correto, **as 133 verificações da suíte de testes passa
 
 **Entregue**: `fortuneteller/tests/redteam-oracles.test.ts` (oráculos Ivã/Fagundes + regressão de DST brasileiro jan/1990) + fix de `jest.config.js`. Commits `3ed970c` e `d6e84db`.
 
-## Item 2 — Terceiros no relatório (nome completo no PDF de Sinastria) — ✅ FEITO (parcial — falta consentimento no formulário)
+## Item 2 — Terceiros no relatório (nome completo no PDF de Sinastria) — ✅ FECHADO (14/08/2026)
 
-`app/pdf/sinastria/build_sinastria.py`: a capa (`pagina_capa`) e o cartão-identidade de cada pessoa (`card_pessoa`) mostravam o nome completo das duas pessoas — trocado por iniciais (`_iniciais_curtas`, já existia e já era usado no rodapé). O nome completo continua existindo só no JSON de entrada em memória durante a geração — hoje não é persistido em disco pelo `server.mjs` (não existe rota `/pdf-sinastria` ainda; quando for criada, replicar o padrão do `/pdf` — grava em `tmpdir()` e apaga logo depois com `unlinkSync`).
+`app/pdf/sinastria/build_sinastria.py`: a capa (`pagina_capa`) e o cartão-identidade de cada pessoa (`card_pessoa`) mostravam o nome completo das duas pessoas — trocado por iniciais (`_iniciais_curtas`, já existia e já era usado no rodapé). O nome completo continua existindo só no JSON de entrada em memória durante a geração — persistido em disco só temporariamente (`tmpdir()`, apagado logo em seguida com `unlinkSync`), no mesmo padrão do `/pdf`.
 
 A prosa do relatório (texto do LLM) continua endereçando cada pessoa só pelo primeiro nome — já era assim (padrão D19), não é nome completo, mantido.
 
-**Pendente, não é código**: o checkbox de consentimento da segunda pessoa no formulário de coleta de dados. Hoje a coleta é manual por e-mail (`docs/FASE4B`), não um formulário web — quando o formulário automático da Fase 5 existir, incluir esse consentimento. Registrado aqui, não em código ainda.
+**Rota `/pdf-sinastria` criada** em `app/server.mjs` (Fase 5), replicando o padrão do `/pdf` via o helper `gerarPdfBuffer`. Testada com dado sintético — gera PDF completo.
+
+**Consentimento da segunda pessoa: feito.** Os 4 formulários estáticos (`Site/enviar-dados/`) e a rota `POST /enviar-dados/:produto/dados` exigem um segundo checkbox (`consentimento_pessoa2`) nas duas Sinastrias — quem compra confirma que tem autorização da Pessoa 2 pra informar os dados dela. Ver D47/D48 em `empresa/DECISOES.md`.
 
 ## Item 3 — Disclaimers nas sinastrias — ✅ FECHADO (aprovado por advogado, 05/08/2026)
 
