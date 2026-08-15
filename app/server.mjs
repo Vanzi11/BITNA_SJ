@@ -169,11 +169,15 @@ const base64url = (input) =>
 let tokenGoogleCache = { token: null, exp: 0 };
 
 async function tokenGoogle() {
+  // Local (dev): caminho pro arquivo .json baixado do Google Cloud (GOOGLE_SERVICE_ACCOUNT_KEY_PATH).
+  // Railway (produção): o conteúdo do .json direto numa variável de ambiente (GOOGLE_SERVICE_ACCOUNT_KEY_JSON) —
+  // não há como referenciar um arquivo local no servidor de deploy.
   const keyPath = process.env.GOOGLE_SERVICE_ACCOUNT_KEY_PATH;
-  if (!keyPath) return null;
+  const keyJson = process.env.GOOGLE_SERVICE_ACCOUNT_KEY_JSON;
+  if (!keyPath && !keyJson) return null;
   const agora = Math.floor(Date.now() / 1000);
   if (tokenGoogleCache.token && tokenGoogleCache.exp - 60 > agora) return tokenGoogleCache.token;
-  const cred = JSON.parse(readFileSync(keyPath, 'utf8'));
+  const cred = keyJson ? JSON.parse(keyJson) : JSON.parse(readFileSync(keyPath, 'utf8'));
   const header = base64url(JSON.stringify({ alg: 'RS256', typ: 'JWT' }));
   const claims = base64url(JSON.stringify({
     iss: cred.client_email,
