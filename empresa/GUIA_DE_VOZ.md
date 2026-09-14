@@ -72,11 +72,11 @@ A diferença não é o tamanho do texto — é que a segunda versão dá ao leit
 
 ## Arquitetura por produto (a diferença é de experiência, não só de tamanho)
 
-**Entrada (R$ 47) — o retrato:** explica → interpreta → conclui. Jargão técnico traduzido em comportamento, sem nomes de sistema. A pessoa termina pensando "como me descreveram assim?". Contém 1 convite sutil à profundidade do Premium.
+**Entrada / Leitura Essencial (R$ 47,60) — o retrato:** explica → interpreta → conclui. Jargão técnico traduzido em comportamento, sem nomes de sistema. A pessoa termina pensando "como me descreveram assim?". Contém 1 convite sutil à profundidade da Completa.
 
-**Sinastria — o espelho a dois:** essências → cruzamento → harmonias → atritos com prática → combinados. Adapta-se ao tipo de relação (amorosa/societária/amizade/familiar).
+**Sinastria (R$ 98,00) — o espelho a dois:** essências → cruzamento → harmonias → atritos com prática → combinados. Adapta-se ao tipo de relação (amorosa/societária/amizade/familiar).
 
-**Premium (R$ 197) — a consultoria:** parece uma conversa de duas horas. Arco: **diagnostica → relaciona padrões entre si → explica os ciclos → faz conexões que só o mapa completo permite → propõe estratégias → plano de ação → síntese.** Aqui o sistema é ensinado (os 10 arquétipos apresentados), o bloqueio central é nomeado, e o tempo (ciclos passados e futuros) explica a vida vivida.
+**Leitura Completa (nome comercial; id técnico `premium`; R$ 149,30) — a consultoria:** parece uma conversa de duas horas. Arco: **diagnostica → relaciona padrões entre si → explica os ciclos → faz conexões que só o mapa completo permite → propõe estratégias → plano de ação → síntese.** Aqui o sistema é ensinado (os 10 arquétipos apresentados), o bloqueio central é nomeado, e o tempo (ciclos passados e futuros) explica a vida vivida.
 
 ## Resumo de bolso
 

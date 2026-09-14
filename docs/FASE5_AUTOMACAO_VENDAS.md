@@ -1,6 +1,6 @@
 # Fase 5 (plano) — Automação de vendas: webhook → formulário → geração → aprovação → envio
 
-> Status: **passos 1–3 implementados e testados localmente (14/08/2026, D50)** — falta configurar credenciais reais (Resend, Google Sheets), o webhook da Hotmart e o deploy no Railway (passos 4–6). Hospedagem: **Railway** (decisão fechada, D44). Plataforma de venda: **Hotmart** (decisão fechada, D43). Painel de pedidos: **Google Sheets + e-mail** (decisão fechada, D49). Formulários: as 8 páginas do site (D43–D48) já existem como HTML estático em `Site/enviar-dados/{produto}/` — isso muda o desenho original abaixo (ver seção "O que mudou").
+> Status (atualizado 13/09/2026): **✅ concluído e em produção.** Credenciais reais (Resend, Google Sheets, `ANTHROPIC_API_KEY`) configuradas e validadas de ponta a ponta (D51); deploy feito no Railway, domínio público no ar (D54); os 4 formulários estáticos já apontam para o backend real (D55). Não existe webhook da Hotmart (a verificação de comprador é manual, por decisão consciente — ver D47/D48/D49, seção "O que mudou" abaixo). Hospedagem: **Railway** (decisão fechada, D44). Plataforma de venda: **Hotmart** (decisão fechada, D43). Painel de pedidos: **Google Sheets + e-mail** (decisão fechada, D49). Formulários: as 8 páginas do site (D43–D48) existem como HTML estático em `Site/enviar-dados/{produto}/` — isso mudou o desenho original abaixo (ver seção "O que mudou"). O plano descrito neste documento é o que foi de fato construído; fica como referência de arquitetura, não como plano em aberto.
 
 ## Objetivo
 

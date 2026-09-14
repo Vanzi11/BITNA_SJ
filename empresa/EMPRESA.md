@@ -112,10 +112,10 @@ Dores principais:
 
 *Produto novo (D29) — empacotamento, sem motor/prompt novo. Depende do PDF de Sinastria (D28), de formulário multi-pessoa e do fluxo de entrega dos 3 PDFs juntos. Substitui na prática o "Mapa Completo do Parceiro" (D4), agora fora do line-up.*
 
-## 📖 Guia Ilustrado do Saju — ~R$ 9,90 (decidido, em construção)
+## 📖 Guia Ilustrado do Saju — R$ 9,80 (decidido, em construção)
 *Os conceitos fundamentais da tradição coreana em uma leitura rápida.* Produto curto, ilustrado e independente: explica de forma introdutória o que é Saju, como o mapa é calculado, Quatro Pilares, Cinco Elementos e conceitos fundamentais.
 
-> **Nota (13/09/2026):** decisão do Ivã — é a exceção explícita à regra "não criar produtos novos agora" (ver `empresa/CONTEXTO_E_AJUSTES_PROJETO_COMERCIAL_BITNA_SAJU_V1.md`, seção 4). Principal candidato a **order bump** no checkout da Essencial e da Completa (fricção baixa: ~R$9,80 adicionados a uma compra já decidida), preferido à Sinastria como bump por não exigir dados de uma segunda pessoa. Ainda não tem motor, prompt nem gerador de PDF — a construir.
+> **Nota (13/09/2026):** decisão do Ivã — é a exceção explícita à regra "não criar produtos novos agora" (ver `empresa/CONTEXTO_E_AJUSTES_PROJETO_COMERCIAL_BITNA_SAJU_V1.md`, seção 4). Principal candidato a **order bump** no checkout da Essencial e da Completa (fricção baixa: R$9,80 adicionados a uma compra já decidida), preferido à Sinastria como bump por não exigir dados de uma segunda pessoa. Ainda não tem motor, prompt nem gerador de PDF — a construir.
 
 ## Clube Saju — R$ 27,90/mês (fase 2)
 Horóscopo coreano mensal, conteúdos exclusivos, comunidade, descontos, novas leituras, sinastrias promocionais. Inicialmente conceito — não construir agora.

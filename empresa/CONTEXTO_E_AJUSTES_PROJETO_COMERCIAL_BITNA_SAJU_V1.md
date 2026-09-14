@@ -112,7 +112,7 @@ O plano sugeriu inicialmente Essencial → order bump Sinastria → upsell Compl
 
 **Guia Ilustrado do Saju — Os conceitos fundamentais da tradição coreana em uma leitura rápida.**
 
-**Status (13/09/2026): DECIDIDO, não hipótese.** O Ivã aprovou a construção deste produto em breve — é a exceção explícita à regra "não criar produtos novos agora" da seção 15. Trata-se de um produto curto, ilustrado, independente e com preço aproximado de **R$ 9 a R$ 10**.
+**Status (13/09/2026): DECIDIDO, não hipótese.** O Ivã aprovou a construção deste produto em breve — é a exceção explícita à regra "não criar produtos novos agora" da seção 15. Trata-se de um produto curto, ilustrado, independente, com preço definido de **R$ 9,80**.
 
 Explicará de maneira introdutória o que é Saju, como o mapa é calculado, Quatro Pilares, Cinco Elementos e conceitos fundamentais.
 
