@@ -354,3 +354,9 @@ Caminho técnico das 8 páginas: HTML estático independente por página, sem o 
 5. **`Site/` não tinha README** — a pasta com as 8 páginas publicadas e os assets do site nunca ganhou um, indo contra a regra 6 do `PROTOCOLO_DE_SESSAO.md`. Criado `Site/README.md`.
 
 Nenhum destes itens era uma decisão errada — eram documentos que pararam de ser atualizados no mesmo turno em que o trabalho real avançou (a própria falha que o `PROTOCOLO_DE_SESSAO.md` tenta prevenir na regra 6).
+
+## 14/09/2026 — Cronograma operacional e pendência de preço da Jornada
+
+> Contexto: a Naia (via Juliana Ops) trouxe `CRONOGRAMA_OPERACIONAL_BITNA_SAJU_4_6_SEMANAS.md`, cruzado com o repositório antes de aprovado pelo Ivã. A checagem revelou uma conta que não fecha mais.
+
+**D61. PENDENTE — preço da Jornada Bitna não recalculado desde o fim da promoção da Completa (D53).** O preço atual (R$249 "de R$291") foi calculado no D45 usando a Completa promocional a R$98 (2×98+98=294, -15%≈250). A promoção acabou em 15/08/2026 (D53) e a Completa voltou a R$149,30 cheio, mas ninguém recalculou a Jornada depois. Com os preços atuais, o valor cheio dos componentes (2 Completas + 1 Sinastria) é **R$396,60**; os mesmos ~15% de desconto dariam **~R$337**, não R$249 (que hoje equivale a ~37% de desconto). **Decisão pendente do Ivã**: manter R$249 como desconto agressivo proposital, ou subir para perto de R$337 para preservar a lógica de desconto das outras ofertas. Nenhum valor foi alterado em `empresa/EMPRESA.md` até essa decisão ser tomada — fica registrado aqui só o alerta, para não ser silenciosamente "corrigido" sem aprovação (preço é item 🟡 da governança).
