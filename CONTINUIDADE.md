@@ -5,8 +5,9 @@ Você é a IA que assume a construção da **Bitna Saju** — empresa de relató
 ## Ordem de leitura obrigatória
 
 0. `PROTOCOLO_DE_SESSAO.md` — as regras de trabalho de TODA sessão (abertura, registro de decisões, checklist de saída, commits). Não é opcional.
+0.5. `GOVERNANCA_DA_SQUAD_BITNA.md` — quem decide o quê, autonomia por padrão vs. escalonamento por exceção, e a exceção vigente de aprovação humana antes do envio final ao cliente (seção 14.1). `NAIA.md` explica o que "Naia" significa no nome "Squad Bitna (Naia)".
 1. Este arquivo inteiro.
-2. `empresa/EMPRESA.md` → `empresa/GUIA_DE_VOZ.md` → `empresa/DECISOES.md` (TODAS as decisões, D1 em diante — o número cresce a cada sessão) → `empresa/PESQUISA_MERCADO.md`
+2. `empresa/EMPRESA.md` → `empresa/GUIA_DE_VOZ.md` → `empresa/DECISOES.md` (TODAS as decisões, D1 em diante — o número cresce a cada sessão) → `empresa/CONTEXTO_E_AJUSTES_PROJETO_COMERCIAL_BITNA_SAJU_V1.md` → `empresa/PESQUISA_MERCADO.md`
 3. `relatorios/prompts/` (os 3 system prompts — ativos centrais)
 4. O README.md de cada pasta antes de mexer nela.
 
@@ -18,7 +19,7 @@ Você é a IA que assume a construção da **Bitna Saju** — empresa de relató
 
 **Prompts dos relatórios** (`relatorios/prompts/`): voz aprovada (mulher madura, vivida e acolhedora; honestidade acolhedora; estrutura V3 com frases fixas da casa). O relatório-padrão de qualidade é `relatorios/exemplos/relatorio_iva_premium_demonstracao.md`.
 
-**Dois produtos prontos DE PONTA A PONTA**: Leitura Essencial (R$ 47, `app/pdf/gerar_pdf.py`, identidade própria — D21; escopo a enxugar, D26) e Leitura Completa (R$ 97 — nome comercial, renomeada de "Premium", id técnico segue `premium`; `app/pdf/premium_v5/build_pdf.py`, visual "livro de Seul" parametrizado — D14–D19). Ambos: cálculo + texto + PDF testados com dados reais. As duas Sinastrias já têm PDF entregável (D34, `app/pdf/sinastria/build_sinastria.py`). As Jornadas Bitna (bundle) agora são construíveis — falta só o empacotamento (D29).
+**Dois produtos prontos DE PONTA A PONTA**: Leitura Essencial (`app/pdf/gerar_pdf.py`, identidade própria — D21; escopo a enxugar, D26) e Leitura Completa (nome comercial, renomeada de "Premium", id técnico segue `premium`; `app/pdf/premium_v5/build_pdf.py`, visual "livro de Seul" parametrizado — D14–D19). Ambos: cálculo + texto + PDF testados com dados reais. As duas Sinastrias já têm PDF entregável (D34, `app/pdf/sinastria/build_sinastria.py`). As Jornadas Bitna (bundle) agora são construíveis — falta só o empacotamento (D29). *Preços citados nesta seção (R$47/R$97) são os valores da época de cada decisão (D21/D22/D27) — **os preços reais atuais em produção estão em `empresa/EMPRESA.md` e `empresa/LINKS_HOTMART.md`** (Essencial R$47,60 · Completa R$149,30 · Sinastrias R$98,00, D45/D53).*
 
 ## REGRAS INVIOLÁVEIS (a identidade da empresa)
 
@@ -81,6 +82,7 @@ Missão em curso: 4 páginas de venda + 4 páginas de obrigado/formulário (`/le
 
 ## Demais pendências (ordem sugerida)
 
+0. **[D58] Construir o Guia Ilustrado do Saju** (~R$9,90) — produto novo decidido (não hipótese), candidato a order bump da Essencial/Completa. Falta tudo: prompt, motor/conteúdo e gerador de PDF. Ver `empresa/EMPRESA.md` e `empresa/CONTEXTO_E_AJUSTES_PROJETO_COMERCIAL_BITNA_SAJU_V1.md` (seção 4).
 1. ~~**[D28] Construir o gerador de PDF de Sinastria**~~ — ✅ **CONCLUÍDO (04/08/2026, D34).** `app/pdf/sinastria/build_sinastria.py`: 1 gerador, 2 produtos por tema (`tipoRelacao`) — Seal Red amorosa / Matte Bronze profissional. 10 páginas com 2 diagramas (ciclo dos 5 elementos + "o que um traz ao outro") e orientação individual a cada pessoa (D33). Testado com 2 pares reais → amostras `relatorios/exemplos/sinastria_*_AMOSTRA_v2.pdf`. Pendências menores: rota `/pdf-sinastria` no `server.mjs`, paletas formais, apagar amostras v1. **Destrava as Jornadas Bitna (D29), agora construíveis.**
 2. ~~**[D26] Enxugar a Leitura Essencial**~~ + ~~**[D30] 9 correções de padrão do PDF**~~ — ✅ **CONCLUÍDOS (03/08/2026).** D26: prompt 12→8 seções, foco "Quem sou eu?", página de elementos premium-only, → 9 páginas (era 11). D30: nome completo + "Cidade - UF" na capa, logo aprovada na capa/fecho, fonte +1, eyebrow com versão (V3), página final com diferenciais da Completa, "Saju Brasil"→"Bitna Saju", ideograma 四柱 na abertura, adendos elementais no Faça mais/Evite, nome de arquivo `Tipo_Iniciais_V_Ano`. Tocou `gerar_pdf.py`, `server.mjs` (uf + nome de arquivo) e `leitura_individual.md`. Refinado em **D31** (nome de arquivo primeiro+último nome completo → `Essencial_IvaMRSantos_V3_2026`, fonte +1 só no texto corrido preservando títulos, logo maior na capa, cards da p.3 alargados, "www." no site, tópicos da p.9 dobrados). Refinado ainda em **D32** (título nunca fecha página via `keepWithNext`; tópicos da p.9 reequilibrados; rótulo "Mestre do Dia do seu nascimento" na p.7). Amostra canônica: `relatorios/exemplos/Essencial_IvaMRSantos_V3_2026.pdf`. Ver D26, D30, D31 e D32.
 3. **[D29] Empacotar as Jornadas Bitna** — formulário multi-pessoa (2–3 pessoas numa compra) + entrega dos 3 PDFs juntos. Depende de D28.

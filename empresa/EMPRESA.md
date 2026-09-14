@@ -1,6 +1,6 @@
 # BITNA SAJU
 > Documento de Contexto da Empresa
-> Versão 1.2 (03/08/2026)
+> Versão 1.3 (13/09/2026) — operação passa a ser identificada como **Squad Bitna (Naia)**; ver `GOVERNANCA_DA_SQUAD_BITNA.md` e `NAIA.md`, na raiz do repositório, para autoridade, limites e o que "Naia" significa.
 ---
 # Visão Geral
 A Bitna Saju é uma empresa digital AI First dedicada à divulgação e comercialização de produtos baseados no Saju (Quatro Pilares do Destino), adaptados para o público brasileiro.
@@ -112,6 +112,11 @@ Dores principais:
 
 *Produto novo (D29) — empacotamento, sem motor/prompt novo. Depende do PDF de Sinastria (D28), de formulário multi-pessoa e do fluxo de entrega dos 3 PDFs juntos. Substitui na prática o "Mapa Completo do Parceiro" (D4), agora fora do line-up.*
 
+## 📖 Guia Ilustrado do Saju — ~R$ 9,90 (decidido, em construção)
+*Os conceitos fundamentais da tradição coreana em uma leitura rápida.* Produto curto, ilustrado e independente: explica de forma introdutória o que é Saju, como o mapa é calculado, Quatro Pilares, Cinco Elementos e conceitos fundamentais.
+
+> **Nota (13/09/2026):** decisão do Ivã — é a exceção explícita à regra "não criar produtos novos agora" (ver `empresa/CONTEXTO_E_AJUSTES_PROJETO_COMERCIAL_BITNA_SAJU_V1.md`, seção 4). Principal candidato a **order bump** no checkout da Essencial e da Completa (fricção baixa: ~R$9,80 adicionados a uma compra já decidida), preferido à Sinastria como bump por não exigir dados de uma segunda pessoa. Ainda não tem motor, prompt nem gerador de PDF — a construir.
+
 ## Clube Saju — R$ 27,90/mês (fase 2)
 Horóscopo coreano mensal, conteúdos exclusivos, comunidade, descontos, novas leituras, sinastrias promocionais. Inicialmente conceito — não construir agora.
 ---
@@ -123,7 +128,7 @@ AI First. IA para: geração dos relatórios, revisão, atendimento, conteúdo, 
 Humano: revisão, decisões, melhoria contínua, estratégia.
 ---
 # Presença Digital
-Domínio: a definir — bitnasaju.com.br (ou equivalente) precisa ter disponibilidade confirmada antes do registro (ver D23)
+Domínio: **bitnasaju.com.br**, registrado e ao vivo em produção desde 15/08/2026 — 8 páginas publicadas (venda + pós-compra dos 4 produtos), backend automatizado no Railway (ver D52–D55).
 Canais iniciais: site institucional, Instagram.
 Futuro: Clube Saju, área de membros.
 ---
