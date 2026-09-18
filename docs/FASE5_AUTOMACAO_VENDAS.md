@@ -21,6 +21,7 @@ carimboDataHora | produto | emailCompra | telefoneCompra | nome (ou nomePessoa1/
 | dataNascimento | horaNascimento | cidadeNascimento | paisNascimento | sexo
 | tipoRelacao (só sinastria) | status ("aguardando revisão" | "aprovado" | "enviado")
 | linkPdf (se guardarmos o PDF em algum lugar acessível) | observações
+| utm_source | utm_medium | utm_campaign | utm_content | utm_term | landing_page | referrer
 ```
 
 `status` começa em "aguardando revisão" (preenchido pelo backend ao gravar a linha) e o Ivã atualiza manualmente conforme processa — mesma lógica de controle de qualidade manual já usada na Fase 4B, só que documentada em planilha em vez de e-mail solto.
@@ -52,7 +53,8 @@ carimboDataHora | produto | emailCompra | telefoneCompra | nome (ou nomePessoa1/
 3. ~~**E-mail de aprovação pro Ivã + rota de aprovar**~~ — ✅ implementado (`enviarEmail` via Resend, rota `GET /pedidos/:id/aprovar`). Testado localmente sem `RESEND_API_KEY`/planilha configuradas: PDF gerado corretamente, e-mail/planilha pulados com aviso, sem quebrar o fluxo.
 4. **Webhook real da Hotmart** — ainda não implementado. Próximo passo depois de validar 1–3 com credenciais reais.
 5. **Envio final ao cliente** — código pronto (dentro da rota de aprovação), falta testar com `RESEND_API_KEY` real.
-6. **Deploy no Railway** (D44) — pendente, precisa da conta criada pelo Ivã.
+6. **Tracking mínimo de origem** — código preparado no site/formulários para capturar UTMs, landing page e referrer e anexar esses campos à linha da planilha. Falta deploy e ajuste dos cabeçalhos da planilha real antes de considerar validado em produção.
+7. **Deploy no Railway** (D44) — pendente, precisa da conta criada pelo Ivã.
 
 ## Não muda em nada
 

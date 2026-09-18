@@ -104,13 +104,13 @@ Dores principais:
 
 *Implementação (Amorosa e Profissional): mesmo motor + mesmo prompt-base `relatorios/prompts/sinastria.md` + **mesmo gerador de PDF** `app/pdf/sinastria/build_sinastria.py`, diferenciados pelo campo `tipoRelacao`. 1 SKU técnico, 2 posicionamentos, com tema por tipo (Seal Red amorosa / Matte Bronze profissional). **PDF construído e testado (D34), 10 páginas com 2 diagramas (ciclo dos elementos + complementaridade) e orientação individual a cada pessoa.** Amostras em `relatorios/exemplos/sinastria_*_AMOSTRA_v2.pdf`.*
 
-## 🌸 Jornadas Bitna — R$ 249 (de R$ 291)
-*Para quem quer compreender a si mesmo e seus relacionamentos.* Bundle de relatórios já existentes (~15% de desconto sobre a soma).
+## 🌸 Jornadas Bitna — R$ 332,00
+*Para quem quer compreender a si mesmo e seus relacionamentos.* Bundle de relatórios já existentes. Valor cheio dos componentes atuais: R$396,60; preço final decidido por Ivã em R$332,00 (D64), preservando a regra comercial/estética de soma dos algarismos chegar a 8 (3+3+2=8).
 - **Jornada Amorosa** — 2 Leituras Completas (uma para cada pessoa) + 1 Sinastria Amorosa
 - **Jornada Profissional** — 2 Leituras Completas (uma para cada pessoa) + 1 Sinastria Profissional
 - 3 relatórios personalizados, com prioridade de entrega (até 48 horas)
 
-*Produto novo (D29) — empacotamento, sem motor/prompt novo. Depende do PDF de Sinastria (D28), de formulário multi-pessoa e do fluxo de entrega dos 3 PDFs juntos. Substitui na prática o "Mapa Completo do Parceiro" (D4), agora fora do line-up.*
+*Produto novo (D29) — empacotamento, sem motor/prompt novo. O preço foi fechado em D64; ainda precisa ser refletido no cadastro/oferta/checkout antes de tráfego pago ou comunicação pública da Jornada. Depende de formulário multi-pessoa e do fluxo de entrega dos 3 PDFs juntos. Substitui na prática o "Mapa Completo do Parceiro" (D4), agora fora do line-up.*
 
 ## 📖 Guia Ilustrado do Saju — R$ 9,80 (decidido, em construção)
 *Os conceitos fundamentais da tradição coreana em uma leitura rápida.* Produto curto, ilustrado e independente: explica de forma introdutória o que é Saju, como o mapa é calculado, Quatro Pilares, Cinco Elementos e conceitos fundamentais.

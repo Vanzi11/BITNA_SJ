@@ -204,6 +204,7 @@ async function tokenGoogle() {
 // Pessoa 1: E nome · F data nasc. · G hora nasc. · H cidade nasc. · I país nasc. · J sexo ·
 // Pessoa 2 (vazio se não for sinastria): K nome · L data nasc. · M hora nasc. · N cidade nasc. ·
 // O país nasc. · P sexo · Q tipo de relação · R status · S observações — status fica na coluna R.
+// Tracking mínimo: T utm_source · U utm_medium · V utm_campaign · W utm_content · X utm_term · Y landing_page · Z referrer.
 async function gravarPedidoNaPlanilha(linha) {
   const sheetId = process.env.GOOGLE_SHEET_ID;
   const token = await tokenGoogle();
@@ -232,6 +233,17 @@ async function atualizarStatusNaPlanilha(range, status) {
   );
   if (!res.ok) throw new Error(`Google Sheets (status): HTTP ${res.status}: ${await res.text()}`);
 }
+
+
+const camposTracking = (form) => [
+  form.utm_source || '',
+  form.utm_medium || '',
+  form.utm_campaign || '',
+  form.utm_content || '',
+  form.utm_term || '',
+  form.landing_page || '',
+  form.referrer || '',
+];
 
 async function lerBodyForm(req) {
   let body = '';
@@ -412,7 +424,7 @@ const server = createServer(async (req, res) => {
           new Date().toISOString(), b.produto, b.email_compra, b.telefone_compra,
           b.pessoa1_nome, b.pessoa1_data, b.pessoa1_hora || '', b.pessoa1_cidade, b.pessoa1_pais || '', b.pessoa1_sexo,
           b.pessoa2_nome, b.pessoa2_data, b.pessoa2_hora || '', b.pessoa2_cidade, b.pessoa2_pais || '', b.pessoa2_sexo,
-          b.tipoRelacao || '', 'aguardando revisão', '',
+          b.tipoRelacao || '', 'aguardando revisão', '', ...camposTracking(b),
         ];
       } else {
         const idade = new Date().getFullYear() - parseInt((b.data || '').slice(0, 4), 10);
@@ -427,7 +439,7 @@ const server = createServer(async (req, res) => {
           new Date().toISOString(), b.produto, b.email_compra, b.telefone_compra,
           b.nome, b.data, b.hora || '', b.cidade, b.pais || '', b.sexo,
           '', '', '', '', '', '',
-          '', 'aguardando revisão', '',
+          '', 'aguardando revisão', '', ...camposTracking(b),
         ];
       }
 
