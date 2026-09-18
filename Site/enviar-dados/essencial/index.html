@@ -61,6 +61,13 @@
   <!-- TODO (Fase 5): action aponta para o endpoint público do backend (Railway) quando estiver no ar. -->
   <form action="https://bitnasj-production.up.railway.app/enviar-dados/essencial/dados" method="POST">
     <input type="hidden" name="produto" value="essencial">
+    <input type="hidden" name="utm_source" value="">
+    <input type="hidden" name="utm_medium" value="">
+    <input type="hidden" name="utm_campaign" value="">
+    <input type="hidden" name="utm_content" value="">
+    <input type="hidden" name="utm_term" value="">
+    <input type="hidden" name="landing_page" value="">
+    <input type="hidden" name="referrer" value="">
 
     <fieldset>
       <legend>Confirmação da compra</legend>
@@ -129,5 +136,6 @@
 
 <footer>© 2026 BITNA SAJU</footer>
 
+<script src="/utm-tracking.js"></script>
 </body>
 </html>

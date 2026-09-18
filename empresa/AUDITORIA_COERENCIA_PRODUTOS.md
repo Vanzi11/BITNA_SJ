@@ -18,7 +18,7 @@ Para cada produto foram comparados três planos:
 | ⭐ Leitura Completa | R$ 97 (de R$ 120) | 16 | **26–27** (amostras Fagundes, texto de produção) | Coerente / entrega a mais | Ajustar páginas + nome + preço (D25, D27) |
 | 💖 Sinastria Amorosa | R$ 97 | 12–16 | **Nenhum PDF existe** (só prompt + exemplos .md) | Prompt cobre os bullets; falta o produto físico | Construir gerador de PDF (D28) |
 | 🤝 Sinastria Profissional | R$ 97 | 12–16 | **Nenhum PDF existe** | Idem (mesmo SKU técnico, `tipoRelacao`) | Construir gerador de PDF (D28) |
-| 🌸 Jornadas Bitna | R$ 249 (de R$ 291) | 3 relatórios | Produto novo — empacotamento | Viável; depende do PDF de Sinastria | Definir empacotamento (D29) |
+| 🌸 Jornadas Bitna | R$ 332,00 (D64) | 3 relatórios | Produto novo — empacotamento | Viável; preço decidido, falta refletir em cadastro/oferta/checkout | Definir empacotamento operacional (D29/D63) |
 
 ## Diagnóstico produto a produto
 
@@ -45,7 +45,7 @@ Tecnicamente o mais simples: **não requer motor nem prompt novo**. É empacotam
 - **Jornada Amorosa** = 2 Leituras Completas + 1 Sinastria Amorosa
 - **Jornada Profissional** = 2 Leituras Completas + 1 Sinastria Profissional
 
-A matemática de preço fecha: 2 × R$ 97 + R$ 97 = R$ 291 de lista → R$ 249 no bundle (~15% de desconto). Viabilidade **alta**, com três dependências: (1) o PDF de Sinastria precisa existir (D28); (2) o formulário precisa coletar os dados de 2–3 pessoas numa compra só; (3) definir a entrega dos 3 PDFs juntos (e-mail único, ordem de leitura sugerida). Ver D29.
+A matemática de preço foi recalculada após o fim da promoção da Leitura Completa: 2 × R$149,30 + R$98,00 = R$396,60 de valor cheio. Ivã fechou o preço final em **R$332,00** (D64), preservando a regra comercial/estética de soma dos algarismos chegar a 8 (3+3+2=8). Viabilidade **alta**, com dependências operacionais: (1) refletir o preço no cadastro/oferta/checkout antes de comunicação pública; (2) formulário precisa coletar os dados de 2–3 pessoas numa compra só; (3) definir a entrega dos 3 PDFs juntos (e-mail único, ordem de leitura sugerida). Ver D29/D63.
 
 ## Caminho de implementação (ordem sugerida)
 

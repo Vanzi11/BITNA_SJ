@@ -40,7 +40,7 @@ Este cronograma foi cruzado com o estado real do repositório (`BITNA_SJ`) antes
 
 1. **A Fase 5 já existe.** A versão original deste documento tratava a automação (webhook, formulário, geração, e-mail) como trabalho futuro da Semana 1–2. Isso já foi construído e testado de ponta a ponta em 15/08/2026. Rodar a Semana 1–2 como "construir checkout/página/formulário do zero" faria a Squad refazer o que já está no ar — desperdício de 1–2 semanas inteiras. As tarefas dessas semanas foram reformuladas de "construir" para "auditar o que existe e completar só o que falta de verdade" (política de reembolso, texto de LGPD genérico, UTM, dashboard — nada disso existe ainda).
 2. **Hotmart vs. Kiwify não é mais uma escolha.** Já foi decidido (D43) e o código já reflete isso (rota do Kiwify removida). O gate de aprovação da Semana 1 e a lista de decisões da seção 9 foram corrigidos para não reabrir essa decisão.
-3. **A conta da Jornada Bitna não fecha com o preço atual.** R$249 (o preço publicado hoje) foi calculado quando a Leitura Completa estava em promoção de lançamento a R$98 (2×98+98=294, -15%≈250). Essa promoção acabou em 15/08/2026 (D53) e a Completa voltou a R$149,30 cheio — ninguém recalculou a Jornada depois disso. Com os preços atuais, o valor cheio dos componentes é R$396,60 (como este próprio cronograma já calcula na seção 0), e 15% de desconto sobre isso dá **~R$337**, não R$249. R$249 hoje equivale a ~37% de desconto — pode ser proposital (bundle mais agressivo) ou só um esquecimento. **Isso precisa virar uma decisão explícita do Ivã antes do gate de preços da Semana 1**, não uma correção silenciosa — nenhum valor foi mudado no repositório, só sinalizado.
+3. **Preço da Jornada Bitna decidido após a checagem de coerência.** O preço antigo de R$249 foi calculado quando a Leitura Completa ainda estava em promoção a R$98. Com os preços atuais, o valor cheio dos componentes é R$396,60. A checagem apontou que ~15% de desconto daria ~R$337; em 17/09/2026 Ivã fechou o preço final em **R$332,00** (D64), preservando a regra comercial/estética de soma dos algarismos chegar a 8 (3+3+2=8). A decisão de preço está fechada; falta refletir esse valor onde houver cadastro/oferta/checkout antes de tráfego pago ou comunicação pública da Jornada.
 4. **O Guia Ilustrado do Saju não tem nenhuma infraestrutura ainda.** É produto decidido (D58), mas não existe prompt, motor de conteúdo nem gerador de PDF — nada. Configurá-lo como order bump "quando a plataforma permitir" na Semana 2 pressupõe que o produto já existe para vender. As tarefas que dependem dele foram marcadas como **dependentes do backlog do Guia**, não bloqueantes do lançamento dos outros 3 produtos.
 5. **Dois bloqueios do repositório que este cronograma não citava, mas que travam gates específicos:**
    - **Tensão de páginas da Essencial (D45):** a página de venda anuncia "10 a 15 páginas", mas a amostra testada com dado real entrega 9. Isso precisa ser resolvido (produzir mais conteúdo ou baixar a faixa anunciada) **antes** do gate de "copy aprovada" da Semana 2 — senão a copy aprovada promete algo que o produto não entrega hoje.
@@ -54,7 +54,7 @@ Este cronograma foi cruzado com o estado real do repositório (`BITNA_SJ`) antes
 **Objetivo:** deixar a operação pronta para receber compra real sem gastar mídia no escuro.
 
 **Nota:** boa parte desta lista já existe em produção (checkout Hotmart, página de obrigado, instrução de envio de dados) — ver seção 0.1, item 1. O trabalho real da Prioridade 1 é auditar isso e completar só o que falta:
-- confirmação do preço da Jornada (seção 0.1, item 3) — o único preço ainda não fechado;
+- ~~confirmação do preço da Jornada~~ — decidido em D64: R$332,00; falta refletir em cadastro/oferta/checkout antes de comunicação pública;
 - ~~escolha Hotmart ou Kiwify~~ — já decidido, Hotmart (D43);
 - ~~criação/configuração dos checkouts~~ — já existe, ver `empresa/LINKS_HOTMART.md`;
 - ~~página de obrigado~~ / ~~instrução de envio de dados~~ — já existem (`Site/enviar-dados/{produto}/`);
@@ -180,7 +180,7 @@ Inclui:
 
 **Ponto de aprovação do Ivã — fim da Semana 1**
 - Confirmar preços já vigentes (nada a decidir aqui, só confirmar): Essencial R$ 47,60; Completa R$ 149,30; Sinastrias R$ 98,00; Guia R$ 9,80.
-- **Decidir o preço final de venda da Jornada Bitna** — o valor cheio dos componentes é R$ 396,60; escolher entre manter R$ 249 (desconto de ~37%, proposital ou não) ou ajustar para perto de R$ 337 (desconto de 15%, como as outras ofertas). Ver seção 0.1, item 3.
+- ~~**Decidir o preço final de venda da Jornada Bitna**~~ — decidido em D64: **R$332,00**. Falta refletir no cadastro/oferta/checkout antes de tráfego pago ou comunicação pública da Jornada.
 - Aprovar SLA de entrega manual.
 - Aprovar política de reembolso simples.
 - Aprovar texto de consentimento LGPD/transparência de IA.
@@ -515,7 +515,7 @@ Não comprimir estes gates:
 
 ## 5. Dependências críticas
 
-- **Checkout depende de:** preço da Jornada decidido (único preço em aberto), produtor da Hotmart regularizado nas Sinastrias antes de mídia paga, bump configurado quando o Guia Ilustrado existir. Plataforma (Hotmart) e cadastro dos produtos já estão feitos.
+- **Checkout depende de:** preço da Jornada já decidido em D64 (**R$332,00**) e ainda pendente de refletir no cadastro/oferta/checkout, produtor da Hotmart regularizado nas Sinastrias antes de mídia paga, bump configurado quando o Guia Ilustrado existir. Plataforma (Hotmart) e cadastro dos produtos já estão feitos.
 - **Mídia depende de:** páginas publicadas, UTMs, eventos mínimos, dashboard e compra/simulação rastreada.
 - **Sinastria como aquisição depende de:** página própria, coleta clara de dados de duas pessoas, promessa aprovada, capacidade de entrega manual validada.
 - **Jornadas dependem de:** Sinastria operacional, capacidade de entregar 3 PDFs, copy de oferta premium, base quente/retargeting.
@@ -580,7 +580,7 @@ Não comprimir estes gates:
 
 ## 9. Decisões que Ivã precisa aprovar explicitamente
 
-1. Preço final de venda da Jornada Bitna (R$249 atual vs. ~R$337 recalculado — ver seção 0.1, item 3). Plataforma já está decidida (Hotmart, D43).
+1. ~~Preço final de venda da Jornada Bitna~~ — decidido em D64: **R$332,00**. Plataforma já está decidida (Hotmart, D43); falta refletir o valor no cadastro/oferta/checkout antes de comunicação pública.
 2. Preços e nomes comerciais finais dos demais produtos (já vigentes, só confirmar).
 3. Política de reembolso.
 4. Texto LGPD/transparência de IA.
