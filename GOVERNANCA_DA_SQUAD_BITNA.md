@@ -2,7 +2,7 @@
 
 **Documento:** `GOVERNANCA_DA_SQUAD_BITNA.md`  
 **Status:** Diretriz operacional da BITNA SAJU  
-**Versão:** 1.1 (13/09/2026 — nome oficial "Squad Bitna (Naia)" e regra de aprovação humana obrigatória adicionados)  
+**Versão:** 1.2 (17/09/2026 — regras de higiene de branches, backup de trabalho em progresso e pasta de trabalho no Drive adicionadas, após incidente real de branches desatualizadas)  
 **Responsável estratégico:** Ivã
 
 ## 1. Finalidade
@@ -96,6 +96,21 @@ O repositório é também parte da **memória institucional da empresa**. A Squa
 Quando uma decisão relevante for tomada, a Squad deverá avaliar quais documentos precisam ser atualizados.
 
 A informação deve ser registrada onde for pertinente, evitando duplicação indiscriminada.
+
+### Higiene de branches (regra obrigatória)
+
+Antes de criar qualquer branch nova, a Squad deve atualizar sua cópia local a partir da `main` remota (`git fetch`/`pull`). Uma branch criada a partir de uma cópia desatualizada, se mesclada, pode apagar trabalho e decisões já publicados — isso já aconteceu na prática (branches `naia/auth-write-test` e `prepare-bitnasaju-com`, criadas a partir de um ponto 53 commits atrás da `main`; felizmente nenhuma das duas chegou a ser mesclada). Branch de teste/conectividade deve ser apagada assim que cumprir seu propósito; branch com trabalho real, mas desatualizada, deve ser recriada em cima da `main` atual antes de qualquer mesclagem — nunca mesclada como está.
+
+### Trabalho em progresso também é memória institucional
+
+Código terminado e testado localmente deve ser commitado numa branch no mesmo dia em que foi concluído — não precisa ser mesclado na `main` sozinho (mudança estrutural continua exigindo revisão), mas precisa **existir em algum branch do Git**, nunca só na sessão de trabalho da Squad ou num ambiente local sem backup. Trabalho que existe apenas localmente não sobrevive a uma queda de sessão e não é auditável por ninguém além de quem o escreveu.
+
+### Pasta de trabalho no Drive (pré-preparo antes do Git)
+
+A Squad usa uma pasta no Google Drive para pré-preparar documentos e pacotes antes de enviá-los ao repositório. Duas regras evitam que essa pasta vire uma fonte paralela de verdade, divergente do Git:
+
+1. **Painéis e relatórios recorrentes (executivos, pacotes noturnos) sobrescrevem uma pasta única**, em vez de criar uma pasta nova com timestamp a cada rodada. Guardar histórico é exceção deliberada (pasta de arquivo à parte), não o padrão.
+2. **Documento já incorporado ao repositório é removido do Drive, ou marcado no topo com o commit/data que o tornou obsoleto.** Nunca deixar duas versões do mesmo conteúdo — uma no Drive desatualizada, outra no repositório atualizada — sem indicar claramente qual é a válida.
 
 ## 7. Padrão documental
 
