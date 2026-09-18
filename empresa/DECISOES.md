@@ -377,3 +377,7 @@ Nenhuma decisão de produto, preço ou conteúdo foi alterada — as três regra
 ## 17/09/2026 — Preço final da Jornada Bitna
 
 **D64. Preço final da Jornada Bitna fechado em R$ 332,00.** Ivã decidiu o preço final da Jornada Bitna em **R$ 332,00**. A conta continua partindo do valor cheio dos componentes atuais: 2 Leituras Completas (2 × R$149,30) + 1 Sinastria (R$98,00) = **R$396,60**. O valor de R$332,00 substitui a aproximação operacional anterior de ~R$337 e preserva uma regra comercial/estética da casa: preços cujo somatório dos algarismos chega ao **8** (3+3+2=8). Isso fecha a pendência aberta no D61: o preço da Jornada deixa de estar em aberto, mas ainda precisa ser refletido onde houver cadastro/oferta/checkout na Hotmart antes de tráfego pago ou comunicação pública de Jornada.
+
+## 17/09/2026 — Foco antes da expansão .com
+
+**D65. Branch `prepare-bitnasaju-com` preservada, mas expansão `.com` pausada.** Ivã decidiu não recriar agora o trabalho da branch `prepare-bitnasaju-com`. A ideia fica guardada e a branch permanece no GitHub sem ser apagada, porque contém trabalho real de separação entre `.com` e `.com.br`. A prioridade continua sendo validar o B2C do **bitnasaju.com.br** primeiro, conforme o cronograma operacional. A expansão para `.com` só deve ser retomada quando houver sinal de que vale expandir; se for retomada, o trabalho deve ser recriado em cima da `main` atual antes de qualquer merge, nunca mesclado a partir da branch antiga desatualizada.
