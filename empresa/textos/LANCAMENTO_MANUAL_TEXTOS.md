@@ -100,7 +100,7 @@ padrões para decidir melhor."
 ## 4. Política de reembolso (rascunho aprovado para revisão final)
 
 ```
-As compras são processadas pela Hotmart e seguem a garantia configurada na plataforma: 7 dias corridos a partir da compra. Dentro desse prazo, o cliente pode solicitar o reembolso diretamente pela Hotmart, sem necessidade de justificativa, e o processamento é feito pela própria plataforma.
+As compras são processadas pela Hotmart e seguem a garantia configurada na plataforma: 7 dias corridos a partir da compra. Dentro desse prazo, o cliente pode solicitar o reembolso pela Hotmart, conforme as regras da plataforma, sem precisar tratar diretamente com a Bitna Saju, e o processamento é feito pela própria plataforma.
 
 Como os relatórios da Bitna Saju são personalizados e produzidos a partir dos dados de nascimento enviados pelo cliente, pedidos relacionados a produtos que já entraram em produção serão avaliados considerando o estágio de produção do relatório, inclusive quando houver solicitação dentro do prazo de garantia da Hotmart.
 
@@ -110,7 +110,7 @@ Fora do prazo de garantia da Hotmart, eventuais solicitações serão analisadas
 Versão curta (rodapé/checkout):
 
 ```
-Garantia Hotmart de 7 dias: dentro desse prazo, o reembolso pode ser solicitado pela plataforma, sem necessidade de justificativa. Como o relatório é personalizado e produzido a partir dos seus dados de nascimento, pedidos após o início da produção serão analisados considerando o estágio do relatório, as regras da Hotmart e a legislação aplicável.
+Garantia Hotmart de 7 dias: dentro desse prazo, o reembolso pode ser solicitado pela Hotmart, conforme as regras da plataforma, sem precisar tratar diretamente com a Bitna Saju. Como o relatório é personalizado e produzido a partir dos seus dados de nascimento, pedidos após o início da produção serão analisados considerando o estágio do relatório, as regras da Hotmart e a legislação aplicável.
 ```
 
 > Nota sobre CDC art. 49: a política de reembolso se apoia em jurisprudência e doutrina sobre produtos personalizados, não em uma exceção explícita no texto do art. 49 do CDC. Por isso, a Bitna Saju evita negar reembolso de forma categórica e usa análise conforme o estágio da produção. Esta é a formulação mais segura enquanto o texto não passa por validação jurídica formal.
