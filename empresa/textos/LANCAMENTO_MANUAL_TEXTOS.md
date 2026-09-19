@@ -100,18 +100,20 @@ padrões para decidir melhor."
 ## 4. Política de reembolso (rascunho aprovado para revisão final)
 
 ```
-Como o relatório é personalizado e produzido a partir dos seus dados de nascimento, o reembolso integral fica disponível até o momento em que você envia esses dados para produção.
+As compras são processadas pela Hotmart e seguem a garantia configurada na plataforma: 7 dias corridos a partir da compra. Dentro desse prazo, o cliente pode solicitar o reembolso diretamente pela Hotmart, sem necessidade de justificativa, e o processamento é feito pela própria plataforma.
 
-Depois que os dados são enviados e o relatório entra em produção, o produto passa a ser personalizado e não pode ser reaproveitado para outra pessoa. Por isso, pedidos de reembolso após esse ponto devem ser analisados caso a caso, considerando o estágio de produção e as regras aplicáveis da plataforma de pagamento e da legislação brasileira.
+Como os relatórios da Bitna Saju são personalizados e produzidos a partir dos dados de nascimento enviados pelo cliente, pedidos relacionados a produtos que já entraram em produção serão avaliados considerando o estágio de produção do relatório, inclusive quando houver solicitação dentro do prazo de garantia da Hotmart.
+
+Fora do prazo de garantia da Hotmart, eventuais solicitações serão analisadas caso a caso, considerando o estágio da produção, as regras da plataforma e a legislação brasileira aplicável.
 ```
 
 Versão curta (rodapé/checkout):
 
 ```
-Reembolso integral disponível até o envio dos dados de nascimento. Após o início da produção personalizada, pedidos de reembolso são analisados conforme o estágio do pedido, regras da plataforma e legislação aplicável.
+Garantia Hotmart de 7 dias: dentro desse prazo, o reembolso pode ser solicitado pela plataforma, sem necessidade de justificativa. Como o relatório é personalizado e produzido a partir dos seus dados de nascimento, pedidos após o início da produção serão analisados considerando o estágio do relatório, as regras da Hotmart e a legislação aplicável.
 ```
 
-> Decisão operacional (19/09/2026): manter a versão sem promessa rígida de “não há reembolso”. Não haverá validação jurídica antes desta etapa; Ivã aprovou seguir com este texto como a versão mais segura sem revisão jurídica formal, pendente apenas de revisão final dele e do Claude antes de publicação.
+> Nota sobre CDC art. 49: a política de reembolso se apoia em jurisprudência e doutrina sobre produtos personalizados, não em uma exceção explícita no texto do art. 49 do CDC. Por isso, a Bitna Saju evita negar reembolso de forma categórica e usa análise conforme o estágio da produção. Esta é a formulação mais segura enquanto o texto não passa por validação jurídica formal.
 
 ## 5. Política de Privacidade (rascunho para página do site)
 
