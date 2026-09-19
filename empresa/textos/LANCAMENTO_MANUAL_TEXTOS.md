@@ -97,27 +97,23 @@ Até já,
 padrões para decidir melhor."
 ```
 
-## 4. Política de reembolso (uma frase para a página de vendas)
+## 4. Política de reembolso (rascunho aprovado para revisão final)
 
 ```
-Seu relatório é produzido sob medida a partir dos seus dados de
-nascimento. Por isso, o reembolso integral vale até o momento em
-que você envia esses dados — depois que o relatório entra em
-produção, não é possível reembolsar, já que o produto já foi
-gerado especificamente para você.
+Como o relatório é personalizado e produzido a partir dos seus dados de nascimento, o reembolso integral fica disponível até o momento em que você envia esses dados para produção.
+
+Depois que os dados são enviados e o relatório entra em produção, o produto passa a ser personalizado e não pode ser reaproveitado para outra pessoa. Por isso, pedidos de reembolso após esse ponto devem ser analisados caso a caso, considerando o estágio de produção e as regras aplicáveis da plataforma de pagamento e da legislação brasileira.
 ```
 
 Versão curta (rodapé/checkout):
 
 ```
-Reembolso integral disponível até o envio dos seus dados de
-nascimento. Após esse ponto, por ser um produto personalizado,
-não há reembolso.
+Reembolso integral disponível até o envio dos dados de nascimento. Após o início da produção personalizada, pedidos de reembolso são analisados conforme o estágio do pedido, regras da plataforma e legislação aplicável.
 ```
 
-> **Atenção — isto não é aconselhamento jurídico.** O Código de Defesa do Consumidor (art. 49) garante 7 dias de arrependimento em compras online, e o texto acima ainda não foi verificado contra essa regra especificamente para produtos digitais personalizados. Antes de publicar, vale uma checada rápida com um contador/advogado — é barato resolver agora e caro resolver depois de um cliente pedir reembolso e citar o CDC.
+> Decisão operacional (19/09/2026): manter a versão sem promessa rígida de “não há reembolso”. Não haverá validação jurídica antes desta etapa; Ivã aprovou seguir com este texto como a versão mais segura sem revisão jurídica formal, pendente apenas de revisão final dele e do Claude antes de publicação.
 
-## 5. Política de Privacidade (página do site)
+## 5. Política de Privacidade (rascunho para página do site)
 
 ```
 Política de Privacidade — Bitna Saju
@@ -125,53 +121,66 @@ Política de Privacidade — Bitna Saju
 Última atualização: [data]
 
 1. Quem somos
-A Bitna Saju é responsável pelo tratamento dos dados pessoais
-descritos nesta política. Dúvidas ou pedidos sobre seus dados
-podem ser enviados para contato@bitnasaju.com.br.
+A Bitna Saju é responsável pelo tratamento dos dados pessoais descritos nesta política. Dúvidas ou pedidos sobre seus dados podem ser enviados para contato@bitnasaju.com.br.
 
 2. Quais dados coletamos
-Para gerar sua leitura de Saju, coletamos: nome completo, data
-de nascimento, horário de nascimento (quando informado), cidade
-e estado de nascimento, e sexo. Esses dados são fornecidos
-diretamente por você, no momento da compra.
+Para gerar sua leitura de Saju, coletamos: nome completo, data de nascimento, horário de nascimento (quando informado), cidade e estado de nascimento, país de nascimento, sexo, e dados de contato informados no momento da compra ou do envio do formulário.
+
+Também podemos coletar dados de navegação, como páginas acessadas, origem da visita, parâmetros de campanha, cliques e eventos de conversão, por meio de ferramentas como Google Analytics 4 (GA4), Meta Pixel e cookies de medição.
+
+2.1. Dados de terceiros, Sinastrias e menores de idade
+Em produtos como Sinastria ou leitura adicional para outra pessoa, os dados de nascimento podem ser informados pelo comprador, e não diretamente pela pessoa titular dos dados.
+
+Ao enviar dados de outra pessoa, o comprador declara que tem autorização da pessoa titular para informar esses dados à Bitna Saju, ou que é seu responsável legal. A responsabilidade pela veracidade dos dados enviados e pela obtenção do consentimento da pessoa titular é de quem realizou a compra e preencheu o formulário. A Bitna Saju não verifica previamente essa autorização.
+
+Dados de nascimento de menores de idade só podem ser informados por pais ou responsáveis legais, que declaram autorizar o tratamento desses dados para produção e entrega do relatório adquirido.
 
 3. Por que coletamos
-Usamos esses dados exclusivamente para calcular o seu mapa de
-Saju e produzir o relatório interpretativo que você comprou. O
-cálculo do mapa é determinístico (feito por um motor próprio,
-não por inteligência artificial); a escrita do texto
-interpretativo conta com apoio de inteligência artificial,
-sempre com revisão humana antes do envio.
+Usamos os dados de nascimento para calcular o mapa de Saju, produzir o relatório interpretativo comprado e entregar o produto ao cliente. O cálculo do mapa é determinístico, feito por um motor próprio; a escrita do texto interpretativo pode contar com apoio de inteligência artificial, sempre a partir do cálculo do mapa e com revisão humana antes do envio.
+
+Usamos dados de contato e transação para confirmar a compra, entregar o produto, prestar suporte, reenviar materiais quando necessário, cumprir obrigações legais e administrar eventuais solicitações, disputas ou reembolsos.
+
+Usamos dados de navegação e campanha para medir visitas, entender a origem das compras, melhorar páginas, avaliar anúncios e criar públicos de remarketing.
 
 4. Com quem compartilhamos
-Não compartilhamos, vendemos ou cedemos seus dados a terceiros
-para nenhuma outra finalidade. Seus dados de nascimento não são
-usados para treinar modelos de inteligência artificial de
-terceiros.
+A Bitna Saju não vende seus dados pessoais.
+
+Dados de nascimento e relatórios não são usados para treinar modelos de inteligência artificial de terceiros.
+
+Dados de navegação e eventos podem ser compartilhados com Google e Meta, por meio de GA4, Meta Pixel e tecnologias semelhantes, para fins de medição, análise de tráfego, otimização de anúncios, remarketing e mensuração de campanhas.
+
+Também podemos compartilhar dados mínimos necessários com plataformas de pagamento, hospedagem, automação, e-mail e ferramentas operacionais usadas para processar compra, entrega, suporte e segurança.
 
 5. Por quanto tempo guardamos
-Guardamos seus dados pelo tempo necessário para produzir e
-entregar seu relatório, e por mais [X] [período] após a entrega,
-para eventual suporte ou reenvio. Após esse prazo, os dados são
-excluídos, salvo obrigação legal de retenção.
+Dados de nascimento e relatório gerado: mantemos por 12 meses após a entrega, para permitir reenvio, suporte, auditoria interna, disputa ou correção operacional. Depois desse prazo, os dados devem ser anonimizados ou excluídos, salvo nova compra ou obrigação legal que justifique retenção maior.
+
+Dados de transação, como nome, e-mail, valor, data da compra e registros necessários para comprovação comercial/fiscal: mantemos por 5 anos, por obrigação fiscal, contábil e para defesa em eventual reclamação de consumo.
 
 6. Seus direitos
-Como titular dos dados, você pode a qualquer momento pedir para:
-acessar os dados que temos sobre você, corrigir dados incorretos,
-ou solicitar a exclusão dos seus dados. Basta escrever para
-contato@bitnasaju.com.br.
+Como titular dos dados, você pode pedir acesso, correção ou exclusão dos dados pessoais tratados pela Bitna Saju, observados os prazos e obrigações legais de retenção. Para isso, escreva para contato@bitnasaju.com.br.
 
-7. Cookies
-[preencher se o site usar Analytics, Pixel do Meta ou similar —
-diga quais ferramentas de rastreamento estão ativas e ofereça
-opção de recusa]
+7. Cookies e tecnologias de rastreamento
+O site pode usar cookies e tecnologias semelhantes para funcionamento, medição de audiência, análise de navegação e anúncios, incluindo Google Analytics 4 (GA4) e Meta Pixel.
+
+Cookies essenciais podem ser usados para o funcionamento do site. Cookies não essenciais, como os de análise, anúncios e remarketing, devem ser apresentados em banner com opção de aceitar ou recusar antes da ativação, conforme a configuração técnica do site.
 
 8. Alterações desta política
-Podemos atualizar esta política eventualmente. Mudanças
-relevantes serão comunicadas nesta mesma página.
+Podemos atualizar esta política eventualmente. Mudanças relevantes serão comunicadas nesta mesma página.
 ```
 
-> **Atenção — isto não é aconselhamento jurídico**, igual a política de reembolso acima. É um rascunho estrutural cobrindo os pontos que a LGPD exige (art. 9º — direito à informação; arts. 17-22 — direitos do titular), mas os campos entre colchetes precisam ser preenchidos com dado real, e o texto inteiro merece revisão de um advogado antes de publicar — principalmente a seção 7 (cookies), que muda dependendo de quais ferramentas de rastreamento o site realmente usa.
+### Checkbox obrigatória para Sinastria ou leitura de terceiro
+
+```
+Confirmo que a pessoa cujos dados estou enviando é maior de idade e autorizou o uso desses dados para a produção do relatório, ou que sou seu responsável legal e autorizo o tratamento desses dados pela Bitna Saju para essa finalidade.
+```
+
+### Texto curto de rodapé/checkout
+
+```
+Seus dados são usados apenas para produzir e entregar seu relatório personalizado de Saju. Não vendemos seus dados nem usamos seus dados de nascimento para treinar IA de terceiros. Podemos usar cookies e dados de navegação com GA4 e Meta Pixel para medir visitas, campanhas e anúncios, com opção de recusar cookies não essenciais.
+```
+
+> Status: rascunho aprovado por Ivã quanto a privacidade, reembolso, versão curta, prazos de guarda, cookies/pixels, dados de terceiros e menores. Não publicar até revisão final de Ivã e Claude.
 
 ## Notas de implementação
 
